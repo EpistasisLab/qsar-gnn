@@ -5,6 +5,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+import ipdb
+
 class HeteroRGCNLayer(nn.Module):
     """Graph convolutional layer for relational data that supports
     multiple edge types.
@@ -27,6 +29,7 @@ class HeteroRGCNLayer(nn.Module):
 
         G.multi_update_all(funcs, 'sum')
 
+        #ipdb.set_trace()
         return { ntype : G.nodes[ntype].data['h'] for ntype in G.ntypes }
 
 
@@ -56,4 +59,7 @@ class HeteroRGCN(nn.Module):
         h_dict = { k : F.leaky_relu(h) for k, h in h_dict.items() }
         h_dict = self.layer2(G, h_dict)
 
-        return h_dict['chemical']
+        try:
+            return h_dict['chemical']
+        except KeyError:
+            return h_dict['paper']
