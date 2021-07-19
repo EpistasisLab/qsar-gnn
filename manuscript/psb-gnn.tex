@@ -28,8 +28,18 @@ Here is a citation~\cite{cherkasov2014qsar}.
 \section{Methods}
 
 \subsection{Data sources}
+The data used in this study come from a new data resource for computational toxicology, named ComptoxAI.
+ComptoxAI includes a large graph database containing many entity and relationship types that pertain to translational mechanisms of toxicity, all of which are sourced from third-party public databases (including PubChem, Drugbank, the US EPA's Computational Toxicology Dashboard, NCBI Gene, and many others).
+We extracted the subgraph from ComptoxAI's graph database defined as all nodes representing chemicals, genes, and toxicology assays, as well as the complete set of edges linking nodes of those types.
+A metagraph describing the node and edge types in the subgraph is shown in [FIGURE XXX].
 
 \subsection{Graph neural network models}
+We constructed a heterogeneous graph neural network (GNN) architecture for the graph ML experiments.
+Since our approach uses multiple entity types (e.g., chemicals, genes, assays) in the same graph---each with possibly different sets of node features, and linked by multiple semantically distinct edge types---the architecture extends the common GCN model to learn separate message passing functions for each edge type.
+We use a message passing strategy similar to GraphSAGE~\cite{hamilton2017inductive}, where signals propagated from adjacent nodes are aggregated using their arithmetic mean:
+\begin{equation}
+\mathbf{h}_v^k \gets \sigma(\mathbf{W} \cdot \textsc{MEAN}(\{\mathbf{h}_v^{k-1}\}\cup \{ \mathbf{h}_u^{k-1},\forall u \in \mathcal{N}(v) \}))
+\end{equation}
 
 \subsubsection{Heterogeneous graph neural network architecture}
 

@@ -5,44 +5,47 @@ The style file: ws-procs11x85.bst
 Database file #1: psb-gnn.bib
 <ws-procs11x85.bst>
 World Scientific's Bibliography Style File for Proceedings
-You've used 1 entry,
+Warning--empty title in hamilton2017inductive
+Warning--empty volume in hamilton2017inductive
+You've used 2 entries,
             2825 wiz_defined-function locations,
-            656 strings with 5208 characters,
-and the built_in function-call counts, 439 in all, are:
-= -- 36
-> -- 35
+            662 strings with 5433 characters,
+and the built_in function-call counts, 741 in all, are:
+= -- 71
+> -- 46
 < -- 0
-+ -- 12
-- -- 11
-* -- 40
-:= -- 74
-add.period$ -- 1
-call.type$ -- 1
-change.case$ -- 1
++ -- 16
+- -- 14
+* -- 61
+:= -- 112
+add.period$ -- 2
+call.type$ -- 2
+change.case$ -- 2
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 18
-empty$ -- 22
-format.name$ -- 11
-if$ -- 96
+cite$ -- 4
+duplicate$ -- 34
+empty$ -- 41
+format.name$ -- 14
+if$ -- 171
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 6
-num.names$ -- 1
-pop$ -- 1
+int.to.str$ -- 2
+missing$ -- 2
+newline$ -- 9
+num.names$ -- 2
+pop$ -- 3
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 17
+skip$ -- 34
 stack$ -- 0
-substring$ -- 22
-swap$ -- 12
+substring$ -- 44
+swap$ -- 22
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 2
 type$ -- 0
-warning$ -- 0
-while$ -- 3
-width$ -- 2
-write$ -- 11
+warning$ -- 2
+while$ -- 6
+width$ -- 3
+write$ -- 19
+(There were 2 warnings)
