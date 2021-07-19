@@ -1,0 +1,3459 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Title: (3d.ps.pdf)
+%%Version: 1 2
+%%CreationDate: (D:191020416114449)
+%%DocumentData: Clean7Bit
+%%BoundingBox: 96 81 679 450
+%%Pages: 1
+%%DocumentProcessColors: Cyan Magenta Yellow Black
+%%DocumentNeededResources:
+%%+ font Helvetica
+%%+ font Helvetica-Bold
+%%DocumentSuppliedResources:
+%%+ procset (Adobe Acrobat - PDF operators) 1.2 0
+%%+ procset (Adobe Acrobat - type operators) 1.2 0
+%%EndComments
+%%BeginDefaults
+%%EndDefaults
+%%BeginProlog
+%%EndProlog
+%%BeginSetup
+/currentpacking where{pop currentpacking true setpacking}if
+userdict /PDF 85 dict put
+%%BeginFile: pdfvars.prc
+%%Copyright: Copyright 1987-1996 Adobe Systems Incorporated. All Rights Reserved.
+userdict /PDFVars 75 dict dup begin put
+/_save 0 def
+/_cshow 0 def
+/InitAll 0 def
+/TermAll 0 def
+/_lp /none def
+/_doClip 0 def
+/sfc 0 def
+/_sfcs 0 def
+/_sfc 0 def
+/ssc 0 def
+/_sscs 0 def
+/_ssc 0 def
+/_fcs 0 def
+/_scs 0 def
+/_fp 0 def
+/_sp 0 def
+/_f0 0 array def
+/_f1 1 array def
+/_f3 3 array def
+/_f4 4 array def
+/_fc null def
+/_s0 0 array def
+/_s1 1 array def
+/_s3 3 array def
+/_s4 4 array def
+/_sc null def
+/_cpcf null def
+/_cpcs null def
+/_inT false def
+/_tr -1 def
+/_rise 0 def
+/_ax 0 def
+/_cx 0 def
+/_ld 0 def
+/_tm matrix def
+/_ctm matrix def
+/_mtx matrix def
+/_hy (-) def
+/_fScl 0 def
+/_hs 1 def
+/_pdfEncodings 2 array def
+/_baselineadj 0 def
+/_Tj 0 def
+/_italMtx[1 0 .212557 1 0 0]def
+/_italMtx_WMode1 [1 -.212557 0 1 0 0]def
+/_basefont 0 def
+/_basefonto 0 def
+/_pdf_oldCIDInit null def
+/_categories 10 dict def
+/_sa? true def
+/_op? false def
+/_ColorSep5044? false def
+/_tmpcolr? [] def
+/_tmpop? {} def
+end
+%%EndFile
+PDFVars begin PDF begin
+%%BeginFile: pdfutil.prc
+%%Copyright: Copyright 1993 Adobe Systems Incorporated. All Rights Reserved.
+/bd {bind def} bind def
+/ld {load def} bd
+/dd { PDFVars 3 1 roll put } bd
+/xdd { exch dd } bd
+/Level2?
+systemdict /languagelevel known
+{ systemdict /languagelevel get 2 ge } { false } ifelse
+def
+/here {
+dup currentdict exch known
+{ currentdict exch get true }
+{ pop false }
+ifelse
+} bd
+/isdefined? { where { pop true } { false } ifelse } bd
+/StartLoad { dup dup not { /_save save dd } if } bd
+/EndLoad { if not { _save restore } if } bd
+/npop { { pop } repeat } bd
+%%EndFile
+%%BeginFile: l2compat
+%%Copyright: Copyright 1987-1993 Adobe Systems Incorporated. All Rights Reserved.
+/cshow isdefined? not StartLoad {
+/cshow {
+exch /_cshow xdd
+{ 0 0 _cshow exec } forall
+} bd
+} EndLoad
+/setcmykcolor isdefined? not StartLoad {
+/setcmykcolor {
+1 sub 4 1 roll
+3 {
+3 index add neg dup 0 lt { pop 0 } if
+3 1 roll
+} repeat
+setrgbcolor
+pop
+} bd
+} EndLoad
+/rectclip isdefined? not StartLoad {
+/re 0 def
+/rectclip { newpath re clip newpath } bd
+} EndLoad
+/execform isdefined? not StartLoad {
+/execform {
+gsave dup begin
+Matrix concat
+BBox aload pop
+exch 3 index sub
+exch 2 index sub
+rectclip
+PaintProc end grestore
+} def
+} EndLoad
+/sethalftone isdefined? not StartLoad {
+/sethalftone {
+begin
+HalftoneType 1 eq
+{ Frequency Angle /SpotFunction load setscreen }
+if
+end
+} bd
+} EndLoad
+%%EndFile
+/_ColorSep5044? true dd
+%%BeginFile: sep_ops.prc
+%%Copyright: Copyright 1987-1996 Adobe Systems Incorporated. All Rights Reserved.
+%%Title: (Separation Procs)
+%%Version: 1.03
+userdict /sep_ops 50 dict dup begin put
+/bdef {bind def} bind def
+/xdef {exch def} bdef
+/colorimagebuffer {
+0 1 2 index length 1 sub {
+dup 2 index exch get 255 exch sub 2 index 3 1 roll put
+}for
+}bdef
+/addprocs {
+[ 3 1 roll
+/exec load
+dup 3 1 roll
+] cvx
+} bdef
+/L1? {
+systemdict /languagelevel known {
+systemdict /languagelevel get 2 lt
+}{
+true
+} ifelse
+} bdef
+/colorexists {
+statusdict /processcolors known {
+statusdict /processcolors get exec
+}{
+/deviceinfo where {
+pop deviceinfo /Colors known {
+deviceinfo /Colors get
+statusdict /processcolors {
+deviceinfo /Colors known {
+deviceinfo /Colors get
+}{
+1
+} ifelse
+} put
+}{
+1
+} ifelse
+}{
+1
+} ifelse
+} ifelse
+1 gt
+} bdef
+/colorplate colorexists { 0 } { 5 } ifelse def
+/negativecolorplate false def
+/setcmykcolor where {
+pop
+gsave
+1 0 0 0 setcmykcolor systemdict /currentgray get exec 1 exch sub
+0 1 0 0 setcmykcolor systemdict /currentgray get exec 1 exch sub
+0 0 1 0 setcmykcolor systemdict /currentgray get exec 1 exch sub
+0 0 0 1 setcmykcolor systemdict /currentgray get exec 1 exch sub
+4 {4 copy} repeat
+grestore
+1 dict begin
+/foureq {
+4 index eq 8 1 roll
+4 index eq 8 1 roll
+4 index eq 8 1 roll
+4 index eq 8 1 roll
+pop pop pop pop and and and
+} def
+1 0 0 0 foureq {/colorplate 1 store} if
+0 1 0 0 foureq {/colorplate 2 store} if
+0 0 1 0 foureq {/colorplate 3 store} if
+0 0 0 1 foureq {/colorplate 4 store} if
+0 0 0 0 foureq {/colorplate 6 store} if
+end
+} if
+0 systemdict /currenttransfer get exec exec
+1 systemdict /currenttransfer get exec exec
+2 copy
+eq
+{
+/colorplate 6 store
+pop
+/negativecolorplate pop 0.5 lt store
+}
+{
+gt /negativecolorplate exch store
+}
+ifelse
+/MakeReadOnlyArray {
+/packedarray where {
+pop packedarray
+}{
+array astore readonly
+} ifelse
+} bdef
+/findcmykcustomcolor where {
+pop
+}{
+/findcmykcustomcolor {
+5 MakeReadOnlyArray
+} bdef
+} ifelse
+/setoverprint where {
+pop
+}{
+/setoverprint {
+pop
+} bdef
+} ifelse
+/setcustomcolor where {
+pop
+}{
+L1? {
+/setcustomcolor {
+exch
+aload pop pop
+4 { 4 index mul 4 1 roll } repeat
+5 -1 roll pop
+setcmykcolor
+} bdef
+}{
+/setcustomcolor {
+exch
+[ exch /Separation exch dup 4 get exch /DeviceCMYK exch
+0 4 getinterval
+[ exch /dup load exch cvx {mul exch dup}
+/forall load /pop load dup] cvx
+] setcolorspace setcolor
+} bdef
+} ifelse
+} ifelse
+/ik 0 def /iy 0 def /im 0 def /ic 0 def
+/imagetint {
+ic .3 mul
+im .59 mul
+iy .11 mul
+ik add add add dup
+1 gt{pop 1}if
+} bdef
+/setcmykcolor where {
+pop
+}{
+/setcmykcolor {
+/ik xdef /iy xdef /im xdef /ic xdef
+imagetint
+1 exch sub setgray
+} bdef
+} ifelse
+/customcolorimage where {
+pop
+}{
+L1? {
+/customcolorimage{
+gsave
+colorexists {
+aload pop pop
+/ik xdef /iy xdef /im xdef /ic xdef
+currentcolortransfer
+{ik mul ik sub 1 add} addprocs
+4 1 roll {iy mul iy sub 1 add} addprocs
+4 1 roll{im mul im sub 1 add} addprocs
+4 1 roll{ic mul ic sub 1 add} addprocs
+4 1 roll setcolortransfer
+/magentabuf 0 string def
+/yellowbuf 0 string def
+/blackbuf 0 string def
+{
+colorimagebuffer dup length magentabuf length ne{
+dup length dup dup
+/magentabuf exch string def
+/yellowbuf exch string def
+/blackbuf exch string def
+}if
+dup magentabuf copy yellowbuf copy
+blackbuf copy pop
+} addprocs
+{magentabuf}{yellowbuf}{blackbuf} true 4 colorimage
+}{
+aload pop pop /ik xdef /iy xdef /im xdef /ic xdef /tint
+imagetint def
+currenttransfer
+{tint mul 1 tint sub add} addprocs settransfer image
+}ifelse
+grestore
+} bdef
+}{
+/customcolorimage {
+gsave
+[ exch /Separation exch dup 4 get exch /DeviceCMYK exch
+0 4 getinterval
+[ exch /dup load exch cvx {mul exch dup}
+/forall load /pop load dup] cvx
+] setcolorspace
+10 dict begin
+/ImageType 1 def
+/DataSource exch def
+/ImageMatrix exch def
+/BitsPerComponent exch def
+/Height exch def
+/Width exch def
+/Decode [1 0] def
+currentdict end
+image
+grestore
+} bdef
+} ifelse
+} ifelse
+/setseparationgray where {
+pop
+}{
+L1? {
+/setseparationgray { 1 exch sub dup dup dup setcmykcolor } bdef
+}{
+/setseparationgray { [/Separation /All /DeviceCMYK
+{dup dup dup}] setcolorspace 1 exch sub setcolor
+} bdef
+} ifelse
+} ifelse
+/separationimage where {
+pop
+}{
+/separationimage {
+gsave
+1 1 1 1 (All)
+findcmykcustomcolor customcolorimage
+grestore
+} bdef
+} ifelse
+currentdict readonly pop end
+%%EndFile
+%%BeginFile: pdf.prc
+%%Copyright: Copyright 1987-1996 Adobe Systems Incorporated. All Rights Reserved.
+/initialize {
+_ColorSep5044? {sep_ops begin 50 dict begin} if
+newpath
+} bd
+/terminate {
+_ColorSep5044? {end end} if
+} bd
+Level2? StartLoad
+{ /m/moveto ld
+/l/lineto ld
+/c/curveto ld
+/setSA/setstrokeadjust ld
+} EndLoad
+Level2? not StartLoad
+{
+/pl {
+transform
+0.25 sub round 0.25 add exch
+0.25 sub round 0.25 add exch
+itransform
+} bd
+/m { _sa? { pl } if moveto } bd
+/l { _sa? { pl } if lineto } bd
+/c { _sa? { pl } if curveto } bd
+/setSA { /_sa? xdd } bd
+} EndLoad
+/v { currentpoint 6 2 roll c } bd
+/y { 2 copy c } bd
+/h/closepath ld
+/d/setdash ld
+/j/setlinejoin ld
+/J/setlinecap ld
+/M/setmiterlimit ld
+/w/setlinewidth ld
+/cf currentflat def
+/i {
+dup 0 eq { pop cf } if
+setflat
+} bd
+/ilp { /_lp /none dd } bd
+/sfc {
+_lp /fill ne {
+_sfcs
+_sfc
+/_lp /fill dd
+} if
+} dd
+/ssc {
+_lp /stroke ne {
+_sscs
+_ssc
+/_lp /stroke dd
+} if
+} dd
+/n {
+_doClip 1 ge {
+_doClip 1 eq { clip } { eoclip } ifelse
+/_doClip 0 dd
+} if
+newpath
+} bd
+/f {
+_doClip 1 ge
+{
+gsave sfc fill grestore
+_doClip 1 eq { clip } { eoclip } ifelse
+newpath
+ilp
+/_doClip 0 dd
+}
+{ sfc fill }
+ifelse
+} bd
+/f* {
+_doClip 1 ge
+{
+gsave sfc eofill grestore
+_doClip 1 eq { clip } { eoclip } ifelse
+newpath
+ilp
+/_doClip 0 dd
+}
+{ sfc eofill }
+ifelse
+} bd
+/S {
+_doClip 1 ge
+{
+gsave ssc stroke grestore
+_doClip 1 eq { clip } { eoclip } ifelse
+newpath
+ilp
+/_doClip 0 dd
+}
+{ ssc stroke }
+ifelse
+} bd
+/s { h S } bd
+/B {
+_doClip dup 1 ge
+gsave f grestore
+{
+gsave S grestore
+1 eq { clip } { eoclip } ifelse
+newpath
+ilp
+/_doClip 0 dd
+}
+{ pop S }
+ifelse
+} bd
+/b { h B } bd
+/B* {
+_doClip dup 1 ge
+gsave f* grestore
+{
+gsave S grestore
+1 eq { clip } { eoclip } ifelse
+newpath
+ilp
+/_doClip 0 dd
+}
+{ pop S }
+ifelse
+} bd
+/b* { h B* } bd
+/W { /_doClip 1 dd } bd
+/W* { /_doClip 2 dd } bd
+/q/save ld
+/Q { restore ilp } bd
+Level2? StartLoad
+{ /defineRes/defineresource ld
+/findRes/findresource ld
+currentglobal
+true systemdict /setglobal get exec
+[/Function /ExtGState /Form]
+{ /Generic /Category findresource dup length dict copy /Category defineresource pop }
+forall
+systemdict /setglobal get exec
+} EndLoad
+Level2? not StartLoad
+{ /AlmostFull?
+{ dup maxlength exch length sub 2 le
+} bind def
+/Expand
+{ 1 index maxlength mul cvi dict
+dup begin exch { def } forall end
+} bind def
+/xput
+{ 3 2 roll
+dup 3 index known not
+{ dup AlmostFull? { 1.5 Expand } if
+} if
+dup 4 2 roll put
+} bind def
+/defineRes
+{ _categories 1 index known not
+{ /_categories _categories 2 index 10 dict xput store
+} if
+_categories exch 2 copy get 5 -1 roll 4 index xput put
+} bind def
+/findRes
+{ _categories exch get exch get
+} bind def
+} EndLoad
+/cs
+{
+dup where { pop load } if
+dup /_fcs xdd
+ucs
+_cpcf exch get
+/_fc xdd
+/_fp null dd
+} bd
+/CS
+{
+dup where { pop load } if
+dup /_scs xdd ucs _cpcs exch get /_sc xdd /_sp null dd
+} bd
+/ucs {
+dup type /arraytype eq
+{ dup 0 get
+dup /Indexed eq
+{ pop 0 get }
+{ /Pattern eq
+{ dup length 2 eq
+{ 1 get ucs }
+{ 0 get }
+ifelse }
+{ 0 get }
+ifelse }
+ifelse }
+if }
+bd
+/_cpcf
+15 dict dup begin
+/DefaultGray _f1 def
+/DeviceGray _f1 def
+/DefaultRGB _f3 def
+/DeviceRGB _f3 def
+/DeviceCMYK _f4 def
+/CalGray _f1 def
+/CalRGB _f3 def
+/CalCMYK _f4 def
+/Lab _f3 def
+/Pattern _f0 def
+/Indexed _f1 def
+/Separation _f1 def
+/CIEBasedA _f1 def
+/CIEBasedABC _f3 def
+end
+dd
+/_cpcs
+15 dict dup begin
+/DefaultGray _s1 def
+/DeviceGray _s1 def
+/DefaultRGB _s3 def
+/DeviceRGB _s3 def
+/DeviceCMYK _s4 def
+/CalGray _s1 def
+/CalRGB _s3 def
+/CalCMYK _s4 def
+/Lab _s3 def
+/Pattern _s0 def
+/Indexed _s1 def
+/Separation _s1 def
+/CIEBasedA _s1 def
+/CIEBasedABC _s3 def
+end
+dd
+Level2? not StartLoad {
+/ri/pop ld
+/makePat/pop ld
+} EndLoad
+Level2? StartLoad {
+/ri
+{
+/findcolorrendering isdefined?
+{
+mark exch
+findcolorrendering
+counttomark 2 eq
+{ type /booleantype eq
+{ dup type /nametype eq
+{ dup /ColorRendering resourcestatus
+{ pop pop
+dup /DefaultColorRendering ne
+{
+/ColorRendering findresource
+setcolorrendering
+} if
+} if
+} if
+} if
+} if
+cleartomark
+}
+{ pop
+} ifelse
+} bd
+/makePat /makepattern ld
+} EndLoad
+Level2? not _ColorSep5044? or StartLoad
+{
+/L1setcolor {
+aload length
+dup 0 eq
+{ pop .5 setgray }
+{ dup 1 eq
+{ pop setgray }
+{ 3 eq
+{ setrgbcolor }
+{ setcmykcolor }
+ifelse }
+ifelse }
+ifelse
+} bind dd
+/_sfcs { } dd
+/_sscs { } dd
+} EndLoad
+Level2? not _ColorSep5044? not and StartLoad
+{
+/_sfc { _fc L1setcolor } dd
+/_ssc { _sc L1setcolor } dd
+} EndLoad
+Level2? _ColorSep5044? not and StartLoad
+{
+/_sfcs
+{
+_fcs setcolorspace
+} bind dd
+/_sscs
+{
+_scs setcolorspace
+} bind dd
+/_sfc
+{
+_fc aload pop
+_fp null eq
+{ setcolor }
+{ _fp setpattern }
+ifelse
+} bind dd
+/_ssc
+{
+_sc aload pop
+_sp null eq { setcolor } { _sp setpattern } ifelse
+} bind dd
+} EndLoad
+/sc
+{
+_fc astore pop
+ilp
+} bd
+/SC
+{
+_sc astore pop
+ilp
+} bd
+/scn {
+dup type /dicttype eq
+{ dup /_fp xdd
+/PaintType get 1 eq
+{ /_fc _f0 dd ilp }
+{ /_fc _cpcf _fcs ucs get dd
+sc }
+ifelse }
+{ sc }
+ifelse
+} bd
+/SCN {
+dup type /dicttype eq
+{ dup /_sp xdd
+/PaintType get 1 eq
+{ /_sc _s0 dd ilp }
+{ /_sc _cpcs _scs ucs get dd
+SC }
+ifelse }
+{ SC }
+ifelse
+} bd
+/g { /DefaultGray cs sc } bd
+/rg { /DefaultRGB cs sc } bd
+/k { /DeviceCMYK cs sc } bd
+/G { /DefaultGray CS SC } bd
+/RG { /DefaultRGB CS SC } bd
+/K { /DeviceCMYK CS SC } bd
+/cm { _mtx astore concat } bd
+/re {
+4 2 roll m
+1 index 0 rlineto
+0 exch rlineto
+neg 0 rlineto
+h
+} bd
+/RC/rectclip ld
+/EF/execform ld
+/PS { cvx exec } bd
+/initgs {
+/DefaultGray where
+{ pop }
+{ /DefaultGray /DeviceGray dd }
+ifelse
+/DefaultRGB where
+{ pop }
+{ /DefaultRGB /DeviceRGB dd }
+ifelse
+0 g 0 G
+[] 0 d 0 j 0 J 10 M 1 w
+true setSA
+} bd
+21 dict dup begin
+/CosineDot
+{ 180 mul cos exch 180 mul cos add 2 div } bd
+/Cross
+{ abs exch abs 2 copy gt { exch } if pop neg } bd
+/Diamond
+{ abs exch abs 2 copy add .75 le
+{ dup mul exch dup mul add 1 exch sub }
+{ 2 copy add 1.23 le
+{ .85 mul add 1 exch sub }
+{ 1 sub dup mul exch 1 sub dup mul add 1 sub }
+ifelse }
+ifelse } bd
+/Double
+{ exch 2 div exch 2 { 360 mul sin 2 div exch } repeat add } bd
+/DoubleDot
+{ 2 { 360 mul sin 2 div exch } repeat add } bd
+/Ellipse
+{ abs exch abs 2 copy 3 mul exch 4 mul add 3 sub dup 0 lt
+{ pop dup mul exch .75 div dup mul add 4 div
+1 exch sub }
+{ dup 1 gt
+{pop 1 exch sub dup mul exch 1 exch sub
+.75 div dup mul add 4 div 1 sub }
+{ .5 exch sub exch pop exch pop }
+ifelse }
+ifelse } bd
+/EllipseA
+{ dup mul .9 mul exch dup mul add 1 exch sub } bd
+/EllipseB
+{ dup 5 mul 8 div mul exch dup mul exch add sqrt 1 exch sub } bd
+/EllipseC
+{ dup .5 gt { 1 exch sub } if
+dup .25 ge
+{ .5 exch sub 4 mul dup mul 1 sub }
+{ 4 mul dup mul 1 exch sub }
+ifelse
+exch
+dup .5 gt { 1 exch sub } if
+dup .25 ge
+{ .5 exch sub 4 mul dup mul 1 sub }
+{ 4 mul dup mul 1 exch sub }
+ifelse
+add -2 div } bd
+/InvertedDouble
+{ exch 2 div exch 2 { 360 mul sin 2 div exch } repeat add neg } bd
+/InvertedDoubleDot
+{ 2 { 360 mul sin 2 div exch } repeat add neg } bd
+/InvertedEllipseA
+{ dup mul .9 mul exch dup mul add 1 sub } bd
+/InvertedSimpleDot
+{ dup mul exch dup mul add 1 sub } bd
+/Line
+{ exch pop abs neg } bd
+/LineX
+{ pop } bd
+/LineY
+{ exch pop } bd
+/Rhomboid
+{ abs exch abs 0.9 mul add 2 div } bd
+/Round
+{ abs exch abs 2 copy add 1 le
+{ dup mul exch dup mul add 1 exch sub }
+{ 1 sub dup mul exch 1 sub dup mul add 1 sub }
+ifelse } bd
+/SimpleDot
+{ dup mul exch dup mul add 1 exch sub } bd
+/Square
+{ abs exch abs 2 copy lt { exch } if pop neg } bd
+end
+{ /Function defineRes pop } forall
+/Identity {} /Function defineRes pop
+_ColorSep5044? StartLoad {
+/_defaulttransferfunc currenttransfer def
+/currentcolortransfer where
+{ pop /_defaultcolortransferfuncs [ currentcolortransfer ] def }
+if
+/concattransferfuncs {
+[ 3 1 roll /exec load exch /exec load ] cvx
+} bd
+/concatandsettransfer {
+/_defaulttransferfunc load concattransferfuncs settransfer
+} bd
+/concatandsetcolortransfer {
+colorplate 0 eq
+{
+_defaultcolortransferfuncs aload pop
+8 -1 roll 5 -1 roll concattransferfuncs 7 1 roll
+6 -1 roll 4 -1 roll concattransferfuncs 5 1 roll
+4 -1 roll 3 -1 roll concattransferfuncs 3 1 roll
+concattransferfuncs
+setcolortransfer
+} if
+colorplate 1 ge colorplate 4 le and
+{
+4 colorplate sub index 4 { exch pop } repeat
+concatandsettransfer
+} if
+colorplate 5 ge
+{
+0 index 4 { exch pop } repeat
+concatandsettransfer
+} if
+} bd
+/tn5044sethalftone
+{
+begin
+HalftoneType 5 eq
+{ [/Default /Cyan /Magenta /Yellow /Black /Default /Default /Default]
+colorplate get
+here not {
+/Default here not { currentdict } if
+} if
+}
+{ currentdict }
+ifelse
+end
+begin
+/TransferFunction here
+{
+concatandsettransfer
+currentdict dup length dict
+begin
+{
+1 index /TransferFunction ne { def } { pop pop } ifelse
+} forall
+currentdict
+end
+}
+{
+currentdict
+} ifelse
+end
+sethalftone
+} bd
+} EndLoad
+Level2? StartLoad {
+/gs
+{
+begin
+/SA here { setstrokeadjust } if
+/OP here { setoverprint } if
+/BG here { setblackgeneration } if
+/UCR here { setundercolorremoval } if
+/TR here
+{
+_ColorSep5044?
+{
+dup xcheck
+{ concatandsettransfer }
+{ aload pop concatandsetcolortransfer }
+ifelse
+}
+{
+dup xcheck
+{ settransfer }
+{ aload pop setcolortransfer }
+ifelse
+} ifelse
+} if
+/sethalftonephase isdefined? { /HTP here { sethalftonephase } if } if
+/HT here
+{ _ColorSep5044?
+{ tn5044sethalftone }
+{ sethalftone }
+ifelse
+} if
+end
+} bd
+/_defaulthalftone currenthalftone def
+} EndLoad
+Level2? not StartLoad {
+/gs
+{
+begin
+/SA here { /_sa? xdd } if
+/OP here { dup /_op? xdd
+/setoverprint where {pop setoverprint}
+{pop} ifelse
+} if
+/TR here
+{
+_ColorSep5044?
+{ dup xcheck
+{ concatandsettransfer }
+{ aload pop concatandsetcolortransfer }
+ifelse
+}
+{ dup xcheck
+{ settransfer }
+{ aload pop setcolortransfer }
+ifelse
+} ifelse
+} if
+/HT here
+{ _ColorSep5044?
+{ tn5044sethalftone }
+{ sethalftone }
+ifelse
+} if
+end
+} bd
+5 dict dup
+begin
+currentscreen 1 [/HalftoneType /SpotFunction /Angle /Frequency ]
+{ exch def } forall
+end
+/_defaulthalftone exch def
+} EndLoad
+/int {
+dup 2 index sub 3 index 5 index sub div 6 -2 roll sub mul
+exch pop add exch pop
+} bd
+/limit {
+dup 2 index le { exch } if pop
+dup 2 index ge { exch } if pop
+} bd
+_ColorSep5044? StartLoad {
+/_sfc
+{
+_fp null eq
+{ _fcs type /arraytype eq
+{_fcs 0 get /Separation eq
+{
+_fcs 1 get /All eq
+{
+_fc aload pop 1 exch sub
+/setseparationgray where pop begin setseparationgray end
+}
+{
+1 _fcs 3 get exec _fcs 1 get
+/findcmykcustomcolor where pop begin findcmykcustomcolor end
+_fc aload pop
+/setcustomcolor where pop begin setcustomcolor end
+}
+ifelse
+}
+{ _fc L1setcolor }
+ifelse
+}
+{ _fc L1setcolor }
+ifelse
+}
+{ _fc L1setcolor }
+ifelse
+} bind dd
+/_ssc
+{
+_sp null eq
+{ _scs type /arraytype eq
+{_scs 0 get /Separation eq
+{
+_scs 1 get /All eq
+{
+_sc aload pop 1 exch sub
+/setseparationgray where pop begin setseparationgray end
+}
+{
+1 _scs 3 get exec _scs 1 get
+/findcmykcustomcolor where pop begin findcmykcustomcolor end
+_sc aload pop
+/setcustomcolor where pop begin setcustomcolor end
+}
+ifelse
+}
+{ _sc L1setcolor }
+ifelse
+}
+{ _sc L1setcolor }
+ifelse
+}
+{ _sc L1setcolor }
+ifelse
+} bind dd
+} EndLoad
+%%EndFile
+%%BeginFile: pdftext.prc
+%%Copyright: Copyright 1987-1997 Adobe Systems Incorporated. All Rights Reserved.
+PDF /PDFText 65 dict dup begin put
+/initialize { PDFText begin } bd
+/terminate { end } bd
+/pdf_has_composefont? systemdict /composefont known def
+/CopyFont {
+{
+1 index /FID ne 2 index /UniqueID ne and
+{ def } { pop pop } ifelse
+} forall
+} bd
+/Type0CopyFont
+{
+exch
+dup length dict
+begin
+CopyFont
+[
+exch
+FDepVector
+{
+dup /FontType get 0 eq
+{
+1 index Type0CopyFont
+/_pdfType0 exch definefont
+}
+{
+/_pdfBaseFont exch
+2 index exec
+}
+ifelse
+exch
+}
+forall
+pop
+]
+/FDepVector exch def
+currentdict
+end
+} bd
+/cHexEncoding
+[/c00/c01/c02/c03/c04/c05/c06/c07/c08/c09/c0A/c0B/c0C/c0D/c0E/c0F/c10/c11/c12
+/c13/c14/c15/c16/c17/c18/c19/c1A/c1B/c1C/c1D/c1E/c1F/c20/c21/c22/c23/c24/c25
+/c26/c27/c28/c29/c2A/c2B/c2C/c2D/c2E/c2F/c30/c31/c32/c33/c34/c35/c36/c37/c38
+/c39/c3A/c3B/c3C/c3D/c3E/c3F/c40/c41/c42/c43/c44/c45/c46/c47/c48/c49/c4A/c4B
+/c4C/c4D/c4E/c4F/c50/c51/c52/c53/c54/c55/c56/c57/c58/c59/c5A/c5B/c5C/c5D/c5E
+/c5F/c60/c61/c62/c63/c64/c65/c66/c67/c68/c69/c6A/c6B/c6C/c6D/c6E/c6F/c70/c71
+/c72/c73/c74/c75/c76/c77/c78/c79/c7A/c7B/c7C/c7D/c7E/c7F/c80/c81/c82/c83/c84
+/c85/c86/c87/c88/c89/c8A/c8B/c8C/c8D/c8E/c8F/c90/c91/c92/c93/c94/c95/c96/c97
+/c98/c99/c9A/c9B/c9C/c9D/c9E/c9F/cA0/cA1/cA2/cA3/cA4/cA5/cA6/cA7/cA8/cA9/cAA
+/cAB/cAC/cAD/cAE/cAF/cB0/cB1/cB2/cB3/cB4/cB5/cB6/cB7/cB8/cB9/cBA/cBB/cBC/cBD
+/cBE/cBF/cC0/cC1/cC2/cC3/cC4/cC5/cC6/cC7/cC8/cC9/cCA/cCB/cCC/cCD/cCE/cCF/cD0
+/cD1/cD2/cD3/cD4/cD5/cD6/cD7/cD8/cD9/cDA/cDB/cDC/cDD/cDE/cDF/cE0/cE1/cE2/cE3
+/cE4/cE5/cE6/cE7/cE8/cE9/cEA/cEB/cEC/cED/cEE/cEF/cF0/cF1/cF2/cF3/cF4/cF5/cF6
+/cF7/cF8/cF9/cFA/cFB/cFC/cFD/cFE/cFF] def
+/modEnc {
+/_enc xdd
+/_icode 0 dd
+counttomark 1 sub -1 0
+{
+index
+dup type /nametype eq
+{
+_enc _icode 3 -1 roll put
+_icode 1 add
+}
+if
+/_icode xdd
+} for
+cleartomark
+_enc
+} bd
+/trEnc {
+/_enc xdd
+255 -1 0 {
+exch dup -1 eq
+{ pop /.notdef }
+{ Encoding exch get }
+ifelse
+_enc 3 1 roll put
+} for
+pop
+_enc
+} bd
+/TE {
+/_i xdd
+StandardEncoding 256 array copy modEnc
+_pdfEncodings exch _i exch put
+} bd
+/TZ
+{
+/_usePDFEncoding xdd
+findfont
+dup length 2 add dict
+begin
+{
+1 index /FID ne { def } { pop pop } ifelse
+} forall
+/FontName exch def
+_usePDFEncoding 0 ge
+{
+/Encoding _pdfEncodings _usePDFEncoding get def
+pop
+}
+{
+_usePDFEncoding -1 eq
+{
+counttomark 0 eq
+{ pop }
+{
+Encoding 256 array copy
+modEnc /Encoding exch def
+}
+ifelse
+}
+{
+256 array
+trEnc /Encoding exch def
+}
+ifelse
+}
+ifelse
+FontName currentdict
+end
+definefont pop
+}
+bd
+/Level2?
+systemdict /languagelevel known
+{systemdict /languagelevel get 2 ge}
+{false}
+ifelse
+def
+Level2?
+{
+/_pdfFontStatus
+{
+currentglobal exch
+/Font resourcestatus
+{pop pop true}
+{false}
+ifelse
+exch setglobal
+} bd
+}
+{
+/_pdfFontStatusString 50 string def
+_pdfFontStatusString 0 (fonts/) putinterval
+/_pdfFontStatus
+{
+_pdfFontStatusString 6 42 getinterval
+cvs length 6 add
+_pdfFontStatusString exch 0 exch getinterval
+status
+{ pop pop pop pop true}
+{ false }
+ifelse
+} bd
+}
+ifelse
+Level2?
+{
+/_pdfCIDFontStatus
+{
+/CIDFont /Category resourcestatus
+{
+pop pop
+/CIDFont resourcestatus
+{pop pop true}
+{false}
+ifelse
+}
+{ pop false }
+ifelse
+} bd
+}
+if
+/_pdfString100 100 string def
+/_pdfComposeFontName
+{
+dup length 1 eq
+{
+0 get
+1 index
+type /nametype eq
+{
+_pdfString100 cvs
+length dup dup _pdfString100 exch (-) putinterval
+_pdfString100 exch 1 add dup _pdfString100 length exch sub getinterval
+2 index exch cvs length
+add 1 add _pdfString100 exch 0 exch getinterval
+exch pop
+true
+}
+{
+pop pop
+false
+}
+ifelse
+}
+{
+false
+}
+ifelse
+} bd
+pdf_has_composefont?
+{
+/_pdfComposeFont
+{
+1 index /CMap resourcestatus
+{pop pop true}
+{false}
+ifelse
+1 index true exch
+{
+_pdfCIDFontStatus not
+{pop false exit}
+if
+}
+forall
+and
+{ 3 -1 roll pop composefont true}
+{
+4 -1 roll pop
+_pdfComposeFontName
+{
+dup _pdfFontStatus
+{ findfont definefont true }
+{
+pop
+dup _pdfFontStatus
+{ findfont true }
+{ pop false }
+ifelse
+}
+ifelse
+}
+{
+dup _pdfFontStatus
+{ findfont true }
+{ pop false }
+ifelse
+}
+ifelse
+}
+ifelse
+} bd
+}
+{
+/_pdfComposeFont
+{
+4 -1 roll pop
+_pdfComposeFontName not
+{
+dup
+}
+if
+2 copy _pdfFontStatus
+{pop findfont exch pop true}
+{
+eq
+{pop false}
+{
+dup _pdfFontStatus
+{findfont true}
+{pop false}
+ifelse
+}
+ifelse
+}
+ifelse
+} bd
+}
+ifelse
+/_pdfFaceByStyleDict 4 dict dup begin
+Level2?
+{
+/Serif
+/HeiseiMin-W3-83pv-RKSJ-H _pdfFontStatus
+{/HeiseiMin-W3}
+{/Ryumin-Light}
+ifelse
+def
+/SansSerif
+/HeiseiKakuGo-W5-83pv-RKSJ-H _pdfFontStatus
+{/HeiseiKakuGo-W5}
+{/GothicBBB-Medium}
+ifelse
+def
+/HeiseiMaruGo-W4-83pv-RKSJ-H _pdfFontStatus
+{/HeiseiMaruGo-W4}
+{
+/Jun101-Light-RKSJ-H _pdfFontStatus
+{ /Jun101-Light }
+{ SansSerif }
+ifelse
+}
+ifelse
+/RoundSansSerif exch def
+/Default Serif def
+}
+{
+/Serif /Ryumin-Light def
+/SansSerif /GothicBBB-Medium def
+{
+(fonts/Jun101-Light-83pv-RKSJ-H) status
+}stopped
+{pop}{
+{ pop pop pop pop /Jun101-Light }
+{ SansSerif }
+ifelse
+/RoundSansSerif exch def
+}ifelse
+/Default Serif def
+}
+ifelse
+end
+def
+/_pdf_Adobe-Japan1-2 (Adobe-Japan1-2) def
+/_pdfConcatNames
+{
+exch
+_pdfString100 cvs
+length dup dup _pdfString100 exch (-) putinterval
+_pdfString100 exch 1 add dup _pdfString100 length exch sub getinterval
+3 -1 roll exch cvs length
+add 1 add _pdfString100 exch 0 exch getinterval
+} bind def
+/_pdfSubSetFontByStyleDict 4 dict dup begin
+_pdfFaceByStyleDict
+{
+_pdf_Adobe-Japan1-2 _pdfConcatNames
+dup _pdfFontStatus
+{ def }
+{
+{
+pop
+dup /SansSerif eq
+{
+/HeiseiKakuGo-W5-Adobe-Japan1-2 dup _pdfFontStatus
+{ def exit }
+{ pop }
+ifelse
+}
+if
+dup /Serif eq
+{
+/HeiseiMin-W3-Adobe-Japan1-2 dup _pdfFontStatus
+{ def exit }
+{ pop }
+ifelse
+}
+if
+pop exit
+}
+loop
+}
+ifelse
+}
+forall
+end def
+/TZzero
+{
+/_fyAdj xdd
+/_wmode xdd
+/_styleArr xdd
+4 copy
+_pdfComposeFont
+{exch pop exch pop exch pop}
+{
+[
+0 1 _styleArr length 1 sub
+{
+_styleArr exch get
+_pdfFaceByStyleDict exch 2 copy known not
+{ pop /Default }
+if
+get
+}
+for
+]
+exch pop
+3 index 3 index 4 2 roll
+_pdfComposeFont
+{exch pop}
+{
+findfont
+}
+ifelse
+}
+ifelse
+dup /FontType get 3 eq _wmode 1 eq and
+{
+_pdfVerticalRomanT3Font dup length dict copy
+begin
+/_basefont exch def
+/Encoding _basefont /Encoding get def
+}
+{
+dup length 2 add dict
+begin
+{1 index /FID ne {def}{pop pop} ifelse }
+forall
+} ifelse
+/WMode _wmode def
+/BaseLineAdj _fyAdj def
+FontType 0 ne
+{
+/Encoding Encoding dup length array copy dup 16#5c /yen put def
+/_fauxfont true def
+} if
+currentdict
+end
+definefont pop
+}
+bd
+/swj {
+dup 4 1 roll
+dup length exch stringwidth
+exch 5 -1 roll 3 index mul add
+4 1 roll 3 1 roll mul add
+6 2 roll /_cnt 0 dd
+{1 index eq {/_cnt _cnt 1 add dd} if} forall pop
+exch _cnt mul exch _cnt mul 2 index add 4 1 roll 2 index add 4 1 roll pop pop
+} bd
+/jss {
+4 1 roll
+{
+2 npop
+(0) exch 2 copy 0 exch put
+gsave
+32 eq
+{
+exch 6 index 6 index 6 index 5 -1 roll widthshow
+currentpoint
+}
+{
+false charpath currentpoint
+4 index setmatrix stroke
+}
+ifelse
+grestore
+moveto
+2 copy rmoveto
+} exch cshow
+6 npop
+} def
+/jsfTzero {
+{
+2 npop
+(0) exch 2 copy 0 exch put
+exch show
+32 eq
+{
+4 index 4 index rmoveto
+}
+if
+2 copy rmoveto
+} exch cshow
+5 npop
+} def
+/jsp
+{
+{
+2 npop
+(0) exch 2 copy 0 exch put
+32 eq
+{ exch 5 index 5 index 5 index 5 -1 roll widthshow }
+{ false charpath }
+ifelse
+2 copy rmoveto
+} exch cshow
+5 npop
+} bd
+/trj { _cx 0 fWModeProc 32 _ax 0 fWModeProc 6 5 roll } bd
+/pjsf { trj sfc fawidthshowProc } bd
+/pjss { trj _ctm ssc jss } bd
+/pjsc { trj jsp } bd
+/_Tjdef [
+/pjsf load
+/pjss load
+{
+dup
+currentpoint 3 2 roll
+pjsf
+newpath moveto
+pjss
+} bind
+{
+trj swj rmoveto
+} bind
+{
+dup currentpoint 4 2 roll gsave
+pjsf
+grestore 3 1 roll moveto
+pjsc
+} bind
+{
+dup currentpoint 4 2 roll
+currentpoint gsave newpath moveto
+pjss
+grestore 3 1 roll moveto
+pjsc
+} bind
+{
+dup currentpoint 4 2 roll gsave
+dup currentpoint 3 2 roll
+pjsf
+newpath moveto
+pjss
+grestore 3 1 roll moveto
+pjsc
+} bind
+/pjsc load
+] def
+/BT
+{
+/_inT true dd
+_ctm currentmatrix pop matrix _tm copy pop
+0 _rise _baselineadj add translate _hs 1 scale
+0 0 moveto
+} bd
+/ET
+{
+/_inT false dd
+_tr 3 gt {clip} if
+_ctm setmatrix newpath
+} bd
+/Tr {
+_inT { _tr 3 le {currentpoint newpath moveto} if } if
+dup /_tr xdd
+_Tjdef exch get /_Tj xdd
+} bd
+/Tj {
+userdict /$$copystring 2 index put
+_Tj
+} bd
+/iTm { _ctm setmatrix _tm concat 0 _rise _baselineadj add translate _hs 1 scale } bd
+/Tm { _tm astore pop iTm 0 0 moveto } bd
+/Td { _mtx translate _tm _tm concatmatrix pop iTm 0 0 moveto } bd
+/TD { dup /_ld xdd Td } bd
+/_nullProc {} bd
+/Tf {
+dup 1000 div /_fScl xdd
+exch findfont dup
+/_nullProc exch
+/WMode known
+{
+1 index /WMode get 1 eq
+{pop /exch}
+if
+}
+if
+load /fWModeProc xdd
+dup
+/FontType get 0 eq dup _cx 0 ne and
+{ /jsfTzero }
+{ /awidthshow }
+ifelse
+load /fawidthshowProc xdd
+/_fTzero xdd
+dup /BaseLineAdj known
+{ dup /BaseLineAdj get _fScl mul }
+{ 0 }
+ifelse
+/_baselineadj xdd
+currentpoint iTm moveto
+exch scalefont setfont
+} bd
+/TL { neg /_ld xdd } bd
+/Tw {
+/_cx xdd
+_cx 0 ne _fTzero and
+{ /jsfTzero }
+{ /awidthshow }
+ifelse
+load /fawidthshowProc xdd
+} bd
+/Tc { /_ax xdd } bd
+/Ts { /_rise xdd currentpoint iTm moveto } bd
+/Tz { 100 div /_hs xdd iTm } bd
+/Tk { exch pop _fScl mul neg 0 fWModeProc rmoveto } bd
+/T* { 0 _ld Td } bd
+/' { T* Tj } bd
+/" { exch Tc exch Tw ' } bd
+/TJ {
+{
+dup type /stringtype eq
+{ Tj }
+{ 0 exch Tk }
+ifelse
+} forall
+} bd
+/T- { _hy Tj } bd
+/d0/setcharwidth ld
+/d1 { setcachedevice /sfc{}dd /ssc{}dd } bd
+/nND {{/.notdef} repeat} bd
+/T3Defs {
+/BuildChar
+{
+1 index /Encoding get exch get
+1 index /BuildGlyph get exec
+}
+def
+/BuildGlyph {
+exch begin
+GlyphProcs exch get exec
+end
+} def
+} bd
+/_pdfBoldRomanWidthProc
+{
+stringwidth 1 index 0 ne { exch .03 add exch }if setcharwidth
+} bd
+/_pdfType0WidthProc
+{
+dup stringwidth 0 0 moveto
+2 index true charpath pathbbox
+0 -1
+7 index 2 div .88
+setcachedevice2
+pop
+} bd
+/_pdfBoldBaseFont
+10 dict begin
+/FontType 3 def
+/FontMatrix[1 0 0 1 0 0]def
+/FontBBox[0 0 1 1]def
+/Encoding cHexEncoding def
+/_setwidthProc /_pdfBoldRomanWidthProc load def
+/_bcstr1 1 string def
+/BuildChar
+{
+exch begin
+_basefont setfont
+_bcstr1 dup 0 4 -1 roll put
+dup
+_setwidthProc
+0 0 moveto
+dup show
+_basefonto setfont
+0 0 moveto
+show
+end
+}bd
+currentdict
+end
+def
+/_pdfVerticalRomanT3Font
+10 dict begin
+/FontType 3 def
+/FontMatrix[1 0 0 1 0 0]def
+/FontBBox[0 0 1 1]def
+/_bcstr1 1 string def
+/BuildChar
+{
+exch begin
+_basefont setfont
+_bcstr1 dup 0 4 -1 roll put
+dup
+_pdfType0WidthProc
+0 0 moveto
+show
+end
+}bd
+currentdict
+end
+def
+/MakeBoldFont
+{
+dup dup length 2 add dict
+begin
+CopyFont
+/PaintType 2 def
+/StrokeWidth .03 0 FontMatrix idtransform pop def
+/dummybold currentdict
+end
+definefont
+_pdfBoldBaseFont 8 dict copy begin
+/_basefont exch def
+/_basefonto exch def
+currentdict
+end
+definefont
+} bd
+/MakeBold {
+findfont dup
+/FontType get 0 eq
+{
+_pdfBoldBaseFont /_setwidthProc /_pdfType0WidthProc load put
+{MakeBoldFont} Type0CopyFont definefont
+}
+{
+dup /_fauxfont known not
+{
+_pdfBoldBaseFont /_setwidthProc /_pdfBoldRomanWidthProc load put
+MakeBoldFont
+}
+{ definefont }
+ifelse
+}
+ifelse
+pop
+}bd
+/MakeItalic {
+findfont
+dup /WMode 2 copy known
+{
+get 1 eq
+{ _italMtx_WMode1 }
+{ _italMtx }
+ifelse
+}
+{ pop pop _italMtx }
+ifelse
+makefont
+definefont pop
+}bd
+/MakeBoldItalic {
+/dummybold exch
+MakeBold
+/dummybold
+MakeItalic
+}bd
+currentdict readonly pop end
+%%EndFile
+PDFText begin
+[39/quotesingle 96/grave 128/Adieresis/Aring/Ccedilla/Eacute/Ntilde/Odieresis
+/Udieresis/aacute/agrave/acircumflex/adieresis/atilde/aring/ccedilla/eacute
+/egrave/ecircumflex/edieresis/iacute/igrave/icircumflex/idieresis/ntilde
+/oacute/ograve/ocircumflex/odieresis/otilde/uacute/ugrave/ucircumflex
+/udieresis/dagger/degree/cent/sterling/section/bullet/paragraph/germandbls
+/registered/copyright/trademark/acute/dieresis/.notdef/AE/Oslash
+/.notdef/plusminus/.notdef/.notdef/yen/mu/.notdef/.notdef
+/.notdef/.notdef/.notdef/ordfeminine/ordmasculine/.notdef/ae/oslash
+/questiondown/exclamdown/logicalnot/.notdef/florin/.notdef/.notdef
+/guillemotleft/guillemotright/ellipsis/.notdef/Agrave/Atilde/Otilde/OE/oe
+/endash/emdash/quotedblleft/quotedblright/quoteleft/quoteright/divide
+/.notdef/ydieresis/Ydieresis/fraction/currency/guilsinglleft/guilsinglright
+/fi/fl/daggerdbl/periodcentered/quotesinglbase/quotedblbase/perthousand
+/Acircumflex/Ecircumflex/Aacute/Edieresis/Egrave/Iacute/Icircumflex
+/Idieresis/Igrave/Oacute/Ocircumflex/.notdef/Ograve/Uacute/Ucircumflex
+/Ugrave/dotlessi/circumflex/tilde/macron/breve/dotaccent/ring/cedilla
+/hungarumlaut/ogonek/caron
+0 TE
+[1/dotlessi/caron 39/quotesingle 96/grave 
+127/bullet/bullet/bullet/quotesinglbase/florin/quotedblbase/ellipsis
+/dagger/daggerdbl/circumflex/perthousand/Scaron/guilsinglleft/OE
+/bullet/bullet/bullet/bullet/quoteleft/quoteright/quotedblleft
+/quotedblright/bullet/endash/emdash/tilde/trademark/scaron
+/guilsinglright/oe/bullet/bullet/Ydieresis/space/exclamdown/cent/sterling
+/currency/yen/brokenbar/section/dieresis/copyright/ordfeminine
+/guillemotleft/logicalnot/hyphen/registered/macron/degree/plusminus
+/twosuperior/threesuperior/acute/mu/paragraph/periodcentered/cedilla
+/onesuperior/ordmasculine/guillemotright/onequarter/onehalf/threequarters
+/questiondown/Agrave/Aacute/Acircumflex/Atilde/Adieresis/Aring/AE/Ccedilla
+/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex/Idieresis
+/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis/multiply/Oslash
+/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls/agrave
+/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde
+/ograve/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute
+/ucircumflex/udieresis/yacute/thorn/ydieresis
+1 TE
+end
+currentdict readonly pop
+end end
+/currentpacking where {pop setpacking}if
+PDFVars/InitAll{[PDF PDFText]{/initialize get exec}forall initgs 0 Tr}put
+PDFVars/TermAll{[PDFText PDF]{/terminate get exec}forall}put
+PDFVars begin PDF begin PDFVars/InitAll get exec
+% Begin encoding-delta
+[ 0 /grave/acute/circumflex/tilde/macron/breve
+/dotaccent/dieresis/ring/cedilla/hungarumlaut/ogonek
+/caron/dotlessi/bullet/bullet/bullet/bullet
+/bullet/bullet/bullet/bullet/bullet/bullet
+/bullet/bullet/bullet/bullet/bullet/bullet
+/bullet/bullet 39 /quotesingle 96 /grave 127 /.notdef/.notdef
+/.notdef/quotesinglbase/florin/quotedblbase/ellipsis/dagger
+/daggerdbl/circumflex/perthousand/Scaron/guilsinglleft/OE
+/.notdef/.notdef/.notdef/.notdef/quoteleft/quoteright
+/quotedblleft/quotedblright/bullet/endash/emdash/tilde
+/trademark/scaron/guilsinglright/oe/.notdef/.notdef
+/Ydieresis/space/exclamdown/cent/sterling/currency
+/yen/brokenbar/section/dieresis/copyright/ordfeminine
+/guillemotleft/logicalnot/hyphen/registered/macron/degree
+/plusminus/twosuperior/threesuperior/acute/mu/paragraph
+/periodcentered/cedilla/onesuperior/ordmasculine/guillemotright/onequarter
+/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex
+/Atilde/Adieresis/Aring/AE/Ccedilla/Egrave
+/Eacute/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex
+/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex
+/Otilde/Odieresis/multiply/Oslash/Ugrave/Uacute
+/Ucircumflex/Udieresis/Yacute/Thorn/germandbls/agrave
+/aacute/acircumflex/atilde/adieresis/aring/ae
+/ccedilla/egrave/eacute/ecircumflex/edieresis/igrave
+/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash
+/ugrave/uacute/ucircumflex/udieresis/yacute/thorn
+/ydieresis
+/N5/Helvetica -1 TZ
+% End encoding-delta
+% Begin encoding-delta
+[ 0 /grave/acute/circumflex/tilde/macron/breve
+/dotaccent/dieresis/ring/cedilla/hungarumlaut/ogonek
+/caron/dotlessi/bullet/bullet/bullet/bullet
+/bullet/bullet/bullet/bullet/bullet/bullet
+/bullet/bullet/bullet/bullet/bullet/bullet
+/bullet/bullet 39 /quotesingle 96 /grave 127 /.notdef/.notdef
+/.notdef/quotesinglbase/florin/quotedblbase/ellipsis/dagger
+/daggerdbl/circumflex/perthousand/Scaron/guilsinglleft/OE
+/.notdef/.notdef/.notdef/.notdef/quoteleft/quoteright
+/quotedblleft/quotedblright/bullet/endash/emdash/tilde
+/trademark/scaron/guilsinglright/oe/.notdef/.notdef
+/Ydieresis/space/exclamdown/cent/sterling/currency
+/yen/brokenbar/section/dieresis/copyright/ordfeminine
+/guillemotleft/logicalnot/hyphen/registered/macron/degree
+/plusminus/twosuperior/threesuperior/acute/mu/paragraph
+/periodcentered/cedilla/onesuperior/ordmasculine/guillemotright/onequarter
+/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex
+/Atilde/Adieresis/Aring/AE/Ccedilla/Egrave
+/Eacute/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex
+/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex
+/Otilde/Odieresis/multiply/Oslash/Ugrave/Uacute
+/Ucircumflex/Udieresis/Yacute/Thorn/germandbls/agrave
+/aacute/acircumflex/atilde/adieresis/aring/ae
+/ccedilla/egrave/eacute/ecircumflex/edieresis/igrave
+/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash
+/ugrave/uacute/ucircumflex/udieresis/yacute/thorn
+/ydieresis
+/N4/Helvetica-Bold -1 TZ
+% End encoding-delta
+PDFVars/TermAll get exec end end
+
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+userdict /pgsave save put
+PDFVars begin PDF begin PDFVars/InitAll get exec
+[ 0 -1 1 0 22 533 ] concat
+/N6 8 dict dup begin
+/SA false def
+/OP false def
+/BG {}def
+/UCR {}def
+/HT _defaulthalftone def
+/TR {}def 
+end /ExtGState defineRes pop
+%%EndPageSetup
+81 59 393 622 RC
+0 0 0 RG
+1 J
+1 j
+0.12 w
+10 M
+[]0 d
+/N6 /ExtGState findRes gs
+1 i
+272.32 324.76 m
+112 324.76 l
+245.68 322.36 m
+245.68 327.16 l
+245.68 322.36 l
+218.92 322.36 m
+218.92 327.16 l
+218.92 322.36 l
+192.16 322.36 m
+192.16 327.16 l
+192.16 322.36 l
+165.52 322.36 m
+165.52 327.16 l
+165.52 322.36 l
+138.76 322.36 m
+138.76 327.16 l
+138.76 322.36 l
+112 322.36 m
+112 327.16 l
+112 322.36 l
+272.32 324.76 m
+118.96 371.68 l
+246.16 330.28 m
+247.6 334.84 l
+246.16 330.28 l
+220.48 338.08 m
+221.92 342.64 l
+220.48 338.08 l
+194.92 346 m
+196.36 350.56 l
+194.92 346 l
+169.48 353.68 m
+170.92 358.24 l
+169.48 353.68 l
+143.8 361.6 m
+145.24 366.16 l
+143.8 361.6 l
+118.24 369.4 m
+119.68 373.96 l
+118.24 369.4 l
+272.32 324.76 m
+139.36 414.4 l
+248.92 337.72 m
+251.56 341.56 l
+248.92 337.72 l
+226.72 352.72 m
+229.36 356.56 l
+226.72 352.72 l
+204.52 367.72 m
+207.16 371.56 l
+204.52 367.72 l
+182.44 382.6 m
+185.08 386.44 l
+182.44 382.6 l
+160.24 397.48 m
+162.88 401.32 l
+160.24 397.48 l
+138.04 412.48 m
+140.68 416.32 l
+138.04 412.48 l
+272.32 324.76 m
+171.4 449.32 l
+253.6 343.96 m
+257.44 346.84 l
+253.6 343.96 l
+236.8 364.84 m
+240.64 367.72 l
+236.8 364.84 l
+219.88 385.6 m
+223.72 388.48 l
+219.88 385.6 l
+203.2 406.24 m
+207.04 409.12 l
+203.2 406.24 l
+186.28 427.12 m
+190.12 430 l
+186.28 427.12 l
+169.48 447.88 m
+173.32 450.76 l
+169.48 447.88 l
+272.32 324.76 m
+214.84 474.4 l
+260.44 348.76 m
+265 350.44 l
+260.44 348.76 l
+250.84 373.72 m
+255.4 375.4 l
+250.84 373.72 l
+241.24 398.8 m
+245.8 400.48 l
+241.24 398.8 l
+231.76 423.64 m
+236.32 425.32 l
+231.76 423.64 l
+222.16 448.6 m
+226.72 450.28 l
+222.16 448.6 l
+212.56 473.56 m
+217.12 475.24 l
+212.56 473.56 l
+272.32 324.76 m
+261.16 484.72 l
+268.12 351.28 m
+272.92 351.52 l
+268.12 351.28 l
+266.2 377.92 m
+271 378.16 l
+266.2 377.92 l
+264.28 404.68 m
+269.08 404.92 l
+264.28 404.68 l
+262.48 431.2 m
+267.28 431.44 l
+262.48 431.2 l
+260.68 457.96 m
+265.48 458.2 l
+260.68 457.96 l
+258.76 484.6 m
+263.56 484.84 l
+258.76 484.6 l
+272.32 324.76 m
+308.44 481 l
+275.92 351.16 m
+280.72 350.2 l
+275.92 351.16 l
+281.92 377.32 m
+286.72 376.36 l
+281.92 377.32 l
+S 
+288.04 403.36 m
+292.84 402.4 l
+288.04 403.36 l
+294.04 429.28 m
+298.84 428.32 l
+294.04 429.28 l
+300.04 455.44 m
+304.84 454.48 l
+300.04 455.44 l
+306.04 481.48 m
+310.84 480.52 l
+306.04 481.48 l
+272.32 324.76 m
+352.48 463.6 l
+283.6 349 m
+287.68 346.6 l
+283.6 349 l
+297.04 372.16 m
+301.12 369.76 l
+297.04 372.16 l
+310.36 395.44 m
+314.44 393.04 l
+310.36 395.44 l
+323.68 418.48 m
+327.76 416.08 l
+323.68 418.48 l
+337.12 441.64 m
+341.2 439.24 l
+337.12 441.64 l
+350.44 464.8 m
+354.52 462.4 l
+350.44 464.8 l
+272.32 324.76 m
+389.56 434.08 l
+290.08 344.68 m
+293.44 341.08 l
+290.08 344.68 l
+309.64 362.92 m
+313 359.32 l
+309.64 362.92 l
+329.32 381.28 m
+332.68 377.68 l
+329.32 381.28 l
+348.76 399.4 m
+352.12 395.8 l
+348.76 399.4 l
+368.32 417.64 m
+371.68 414.04 l
+368.32 417.64 l
+387.88 435.88 m
+391.24 432.28 l
+387.88 435.88 l
+272.32 324.76 m
+416.44 395.08 l
+295.24 338.56 m
+297.4 334.24 l
+295.24 338.56 l
+319.24 350.32 m
+321.4 346 l
+319.24 350.32 l
+343.36 362.08 m
+345.52 357.76 l
+343.36 362.08 l
+367.24 373.72 m
+369.4 369.4 l
+367.24 373.72 l
+391.36 385.48 m
+393.52 381.16 l
+391.36 385.48 l
+415.36 397.24 m
+417.52 392.92 l
+415.36 397.24 l
+272.32 324.76 m
+430.72 349.84 l
+298.24 331.36 m
+298.96 326.56 l
+298.24 331.36 l
+324.76 335.56 m
+325.48 330.76 l
+324.76 335.56 l
+351.16 339.76 m
+351.88 334.96 l
+351.16 339.76 l
+377.44 343.84 m
+378.16 339.04 l
+377.44 343.84 l
+403.96 348.04 m
+404.68 343.24 l
+403.96 348.04 l
+430.36 352.24 m
+431.08 347.44 l
+430.36 352.24 l
+272.32 324.76 m
+430.72 299.68 l
+298.96 322.96 m
+298.24 318.16 l
+298.96 322.96 l
+325.48 318.76 m
+324.76 313.96 l
+325.48 318.76 l
+351.88 314.56 m
+351.16 309.76 l
+351.88 314.56 l
+378.16 310.48 m
+377.44 305.68 l
+378.16 310.48 l
+404.68 306.28 m
+403.96 301.48 l
+404.68 306.28 l
+431.08 302.08 m
+430.36 297.28 l
+431.08 302.08 l
+272.32 324.76 m
+416.44 254.44 l
+297.4 315.28 m
+295.24 310.96 l
+297.4 315.28 l
+321.4 303.52 m
+319.24 299.2 l
+321.4 303.52 l
+345.52 291.76 m
+343.36 287.44 l
+345.52 291.76 l
+369.4 280.12 m
+367.24 275.8 l
+369.4 280.12 l
+393.52 268.36 m
+391.36 264.04 l
+S 
+391.36 264.04 m
+393.52 268.36 l
+417.52 256.6 m
+415.36 252.28 l
+417.52 256.6 l
+272.32 324.76 m
+389.56 215.44 l
+293.44 308.44 m
+290.08 304.84 l
+293.44 308.44 l
+313 290.2 m
+309.64 286.6 l
+313 290.2 l
+332.68 271.84 m
+329.32 268.24 l
+332.68 271.84 l
+352.12 253.72 m
+348.76 250.12 l
+352.12 253.72 l
+371.68 235.48 m
+368.32 231.88 l
+371.68 235.48 l
+391.24 217.24 m
+387.88 213.64 l
+391.24 217.24 l
+272.32 324.76 m
+352.48 185.92 l
+287.68 302.92 m
+283.6 300.52 l
+287.68 302.92 l
+301.12 279.76 m
+297.04 277.36 l
+301.12 279.76 l
+314.44 256.48 m
+310.36 254.08 l
+314.44 256.48 l
+327.76 233.44 m
+323.68 231.04 l
+327.76 233.44 l
+341.2 210.28 m
+337.12 207.88 l
+341.2 210.28 l
+354.52 187.12 m
+350.44 184.72 l
+354.52 187.12 l
+272.32 324.76 m
+308.44 168.52 l
+280.72 299.32 m
+275.92 298.36 l
+280.72 299.32 l
+286.72 273.16 m
+281.92 272.2 l
+286.72 273.16 l
+S 
+292.84 247.12 m
+288.04 246.16 l
+292.84 247.12 l
+298.84 221.2 m
+294.04 220.24 l
+298.84 221.2 l
+304.84 195.04 m
+300.04 194.08 l
+304.84 195.04 l
+310.84 169 m
+306.04 168.04 l
+310.84 169 l
+272.32 324.76 m
+261.16 164.8 l
+272.92 298 m
+268.12 298.24 l
+272.92 298 l
+271 271.36 m
+266.2 271.6 l
+271 271.36 l
+269.08 244.6 m
+264.28 244.84 l
+269.08 244.6 l
+267.28 218.08 m
+262.48 218.32 l
+267.28 218.08 l
+265.48 191.32 m
+260.68 191.56 l
+265.48 191.32 l
+263.56 164.68 m
+258.76 164.92 l
+263.56 164.68 l
+272.32 324.76 m
+214.84 175.12 l
+265 299.08 m
+260.44 300.76 l
+265 299.08 l
+255.4 274.12 m
+250.84 275.8 l
+255.4 274.12 l
+245.8 249.04 m
+241.24 250.72 l
+245.8 249.04 l
+236.32 224.2 m
+231.76 225.88 l
+236.32 224.2 l
+226.72 199.24 m
+222.16 200.92 l
+226.72 199.24 l
+217.12 174.28 m
+212.56 175.96 l
+217.12 174.28 l
+272.32 324.76 m
+171.4 200.2 l
+257.44 302.68 m
+253.6 305.56 l
+257.44 302.68 l
+240.64 281.8 m
+236.8 284.68 l
+240.64 281.8 l
+223.72 261.04 m
+219.88 263.92 l
+223.72 261.04 l
+207.04 240.4 m
+203.2 243.28 l
+207.04 240.4 l
+190.12 219.52 m
+186.28 222.4 l
+190.12 219.52 l
+173.32 198.76 m
+169.48 201.64 l
+173.32 198.76 l
+272.32 324.76 m
+139.36 235.12 l
+251.56 307.96 m
+248.92 311.8 l
+251.56 307.96 l
+229.36 292.96 m
+226.72 296.8 l
+229.36 292.96 l
+207.16 277.96 m
+204.52 281.8 l
+207.16 277.96 l
+185.08 263.08 m
+182.44 266.92 l
+185.08 263.08 l
+162.88 248.2 m
+160.24 252.04 l
+162.88 248.2 l
+140.68 233.2 m
+138.04 237.04 l
+140.68 233.2 l
+272.32 324.76 m
+118.96 277.84 l
+247.6 314.68 m
+246.16 319.24 l
+247.6 314.68 l
+221.92 306.88 m
+220.48 311.44 l
+221.92 306.88 l
+196.36 298.96 m
+194.92 303.52 l
+196.36 298.96 l
+170.92 291.28 m
+169.48 295.84 l
+170.92 291.28 l
+145.24 283.36 m
+143.8 287.92 l
+145.24 283.36 l
+119.68 275.56 m
+118.24 280.12 l
+119.68 275.56 l
+S 
+0.96 w
+218.92 324.76 m
+195.64 348.16 l
+205.84 369.64 l
+238.72 366.28 l
+243.64 399.64 l
+268.6 378.04 l
+296.32 428.92 l
+299.08 370.96 l
+291.88 343 l
+344.32 359.92 l
+298.72 328.96 l
+351.52 312.16 l
+320.32 301.36 l
+389.56 215.44 l
+299.08 278.56 l
+290.32 246.64 l
+270.4 298.12 l
+253.24 274.96 l
+238.72 283.24 l
+205.84 279.88 l
+195.64 301.36 l
+218.92 324.76 l
+S 
+0 0 0 rg
+191.68 324.16 m
+190.6 325.72 l
+191.68 325.84 l
+192.76 324.28 l
+191.68 324.16 l
+f* 
+188.44 328.96 m
+187.36 330.52 l
+188.44 330.64 l
+189.52 329.08 l
+188.44 328.96 l
+f* 
+185.2 333.64 m
+184.12 335.2 l
+185.2 335.32 l
+186.28 333.76 l
+185.2 333.64 l
+f* 
+181.84 338.44 m
+180.76 340 l
+181.84 340.12 l
+182.92 338.56 l
+181.84 338.44 l
+f* 
+178.6 343.12 m
+177.52 344.8 l
+178.6 344.92 l
+179.68 343.24 l
+178.6 343.12 l
+f* 
+175.36 347.92 m
+174.28 349.48 l
+175.36 349.6 l
+176.44 348.04 l
+175.36 347.92 l
+f* 
+172.12 352.6 m
+171.04 354.28 l
+172.12 354.4 l
+173.2 352.72 l
+172.12 352.6 l
+f* 
+170.56 355.36 m
+171.4 357.16 l
+170.44 357.28 l
+169.6 355.48 l
+170.56 355.36 l
+f* 
+172.96 360.64 m
+173.8 362.32 l
+172.84 362.44 l
+172 360.76 l
+172.96 360.64 l
+f* 
+175.36 365.8 m
+176.2 367.6 l
+175.24 367.72 l
+174.4 365.92 l
+175.36 365.8 l
+f* 
+177.76 371.08 m
+178.6 372.88 l
+177.64 373 l
+176.8 371.2 l
+177.76 371.08 l
+f* 
+180.16 376.36 m
+181 378.16 l
+180.04 378.28 l
+179.2 376.48 l
+180.16 376.36 l
+f* 
+182.56 381.64 m
+183.4 383.32 l
+182.44 383.44 l
+181.6 381.76 l
+182.56 381.64 l
+f* 
+184.24 383.92 m
+185.56 385.36 l
+184.48 385.48 l
+183.16 384.04 l
+184.24 383.92 l
+f* 
+188.08 388.24 m
+189.28 389.68 l
+188.2 389.8 l
+187 388.36 l
+188.08 388.24 l
+f* 
+191.92 392.56 m
+193.12 394 l
+192.04 394.12 l
+190.84 392.68 l
+191.92 392.56 l
+f* 
+195.64 396.88 m
+196.96 398.32 l
+195.88 398.44 l
+194.56 397 l
+195.64 396.88 l
+f* 
+199.48 401.2 m
+200.8 402.64 l
+199.72 402.76 l
+198.4 401.32 l
+199.48 401.2 l
+f* 
+203.32 405.52 m
+204.52 406.96 l
+203.44 407.08 l
+202.24 405.64 l
+203.32 405.52 l
+f* 
+204.4 407.32 m
+206.32 406.96 l
+206.44 407.92 l
+204.52 408.28 l
+204.4 407.32 l
+f* 
+210.04 406.12 m
+211.96 405.76 l
+212.08 406.72 l
+210.16 407.08 l
+210.04 406.12 l
+f* 
+215.68 405.04 m
+217.6 404.56 l
+217.72 405.52 l
+215.8 406 l
+215.68 405.04 l
+f* 
+221.32 403.84 m
+223.24 403.48 l
+223.36 404.44 l
+221.44 404.8 l
+221.32 403.84 l
+f* 
+227.08 402.64 m
+228.88 402.28 l
+229 403.24 l
+227.2 403.6 l
+227.08 402.64 l
+f* 
+232.72 401.44 m
+234.52 401.08 l
+234.64 402.04 l
+232.84 402.4 l
+232.72 401.44 l
+f* 
+238.36 400.36 m
+240.28 399.88 l
+240.4 400.84 l
+238.48 401.32 l
+238.36 400.36 l
+f* 
+243.04 399.16 m
+244.96 399.52 l
+245.08 400.48 l
+243.16 400.12 l
+243.04 399.16 l
+f* 
+248.68 400.36 m
+250.6 400.72 l
+250.72 401.68 l
+248.8 401.32 l
+248.68 400.36 l
+f* 
+254.32 401.56 m
+256.24 401.92 l
+256.36 402.88 l
+254.44 402.52 l
+254.32 401.56 l
+f* 
+259.96 402.76 m
+261.88 403.12 l
+262 404.08 l
+260.08 403.72 l
+259.96 402.76 l
+f* 
+265.6 403.96 m
+267.04 404.2 l
+267.16 405.16 l
+265.72 404.92 l
+265.6 403.96 l
+f* 
+265.96 404.2 m
+267.52 405.4 l
+267.64 406.48 l
+266.08 405.28 l
+265.96 404.2 l
+f* 
+270.52 407.8 m
+271.96 409 l
+272.08 410.08 l
+270.64 408.88 l
+270.52 407.8 l
+f* 
+275.08 411.28 m
+276.52 412.48 l
+276.64 413.56 l
+275.2 412.36 l
+275.08 411.28 l
+f* 
+279.64 414.88 m
+281.08 416.08 l
+281.2 417.16 l
+279.76 415.96 l
+279.64 414.88 l
+f* 
+284.08 418.48 m
+285.64 419.68 l
+285.76 420.76 l
+284.2 419.56 l
+284.08 418.48 l
+f* 
+288.64 422.08 m
+290.2 423.28 l
+290.32 424.36 l
+288.76 423.16 l
+288.64 422.08 l
+f* 
+293.2 425.56 m
+294.76 426.76 l
+294.88 427.84 l
+293.32 426.64 l
+293.2 425.56 l
+f* 
+296.8 429.28 m
+297.64 427.48 l
+296.68 427.6 l
+295.84 429.4 l
+296.8 429.28 l
+f* 
+299.2 424 m
+299.92 422.32 l
+298.96 422.44 l
+298.24 424.12 l
+299.2 424 l
+f* 
+301.6 418.72 m
+302.32 417.04 l
+301.36 417.16 l
+300.64 418.84 l
+301.6 418.72 l
+f* 
+303.88 413.44 m
+304.72 411.76 l
+303.76 411.88 l
+302.92 413.56 l
+303.88 413.44 l
+f* 
+306.28 408.28 m
+307.12 406.48 l
+306.16 406.6 l
+305.32 408.4 l
+306.28 408.28 l
+f* 
+308.68 403 m
+309.52 401.2 l
+308.56 401.32 l
+307.72 403.12 l
+308.68 403 l
+f* 
+311.08 397.72 m
+311.8 395.92 l
+310.84 396.04 l
+310.12 397.84 l
+311.08 397.72 l
+f* 
+311.68 393.76 m
+313.24 392.56 l
+313.36 393.64 l
+311.8 394.84 l
+311.68 393.76 l
+f* 
+316.36 390.28 m
+317.92 389.2 l
+318.04 390.28 l
+316.48 391.36 l
+316.36 390.28 l
+f* 
+320.92 386.8 m
+322.48 385.72 l
+322.6 386.8 l
+321.04 387.88 l
+320.92 386.8 l
+f* 
+325.6 383.44 m
+327.16 382.24 l
+327.28 383.32 l
+325.72 384.52 l
+325.6 383.44 l
+f* 
+330.28 379.96 m
+331.48 379 l
+331.6 380.08 l
+330.4 381.04 l
+330.28 379.96 l
+f* 
+331.6 379.84 m
+332.68 378.28 l
+331.6 378.4 l
+330.52 379.96 l
+331.6 379.84 l
+f* 
+334.72 375.04 m
+335.8 373.36 l
+334.72 373.48 l
+333.64 375.16 l
+334.72 375.04 l
+f* 
+337.84 370.12 m
+338.92 368.56 l
+337.84 368.68 l
+336.76 370.24 l
+337.84 370.12 l
+f* 
+341.08 365.32 m
+342.04 363.64 l
+340.96 363.76 l
+340 365.44 l
+341.08 365.32 l
+f* 
+344.2 360.4 m
+344.92 359.32 l
+343.84 359.44 l
+343.12 360.52 l
+344.2 360.4 l
+f* 
+343.72 359.44 m
+345.64 358.96 l
+345.76 359.92 l
+343.84 360.4 l
+343.72 359.44 l
+f* 
+349.36 358.12 m
+351.16 357.64 l
+351.28 358.6 l
+349.48 359.08 l
+349.36 358.12 l
+f* 
+355 356.8 m
+356.8 356.32 l
+356.92 357.28 l
+355.12 357.76 l
+355 356.8 l
+f* 
+360.52 355.48 m
+362.44 355 l
+362.56 355.96 l
+360.64 356.44 l
+360.52 355.48 l
+f* 
+366.16 354.16 m
+368.08 353.68 l
+368.2 354.64 l
+366.28 355.12 l
+366.16 354.16 l
+f* 
+371.8 352.84 m
+373.72 352.36 l
+373.84 353.32 l
+371.92 353.8 l
+371.8 352.84 l
+f* 
+377.44 351.52 m
+379.24 351.04 l
+379.36 352 l
+377.56 352.48 l
+377.44 351.52 l
+f* 
+383.08 350.2 m
+384.88 349.72 l
+385 350.68 l
+383.2 351.16 l
+383.08 350.2 l
+f* 
+388.6 348.88 m
+390.52 348.4 l
+390.64 349.36 l
+388.72 349.84 l
+388.6 348.88 l
+f* 
+394.24 347.56 m
+396.16 347.08 l
+396.28 348.04 l
+394.36 348.52 l
+394.24 347.56 l
+f* 
+399.88 346.24 m
+401.8 345.76 l
+401.92 346.72 l
+400 347.2 l
+399.88 346.24 l
+f* 
+404.56 345.16 m
+402.76 344.56 l
+402.88 345.52 l
+404.68 346.12 l
+404.56 345.16 l
+f* 
+399.16 343.24 m
+397.36 342.52 l
+397.48 343.48 l
+399.28 344.2 l
+399.16 343.24 l
+f* 
+393.76 341.2 m
+391.96 340.6 l
+392.08 341.56 l
+393.88 342.16 l
+393.76 341.2 l
+f* 
+388.36 339.28 m
+386.56 338.56 l
+386.68 339.52 l
+388.48 340.24 l
+388.36 339.28 l
+f* 
+382.96 337.24 m
+381.16 336.64 l
+381.28 337.6 l
+383.08 338.2 l
+382.96 337.24 l
+f* 
+377.56 335.32 m
+375.76 334.6 l
+375.88 335.56 l
+377.68 336.28 l
+377.56 335.32 l
+f* 
+372.04 333.28 m
+370.24 332.68 l
+370.36 333.64 l
+372.16 334.24 l
+372.04 333.28 l
+f* 
+366.64 331.36 m
+364.84 330.64 l
+364.96 331.6 l
+366.76 332.32 l
+366.64 331.36 l
+f* 
+361.24 329.32 m
+359.44 328.72 l
+359.56 329.68 l
+361.36 330.28 l
+361.24 329.32 l
+f* 
+355.84 327.4 m
+354.04 326.68 l
+354.16 327.64 l
+355.96 328.36 l
+355.84 327.4 l
+f* 
+350.44 325.36 m
+348.64 324.76 l
+348.76 325.72 l
+350.56 326.32 l
+350.44 325.36 l
+f* 
+345.04 323.44 m
+343.24 322.72 l
+343.36 323.68 l
+345.16 324.4 l
+345.04 323.44 l
+f* 
+339.64 321.4 m
+337.84 320.8 l
+337.96 321.76 l
+339.76 322.36 l
+339.64 321.4 l
+f* 
+334.24 319.48 m
+332.44 318.76 l
+332.56 319.72 l
+334.36 320.44 l
+334.24 319.48 l
+f* 
+328.84 317.44 m
+327.04 316.84 l
+327.16 317.8 l
+328.96 318.4 l
+328.84 317.44 l
+f* 
+325.72 316.72 m
+326.8 315.16 l
+325.72 315.28 l
+324.64 316.84 l
+325.72 316.72 l
+f* 
+328.96 312.04 m
+330.04 310.36 l
+328.96 310.48 l
+327.88 312.16 l
+328.96 312.04 l
+f* 
+332.32 307.24 m
+333.4 305.68 l
+332.32 305.8 l
+331.24 307.36 l
+332.32 307.24 l
+f* 
+335.56 302.56 m
+336.64 300.88 l
+335.56 301 l
+334.48 302.68 l
+335.56 302.56 l
+f* 
+338.8 297.76 m
+339.88 296.2 l
+338.8 296.32 l
+337.72 297.88 l
+338.8 297.76 l
+f* 
+342.16 293.08 m
+343.24 291.52 l
+342.16 291.64 l
+341.08 293.2 l
+342.16 293.08 l
+f* 
+344.8 289.96 m
+345.16 288.04 l
+344.2 288.16 l
+343.84 290.08 l
+344.8 289.96 l
+f* 
+345.76 284.32 m
+346 282.4 l
+345.04 282.52 l
+344.8 284.44 l
+345.76 284.32 l
+f* 
+346.6 278.56 m
+346.96 276.64 l
+346 276.76 l
+345.64 278.68 l
+346.6 278.56 l
+f* 
+347.56 272.92 m
+347.8 271 l
+346.84 271.12 l
+346.6 273.04 l
+347.56 272.92 l
+f* 
+348.52 267.16 m
+348.76 265.36 l
+347.8 265.48 l
+347.56 267.28 l
+348.52 267.16 l
+f* 
+349.36 261.52 m
+349.72 259.6 l
+348.76 259.72 l
+348.4 261.64 l
+349.36 261.52 l
+f* 
+350.32 255.88 m
+350.56 253.96 l
+349.6 254.08 l
+349.36 256 l
+350.32 255.88 l
+f* 
+350.92 251.32 m
+349 251.44 l
+349.12 252.4 l
+351.04 252.28 l
+350.92 251.32 l
+f* 
+345.16 251.8 m
+343.24 252.04 l
+343.36 253 l
+345.28 252.76 l
+345.16 251.8 l
+f* 
+339.4 252.4 m
+337.48 252.52 l
+337.6 253.48 l
+339.52 253.36 l
+339.4 252.4 l
+f* 
+333.64 252.88 m
+331.72 253 l
+331.84 253.96 l
+333.76 253.84 l
+333.64 252.88 l
+f* 
+328 253.36 m
+326.08 253.48 l
+326.2 254.44 l
+328.12 254.32 l
+328 253.36 l
+f* 
+322.24 253.84 m
+320.32 254.08 l
+320.44 255.04 l
+322.36 254.8 l
+322.24 253.84 l
+f* 
+316.48 254.44 m
+314.56 254.56 l
+314.68 255.52 l
+316.6 255.4 l
+316.48 254.44 l
+f* 
+312.76 254.8 m
+310.96 254.08 l
+311.08 255.04 l
+312.88 255.76 l
+312.76 254.8 l
+f* 
+307.36 252.76 m
+305.56 252.16 l
+305.68 253.12 l
+307.48 253.72 l
+307.36 252.76 l
+f* 
+301.96 250.72 m
+300.16 250.12 l
+300.28 251.08 l
+302.08 251.68 l
+301.96 250.72 l
+f* 
+296.56 248.68 m
+294.76 248.08 l
+294.88 249.04 l
+296.68 249.64 l
+296.56 248.68 l
+f* 
+291.16 246.76 m
+289.72 246.16 l
+289.84 247.12 l
+291.28 247.72 l
+291.16 246.76 l
+f* 
+289.84 247 m
+289 245.32 l
+289.96 245.44 l
+290.8 247.12 l
+289.84 247 l
+f* 
+287.32 241.84 m
+286.48 240.04 l
+287.44 240.16 l
+288.28 241.96 l
+287.32 241.84 l
+f* 
+284.8 236.68 m
+283.96 234.88 l
+284.92 235 l
+285.76 236.8 l
+284.8 236.68 l
+f* 
+282.28 231.4 m
+281.44 229.72 l
+282.4 229.84 l
+283.24 231.52 l
+282.28 231.4 l
+f* 
+279.76 226.24 m
+278.92 224.56 l
+279.88 224.68 l
+280.72 226.36 l
+279.76 226.24 l
+f* 
+277.24 221.08 m
+276.4 219.4 l
+277.36 219.52 l
+278.2 221.2 l
+277.24 221.08 l
+f* 
+274.6 215.92 m
+273.76 214.12 l
+274.72 214.24 l
+275.56 216.04 l
+274.6 215.92 l
+f* 
+272.08 210.76 m
+271.24 208.96 l
+272.2 209.08 l
+273.04 210.88 l
+272.08 210.76 l
+f* 
+269.56 205.48 m
+268.72 203.8 l
+269.68 203.92 l
+270.52 205.6 l
+269.56 205.48 l
+f* 
+267.04 200.32 m
+266.2 198.64 l
+267.16 198.76 l
+268 200.44 l
+267.04 200.32 l
+f* 
+264.52 195.16 m
+263.68 193.48 l
+264.64 193.6 l
+265.48 195.28 l
+264.52 195.16 l
+f* 
+262.48 190.96 m
+261.88 192.76 l
+262.84 192.88 l
+263.44 191.08 l
+262.48 190.96 l
+f* 
+260.68 196.48 m
+260.08 198.28 l
+261.04 198.4 l
+261.64 196.6 l
+260.68 196.48 l
+f* 
+258.88 201.88 m
+258.28 203.8 l
+259.24 203.92 l
+259.84 202 l
+258.88 201.88 l
+f* 
+257.08 207.4 m
+256.48 209.2 l
+257.44 209.32 l
+258.04 207.52 l
+257.08 207.4 l
+f* 
+255.28 212.92 m
+254.68 214.72 l
+255.64 214.84 l
+256.24 213.04 l
+255.28 212.92 l
+f* 
+253.6 218.32 m
+253 220.24 l
+253.96 220.36 l
+254.56 218.44 l
+253.6 218.32 l
+f* 
+251.8 223.84 m
+251.2 225.64 l
+252.16 225.76 l
+252.76 223.96 l
+251.8 223.84 l
+f* 
+250 229.36 m
+249.4 231.16 l
+250.36 231.28 l
+250.96 229.48 l
+250 229.36 l
+f* 
+248.2 234.88 m
+247.6 236.68 l
+248.56 236.8 l
+249.16 235 l
+248.2 234.88 l
+f* 
+246.4 240.28 m
+245.8 242.08 l
+246.76 242.2 l
+247.36 240.4 l
+246.4 240.28 l
+f* 
+244.6 245.8 m
+244 247.6 l
+244.96 247.72 l
+245.56 245.92 l
+244.6 245.8 l
+f* 
+244.12 249.4 m
+242.44 248.56 l
+242.56 249.52 l
+244.24 250.36 l
+244.12 249.4 l
+f* 
+238.96 246.76 m
+237.28 245.92 l
+237.4 246.88 l
+239.08 247.72 l
+238.96 246.76 l
+f* 
+233.92 244.12 m
+232.12 243.28 l
+232.24 244.24 l
+234.04 245.08 l
+233.92 244.12 l
+f* 
+228.76 241.48 m
+227.08 240.64 l
+227.2 241.6 l
+228.88 242.44 l
+228.76 241.48 l
+f* 
+223.6 238.96 m
+221.92 238 l
+222.04 239.08 l
+223.72 240.04 l
+223.6 238.96 l
+f* 
+218.44 236.32 m
+216.76 235.36 l
+216.88 236.44 l
+218.56 237.4 l
+218.44 236.32 l
+f* 
+213.4 233.68 m
+211.6 232.84 l
+211.72 233.8 l
+213.52 234.64 l
+213.4 233.68 l
+f* 
+208.24 231.04 m
+206.56 230.2 l
+206.68 231.16 l
+208.36 232 l
+208.24 231.04 l
+f* 
+203.08 228.4 m
+201.4 227.56 l
+201.52 228.52 l
+203.2 229.36 l
+203.08 228.4 l
+f* 
+197.92 225.76 m
+196.24 224.92 l
+196.36 225.88 l
+198.04 226.72 l
+197.92 225.76 l
+f* 
+192.88 223.12 m
+191.08 222.28 l
+191.2 223.24 l
+193 224.08 l
+192.88 223.12 l
+f* 
+187.72 220.48 0.12 0.96 re
+f 
+187.84 220.36 m
+187.6 222.28 l
+188.56 222.4 l
+188.8 220.48 l
+187.84 220.36 l
+f* 
+187.24 226.12 m
+187 228.04 l
+187.96 228.16 l
+188.2 226.24 l
+187.24 226.12 l
+f* 
+186.64 231.76 m
+186.4 233.68 l
+187.36 233.8 l
+187.6 231.88 l
+186.64 231.76 l
+f* 
+186.04 237.52 m
+185.8 239.44 l
+186.76 239.56 l
+187 237.64 l
+186.04 237.52 l
+f* 
+185.44 243.28 m
+185.2 245.2 l
+186.16 245.32 l
+186.4 243.4 l
+185.44 243.28 l
+f* 
+184.84 249.04 m
+184.72 250.96 l
+185.68 251.08 l
+185.8 249.16 l
+184.84 249.04 l
+f* 
+184.24 254.68 m
+184.12 256.6 l
+185.08 256.72 l
+185.2 254.8 l
+184.24 254.68 l
+f* 
+183.64 260.44 m
+183.52 262.36 l
+184.48 262.48 l
+184.6 260.56 l
+183.64 260.44 l
+f* 
+184.12 264.4 m
+184.72 266.2 l
+183.76 266.32 l
+183.16 264.52 l
+184.12 264.4 l
+f* 
+185.92 269.92 m
+186.52 271.72 l
+185.56 271.84 l
+184.96 270.04 l
+185.92 269.92 l
+f* 
+187.6 275.44 m
+188.2 277.24 l
+187.24 277.36 l
+186.64 275.56 l
+187.6 275.44 l
+f* 
+189.4 280.84 m
+190 282.76 l
+189.04 282.88 l
+188.44 280.96 l
+189.4 280.84 l
+f* 
+191.2 286.36 m
+191.8 288.16 l
+190.84 288.28 l
+190.24 286.48 l
+191.2 286.36 l
+f* 
+193 291.88 m
+193.6 293.68 l
+192.64 293.8 l
+192.04 292 l
+193 291.88 l
+f* 
+194.68 297.4 m
+195.28 299.2 l
+194.32 299.32 l
+193.72 297.52 l
+194.68 297.4 l
+f* 
+195.16 300.76 m
+194.92 302.68 l
+195.88 302.8 l
+196.12 300.88 l
+195.16 300.76 l
+f* 
+194.32 306.52 m
+194.08 308.32 l
+195.04 308.44 l
+195.28 306.64 l
+194.32 306.52 l
+f* 
+193.48 312.16 m
+193.24 314.08 l
+194.2 314.2 l
+194.44 312.28 l
+193.48 312.16 l
+f* 
+192.76 317.92 m
+192.4 319.72 l
+193.36 319.84 l
+193.72 318.04 l
+192.76 317.92 l
+f* 
+191.92 323.56 m
+191.68 325.12 l
+192.64 325.24 l
+192.88 323.68 l
+191.92 323.56 l
+f* 
+BT
+/N4 1 Tf
+0 12 -12 0 54.28 343.48 Tm
+0.002 Tc
+0 Tw
+(Figure 3d)Tj
+-10.14 -1.26 TD
+0 Tc
+0.002 Tw
+[(Psy)26 (c)-4 (hological Profile for Outbound Tour Consultant)]TJ
+/N5 1 Tf
+0 9.96 -9.96 0 275.44 308.68 Tm
+0 Tw
+(0)Tj
+0 2.6747 TD
+(1)Tj
+0 2.6867 TD
+(2)Tj
+T*
+(3)Tj
+0 2.6747 TD
+(4)Tj
+0 2.6867 TD
+(5)Tj
+T*
+(6)Tj
+1.0121 1.3012 TD
+-0.004 Tc
+(A1)Tj
+5.5904 -1.5663 TD
+(A2)Tj
+4.4096 -2.0964 TD
+(A3)Tj
+3.6145 -3.3133 TD
+(A4)Tj
+2.5783 -4.4819 TD
+(A5)Tj
+1.0723 -4.7831 TD
+(A6)Tj
+-0.3855 -4.8916 TD
+(A7)Tj
+-1.7952 -4.5422 TD
+(A8)Tj
+-3.0482 -3.8313 TD
+(A9)Tj
+-4.0241 -2.7711 TD
+-0.003 Tc
+(A10)Tj
+-4.6747 -1.4819 TD
+(A11)Tj
+-7.241 0 TD
+(A12)Tj
+-4.6747 1.4819 TD
+(A13)Tj
+-4.0241 2.7711 TD
+(A14)Tj
+-3.0482 3.8313 TD
+(A15)Tj
+-1.7952 4.5422 TD
+(A16)Tj
+-0.3855 4.8916 TD
+(A17)Tj
+1.0723 4.7831 TD
+(A18)Tj
+2.5783 4.4819 TD
+(A19)Tj
+3.6145 3.3133 TD
+(A20)Tj
+4.4096 2.0964 TD
+(A21)Tj
+ET
+0.973 0.8 0.784 rg
+0 J
+0 j
+0.12 w
+402.04 653.44 42.12 -114.96 re
+B 
+1 J
+1 j
+0.96 w
+412.6 556.12 m
+412.6 584.08 l
+S 
+BT
+0 9.96 -9.96 0 416.08 586.36 Tm
+0 0 0 rg
+[(Benc)-8 (hm)-24 (ar)-6 (k)]TJ
+ET
+433 555.64 0.96 1.92 re
+f 
+433 561.4 0.96 1.92 re
+f 
+433 567.16 0.96 1.92 re
+f 
+433 572.92 0.96 1.92 re
+f 
+433 578.68 0.96 1.92 re
+f 
+433 584.44 0.96 0.12 re
+f 
+BT
+0 9.96 -9.96 0 436.96 586.36 Tm
+(Individual's)Tj
+-33.2771 34.7952 TD
+0.001 Tw
+[(Car)-6 (i)3 (ng f)-13 (o)0 (r)-6 ( other)-6 ( people's)-8 ( needs)]TJ
+12.4819 -1.759 TD
+[(Ac)-8 (hievem)-24 (ent and tar)-6 (get or)-6 (iented)]TJ
+5.7711 -2.8313 TD
+[(Cons)-8 (c)-8 (i)3 (entious)-8 ( and tak)-20 (e)0 ( c)-8 (a)0 (r)-6 (e)0 ( )]TJ
+0 -1.241 TD
+[(w)9 (hen doing w)9 (o)0 (r)-6 (k)]TJ
+3.3855 -2.0361 TD
+[(Contr)-6 (o)0 (l over)-6 ( em)-24 (otion)]TJ
+2.7229 -4.4819 TD
+[(W)-58 (illing to adapt to or)-6 ( ac)-8 (c)-8 (ept new)9 (/)]TJ
+0 -1.241 TD
+[( dif)-13 (f)-13 (e)0 (r)-6 (ent ideas)-8 (/ s)-8 (i)3 (tuations)]TJ
+1.6265 -3.8072 TD
+[(Aggr)-7 (es)-9 (s)-9 (i)2 (ve)]TJ
+-0.9518 -4.9157 TD
+[(Dedic)-8 (a)0 (tion to w)9 (o)0 (r)-6 (k)]TJ
+-1.506 -4.4819 TD
+0.002 Tw
+[(Inter)-7 (e)-1 (s)-9 (t)-2 (ed & enthus)-9 (ias)-9 (t)-2 (ic)]TJ
+-2.8434 -3.7349 TD
+(Inventive)Tj
+-3.6386 -2.7349 TD
+[(Pr)-7 (inc)-9 (i)2 (pled)]TJ
+-7.0602 -2.8072 TD
+[(Inves)-9 (t)-2 (igative)]TJ
+-10.6868 0 TD
+0.006 Tc
+[(I)7 (n)8 (st)7 (i)11 (n)8 (ct)7 (i)11 (v)12 (e)]TJ
+-7.7711 2.8072 TD
+-0.002 Tc
+0.001 Tw
+[(Ris)-8 (k)-20 ( tak)-20 (i)3 (ng)]TJ
+-2.8072 2.7349 TD
+-0.004 Tc
+[(R)-5 (ealis)-10 (tic)]TJ
+-3.759 3.7349 TD
+-0.002 Tc
+[(Conf)-13 (ident)]TJ
+-3.0602 4.4819 TD
+(Independent)Tj
+2.4699 4.9157 TD
+[(C)-4 (r)-7 (itic)-9 (al)]TJ
+0 5.0482 TD
+[(Soc)-9 (i)2 (able)]TJ
+2.4578 4.4819 TD
+0.006 Tc
+[(Op)8 (t)7 (i)11 (m)-16 (i)11 (st)7 (i)11 (c)]TJ
+3.8916 3.2771 TD
+0.004 Tc
+[(De)6 (ci)9 (si)9 (v)10 (e)]TJ
+0 2.8313 TD
+-0.002 Tc
+[(Polite/ c)-8 (our)-6 (teous)]TJ
+ET
+PDFVars/TermAll get exec end end
+userdict /pgsave get restore
+showpage
+%%PageTrailer
+%%EndPage
+%%Trailer
+%%EOF

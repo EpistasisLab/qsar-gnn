@@ -44,7 +44,7 @@
 
 from numpy.core.fromnumeric import size
 import torch
-from dgl import save_graphs, load_graphs, heterograph
+from dgl import save_graphs, load_graphs, heterograph, edge_type_subgraph
 from dgl.data import DGLDataset
 import pandas as pd
 import numpy as np
@@ -81,11 +81,9 @@ class QSARDataset(DGLDataset):
 
     self.read_source_files()
     self.parse_node_features()
-    self.process_node_labels()
+    self.process_node_labels()  # For link prediction
     self.build_adjacency_matrices()
     self.make_heterograph()
-
-    ipdb.set_trace()
 
   def read_source_files(self):
     print("  ...reading source files.")
@@ -133,6 +131,10 @@ class QSARDataset(DGLDataset):
     rel_df = eval("self."+s_node+"_"+o_node)
     o_df = eval("self."+o_node+"s")
 
+    if o_node == 'assay':
+      # REMOVE WHEN node2 == 2783
+      rel_df = rel_df.loc[rel_df.node2 != 2783,:]
+    
     filtered_rels = rel_df.loc[rel_df.edge == rel,:]
 
     s_idx_map = dict(zip(s_df.node, s_df.index.tolist()))
@@ -182,10 +184,23 @@ class QSARDataset(DGLDataset):
 
     self.G = heterograph(graph_data)
 
+    # Get rid of all links to assays
+    # self.G = edge_type_subgraph(self.G, [
+    #   ('chemical', 'chemicalbindsgene', 'gene'),
+    #   ('gene', 'genebindedbychemical', 'chemical'),
+    #   ('chemical', 'chemicaldecreasesexpression', 'gene'),
+    #   ('gene', 'expressiondecreasedbychemical', 'chemical'),
+    #   ('chemical', 'chemicalincreasesexpression', 'gene'),
+    #   ('gene', 'expressionincreasedbychemical', 'chemical'),
+    #   ('gene', 'geneinteractswithgene', 'gene'),
+    #   ('gene', 'geneinverseinteractswithgene', 'gene'),
+    # ])
+
 
   def save(self):
     print("Saving data...")
-    save_graphs("./data/graph.bin", self.G)
+    output_filename = path.join("data", "graph.bin")
+    save_graphs(output_filename, self.G)
 
   def load(self):
     print("Loading data from disk...")
@@ -228,4 +243,4 @@ class QSARDataset(DGLDataset):
 
 if __name__=="__main__":
   dset = QSARDataset(name="qsar-gnn")
-  
+  ipdb.set_trace()
