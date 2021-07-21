@@ -67,7 +67,9 @@ def edge_prediction(args):
 
     k = 5
     ep_model = HeteroRGCNEPModel(10, 20, 5, G.etypes)
-    node_features = {}
+    node_features = {
+
+    }
     opt = torch.optim.Adam(ep_model.parameters())
 
     for epoch in range(100):
@@ -161,15 +163,17 @@ def node_classification(args):
             ))
     
 def main(args):
-    if args.task == "edge-prediction":
+    if args.task == "ep":
         edge_prediction(args)
-    elif args.task == "node-classification":
+    elif args.task == "nc":
         node_classification(args)
 
 if __name__=="__main__":
+    tasks = ['nc', 'ep']
     parser = argparse.ArgumentParser(description="Train a heterogeneous RGCN on a prediction task.")
-    parser.add_argument("--task", type=str, default="node-classification",
-                        help="Type of prediction task to perform.")
+    parser.add_argument("--task", type=str, default="nc",
+                        help="Type of prediction task to perform.",
+                        choices=tasks)
     parser.add_argument("--graph-file", type=str, default="./data/graph.bin",
                         help="File location where the DGL heterograph is stored.")
     parser.add_argument("--lr", type=float, default=0.01,
