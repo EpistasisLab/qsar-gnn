@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
 import dgl.function as fn
+from numpy import e
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+import ipdb
 
 class HeteroRGCNLayer(nn.Module):
     """Graph convolutional layer for relational data that supports
@@ -28,6 +31,7 @@ class HeteroRGCNLayer(nn.Module):
     def forward(self, G, feat_dict):
         funcs = {}
         for srctype, etype, dsttype in G.canonical_etypes:
+            ipdb.set_trace()
             Wh = self.weight[etype](feat_dict[srctype])
 
             G.nodes[srctype].data['Wh_%s' % etype] = Wh
@@ -82,19 +86,39 @@ class HeteroRGCNNCModel(nn.Module):
         return h_dict['chemical']
 
 def compute_ep_loss(pos_score, neg_score):
+    """Compute the Margin Loss between positive and negative edges for Edge
+    Prediction.
+    
+    Parameters
+    ----------
+    pos_score
+    neg_score
+    """
     # Margin loss:
     n_edges = pos_score.shape[0]
     return (1 - pos_score.unsqueeze(1) + neg_score.view(n_edges, -1)).clamp(min=0).mean()
 
-class HeteroRGCNEPModel(nn.Module):
-    """Relational GCN for heterogeneous graphs designed to predict
-    missing edges between chemicals and Tox21 assays.
-    """
-    def __init__(self, G):
-        super(HeteroRGCNEPModel, self).__init__()
-
+class HeteroDotProductPredictor(nn.Module):
     def forward(self, G, h, etype):
         with G.local_scope():
             G.ndata['h'] = h
             G.apply_edges(F.u_dot_v('h', 'h', 'score'), etype=etype)
             return G.edges[etype].data['score']
+
+class HeteroRGCNEPModel(nn.Module):
+    """Relational GCN for heterogeneous graphs designed to predict
+    missing edges between chemicals and Tox21 assays.
+    """
+    def __init__(self, in_size, hidden_size, out_size, rel_names):
+        super(HeteroRGCNEPModel, self).__init__()
+        
+        # NOTE: May need to modify to take _one_ rel name
+        self.sage = HeteroRGCNLayer(in_size, out_size, rel_names)
+
+        self.pred = HeteroDotProductPredictor()
+
+    def forward(self, g, neg_g, x, etype):
+        # An 'encoder', of sorts
+        h = self.sage(g, x)
+
+        return self.pred(g, h, etype), self.pred(neg_g, h, etype)

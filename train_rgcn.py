@@ -60,7 +60,7 @@ def edge_prediction(args):
     """
     G = dgl.load_graphs(args.graph_file)[0][0]
 
-    ipdb.set_trace()
+    #ipdb.set_trace()
 
     # Do some more processing on the graph here
     # TODO
