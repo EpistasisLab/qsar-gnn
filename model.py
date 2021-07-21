@@ -5,11 +5,18 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-import ipdb
-
 class HeteroRGCNLayer(nn.Module):
     """Graph convolutional layer for relational data that supports
     multiple edge types.
+
+    Parameters
+    ----------
+    in_size : int
+        Number of input features for the graph convolutional layer.
+    out_size : int
+        Number of output features for the graph convolutional layer.
+    etypes : list of str
+        List of strings representing the names of all edge types in the graph.
     """
     def __init__(self, in_size, out_size, etypes):
         super(HeteroRGCNLayer, self).__init__()
@@ -29,7 +36,6 @@ class HeteroRGCNLayer(nn.Module):
 
         G.multi_update_all(funcs, 'sum')
 
-        #ipdb.set_trace()
         return { ntype : G.nodes[ntype].data['h'] for ntype in G.ntypes }
 
 
@@ -38,6 +44,20 @@ class HeteroRGCN(nn.Module):
 
     The neural network consists of two HeteroRGCNLayers stacked in an
     encoder/decoder arrangement.
+
+    Parameters
+    ----------
+    G : dgl.heterograph.DGLHeteroGraph
+        Heterogeneous graph on which to perform a learning task.
+    in_size : int
+        Number of input node features. In this implementation all nodes have the same
+        number of features.
+    hidden_size : int
+        Number of features in the hidden layer. Note that this implementation only
+        contains a single hidden layer.
+    out_size : int
+        Number of output node features. If you don't have a reason to do otherwise, this
+        should probably be the same as `in_size`.
     """
     def __init__(self, G, in_size, hidden_size, out_size):
         super(HeteroRGCN, self).__init__()
@@ -59,7 +79,4 @@ class HeteroRGCN(nn.Module):
         h_dict = { k : F.leaky_relu(h) for k, h in h_dict.items() }
         h_dict = self.layer2(G, h_dict)
 
-        try:
-            return h_dict['chemical']
-        except KeyError:
-            return h_dict['paper']
+        return h_dict['chemical']
