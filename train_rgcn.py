@@ -9,13 +9,95 @@ import torch.nn.functional as F
 
 import ipdb
 
-from model import HeteroRGCN
+from model import HeteroRGCNNCModel, HeteroRGCNEPModel, compute_ep_loss
 
 
-def link_prediction(args):
-    pass
+def construct_negative_graph(graph, k, etype):
+    """Construct a negative graph for negative sampling in edge prediction.
+    
+    This implementation is designed for heterogeneous graphs - the user specifies
+    the edge type on which negative sampling will be performed.
+
+    Parameters
+    ----------
+    graph : dgl.heterograph.DGLHeterograph
+        Graph on which the sampling will be performed.
+    k : int
+        Number of negative examples to retrieve.
+    etype : tuple
+        A tuple in the format (subj_node_type, edge_label, obj_node_type) corresponding
+        to the edge on which negative sampling will be performed.
+    """
+    utype, _, vtype = etype
+    src, dst = graph.edges(etype=etype)
+    
+    neg_src = src.repeat_interleave(k)
+    neg_dst = torch.randint(0, graph.num_nodes(vtype), (len(src) * k,))
+    
+    return dgl.heterograph(
+        {etype: (neg_src, neg_dst)},
+        num_nodes_dict= { ntype: graph.num_nodes(ntype) for ntype in graph.ntypes }
+    )
+
+
+def edge_prediction(args):
+    """Predict edges in a heterogeneous graph given a particular edge type.
+
+    For this implementation, the edge type we are predicting is:
+    `('chemical', 'chemicalhasactiveassay', 'assay')`
+
+    There are two approaches for training the network:
+    1. Train known edges against a negative sampling of the entire graph, using
+       margin loss (or equivalent) to maximize the difference between known edges
+       and the background "noise distribution" of randomly sampled edges.
+    2. Use a predetermined edge (e.g., `'chemicalhasinactiveassay'`) instead as the
+       negative graph. This approach may be more powerful. Cross-entropy loss also
+       may be more appropriate than margin loss in this scenario.
+
+    Parameters
+    ----------
+    args : (namespace output of argparse.parse_args() - see below for details)
+    """
+    G = dgl.load_graphs(args.graph_file)[0][0]
+
+    ipdb.set_trace()
+
+    # Do some more processing on the graph here
+    # TODO
+
+    k = 5
+    ep_model = HeteroRGCNEPModel(10, 20, 5, G.etypes)
+    node_features = {}
+    opt = torch.optim.Adam(ep_model.parameters())
+
+    for epoch in range(100):
+        neg_G = construct_negative_graph(G, k, ('chemical', 'chemicalhasactiveassay', 'assay'))
+        pos_score, neg_score = ep_model(G, neg_G, node_features, ('chemical', 'chemicalhasactiveassay', 'assay'))
+        
+        # margin loss
+        loss = compute_ep_loss(pos_score, neg_score)
+        
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
+        
+        print(loss.item())
+    
 
 def node_classification(args):
+    """Predict node labels in a heterogeneous graph given a particular node type
+    and a dataset of known node labels.
+
+    Here, the node type is `'chemical'` and the labels we predict are annotations
+    representing edge connectivity to a (deleted) `'assay'` node where 0 is
+    `'chemicalhasinactiveassay'` edges and 1 is `'chemicalhasactiveassay'` edges.
+    Labels are not provided for nodes with unknown activity annotations to the
+    assay of interest.
+
+    Parameters
+    ----------
+    args : (namespace output of argparse.parse_args() - see below for details)
+    """
     G = dgl.load_graphs(args.graph_file)[0][0]
 
     # Get labels for a single prediction task:
@@ -37,7 +119,7 @@ def node_classification(args):
     test_idx = torch.tensor(idx_labels_merged[0,6000:].squeeze()).long()
     test_labels = torch.tensor(idx_labels_merged[1,6000:].squeeze()).long()
 
-    model = HeteroRGCN(G, 2, 2, 3)  # (graph, input_size, output_size, num_edge_types)
+    model = HeteroRGCNNCModel(G, 2, 2, 3)  # (graph, input_size, output_size, num_edge_types)
     opt = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
 
     best_val_acc = 0
@@ -79,8 +161,8 @@ def node_classification(args):
             ))
     
 def main(args):
-    if args.task == "link-prediction":
-        link_prediction(args)
+    if args.task == "edge-prediction":
+        edge_prediction(args)
     elif args.task == "node-classification":
         node_classification(args)
 

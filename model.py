@@ -39,7 +39,7 @@ class HeteroRGCNLayer(nn.Module):
         return { ntype : G.nodes[ntype].data['h'] for ntype in G.ntypes }
 
 
-class HeteroRGCN(nn.Module):
+class HeteroRGCNNCModel(nn.Module):
     """Relational Convolutional Graph NN for heterogeneous graphs.
 
     The neural network consists of two HeteroRGCNLayers stacked in an
@@ -60,7 +60,7 @@ class HeteroRGCN(nn.Module):
         should probably be the same as `in_size`.
     """
     def __init__(self, G, in_size, hidden_size, out_size):
-        super(HeteroRGCN, self).__init__()
+        super(HeteroRGCNNCModel, self).__init__()
 
         embed_dict = {
             ntype: nn.Parameter(torch.Tensor(G.number_of_nodes(ntype), in_size)) for ntype in G.ntypes
@@ -80,3 +80,21 @@ class HeteroRGCN(nn.Module):
         h_dict = self.layer2(G, h_dict)
 
         return h_dict['chemical']
+
+def compute_ep_loss(pos_score, neg_score):
+    # Margin loss:
+    n_edges = pos_score.shape[0]
+    return (1 - pos_score.unsqueeze(1) + neg_score.view(n_edges, -1)).clamp(min=0).mean()
+
+class HeteroRGCNEPModel(nn.Module):
+    """Relational GCN for heterogeneous graphs designed to predict
+    missing edges between chemicals and Tox21 assays.
+    """
+    def __init__(self, G):
+        super(HeteroRGCNEPModel, self).__init__()
+
+    def forward(self, G, h, etype):
+        with G.local_scope():
+            G.ndata['h'] = h
+            G.apply_edges(F.u_dot_v('h', 'h', 'score'), etype=etype)
+            return G.edges[etype].data['score']
