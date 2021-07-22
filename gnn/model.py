@@ -27,17 +27,13 @@ class HeteroRGCNLayer(nn.Module):
         super(HeteroRGCNLayer, self).__init__()
 
         self.weight = nn.ModuleDict({
-            name: nn.Linear(in_size_dict[name], out_size) for name in etypes
+            name: nn.Linear(in_size_dict[name], out_size).to('cuda:0') for name in etypes
         })
 
     def forward(self, G, feat_dict):
         funcs = {}
         for srctype, etype, dsttype in G.canonical_etypes:
-            try:
-                Wh = self.weight[etype](feat_dict[srctype])
-            except RuntimeError:
-                ipdb.set_trace()
-                print()
+            Wh = self.weight[etype](feat_dict[srctype]).to('cuda:0')
 
             G.nodes[srctype].data['Wh_%s' % etype] = Wh
 

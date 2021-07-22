@@ -72,9 +72,10 @@ def edge_prediction(args):
     chem = pd.read_csv("./data/chemicals.csv")
     maccs = torch.tensor([[int(x) for x in xx] for xx in chem.maccs]).float()
     node_features = {
-        'chemical': maccs,
-        'assay': torch.ones((G.number_of_nodes(ntype='assay'))).unsqueeze(1),
-        'gene': torch.ones((G.number_of_nodes(ntype='gene'))).unsqueeze(1)
+        #'chemical': maccs,
+        'chemical': torch.ones((G.number_of_nodes(ntype='chemical'))).unsqueeze(1).to('cuda:0'),
+        'assay': torch.ones((G.number_of_nodes(ntype='assay'))).unsqueeze(1).to('cuda:0'),
+        'gene': torch.ones((G.number_of_nodes(ntype='gene'))).unsqueeze(1).to('cuda:0')
     }
     input_type_map = dict([(x[1], x[0]) for x in G.canonical_etypes])
     edge_input_sizes = { k: node_features[v].shape[1] for k, v in input_type_map.items() }
@@ -84,7 +85,7 @@ def edge_prediction(args):
 
     for epoch in range(100):
         neg_G = construct_negative_graph(G, k, ('chemical', 'chemicalhasactiveassay', 'assay'))
-        pos_score, neg_score = ep_model(G, neg_G, node_features, ('chemical', 'chemicalhasactiveassay', 'assay'))
+        pos_score, neg_score = ep_model(G.to('cuda:0'), neg_G.to('cuda:0'), node_features, ('chemical', 'chemicalhasactiveassay', 'assay'))
         
         # margin loss
         loss = compute_ep_loss(pos_score, neg_score)
