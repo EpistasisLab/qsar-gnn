@@ -3,13 +3,14 @@
 import argparse
 import dgl
 import numpy as np
+import pandas as pd
 import pickle as pkl
 import torch
 import torch.nn.functional as F
 
 import ipdb
 
-from model import HeteroRGCNNCModel, HeteroRGCNEPModel, compute_ep_loss
+from model import NCModel, EPModel, compute_ep_loss
 
 
 def construct_negative_graph(graph, k, etype):
@@ -66,10 +67,19 @@ def edge_prediction(args):
     # TODO
 
     k = 5
-    ep_model = HeteroRGCNEPModel(10, 20, 5, G.etypes)
+    
+    # HERE!!!
+    chem = pd.read_csv("./data/chemicals.csv")
+    maccs = torch.tensor([[int(x) for x in xx] for xx in chem.maccs]).float()
     node_features = {
-
+        'chemical': maccs,
+        'assay': torch.ones((G.number_of_nodes(ntype='assay'))).unsqueeze(1),
+        'gene': torch.ones((G.number_of_nodes(ntype='gene'))).unsqueeze(1)
     }
+    input_type_map = dict([(x[1], x[0]) for x in G.canonical_etypes])
+    edge_input_sizes = { k: node_features[v].shape[1] for k, v in input_type_map.items() }
+    #ipdb.set_trace()
+    ep_model = EPModel(edge_input_sizes, 20, 5, G.etypes)
     opt = torch.optim.Adam(ep_model.parameters())
 
     for epoch in range(100):
@@ -84,6 +94,8 @@ def edge_prediction(args):
         opt.step()
         
         print(loss.item())
+
+        # Now, we need to figure out something to do wwith the trained model!
     
 
 def node_classification(args):
@@ -121,7 +133,7 @@ def node_classification(args):
     test_idx = torch.tensor(idx_labels_merged[0,6000:].squeeze()).long()
     test_labels = torch.tensor(idx_labels_merged[1,6000:].squeeze()).long()
 
-    model = HeteroRGCNNCModel(G, 2, 2, 3)  # (graph, input_size, output_size, num_edge_types)
+    model = NCModel(G, 2, 2, 3)  # (graph, input_size, output_size, num_edge_types)
     opt = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
 
     best_val_acc = 0
@@ -182,5 +194,4 @@ if __name__=="__main__":
     parser.set_defaults(validation=True)
 
     args = parser.parse_args()
-    print(args)
     main(args)

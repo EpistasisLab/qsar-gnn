@@ -14,25 +14,30 @@ class HeteroRGCNLayer(nn.Module):
 
     Parameters
     ----------
-    in_size : int
-        Number of input features for the graph convolutional layer.
+    in_size_dict : int
+        A dictionary mapping edge types to their input size. For any given edge
+        type, the input size is equal to the dimensionality of the source
+        node's feature matrix.
     out_size : int
         Number of output features for the graph convolutional layer.
     etypes : list of str
         List of strings representing the names of all edge types in the graph.
     """
-    def __init__(self, in_size, out_size, etypes):
+    def __init__(self, in_size_dict, out_size, etypes):
         super(HeteroRGCNLayer, self).__init__()
 
         self.weight = nn.ModuleDict({
-            name: nn.Linear(in_size, out_size) for name in etypes
+            name: nn.Linear(in_size_dict[name], out_size) for name in etypes
         })
 
     def forward(self, G, feat_dict):
         funcs = {}
         for srctype, etype, dsttype in G.canonical_etypes:
-            ipdb.set_trace()
-            Wh = self.weight[etype](feat_dict[srctype])
+            try:
+                Wh = self.weight[etype](feat_dict[srctype])
+            except RuntimeError:
+                ipdb.set_trace()
+                print()
 
             G.nodes[srctype].data['Wh_%s' % etype] = Wh
 
@@ -43,7 +48,7 @@ class HeteroRGCNLayer(nn.Module):
         return { ntype : G.nodes[ntype].data['h'] for ntype in G.ntypes }
 
 
-class HeteroRGCNNCModel(nn.Module):
+class NCModel(nn.Module):
     """Relational Convolutional Graph NN for heterogeneous graphs.
 
     The neural network consists of two HeteroRGCNLayers stacked in an
@@ -64,7 +69,7 @@ class HeteroRGCNNCModel(nn.Module):
         should probably be the same as `in_size`.
     """
     def __init__(self, G, in_size, hidden_size, out_size):
-        super(HeteroRGCNNCModel, self).__init__()
+        super(NCModel, self).__init__()
 
         embed_dict = {
             ntype: nn.Parameter(torch.Tensor(G.number_of_nodes(ntype), in_size)) for ntype in G.ntypes
@@ -91,8 +96,8 @@ def compute_ep_loss(pos_score, neg_score):
     
     Parameters
     ----------
-    pos_score
-    neg_score
+    pos_score : torch.tensor
+    neg_score : torch.tensor
     """
     # Margin loss:
     n_edges = pos_score.shape[0]
@@ -102,18 +107,35 @@ class HeteroDotProductPredictor(nn.Module):
     def forward(self, G, h, etype):
         with G.local_scope():
             G.ndata['h'] = h
-            G.apply_edges(F.u_dot_v('h', 'h', 'score'), etype=etype)
+            G.apply_edges(fn.u_dot_v('h', 'h', 'score'), etype=etype)
             return G.edges[etype].data['score']
 
-class HeteroRGCNEPModel(nn.Module):
+class EPModel(nn.Module):
     """Relational GCN for heterogeneous graphs designed to predict
     missing edges between chemicals and Tox21 assays.
+
+    Parameters
+    ----------
+    in_size_dict : dict
+        A dictionary mapping edge types to their input size. For any given edge
+        type, the input size is equal to the dimensionality of the source
+        node's feature matrix.
+    hidden_size : int
+        The dimensionality of the hidden (encoded) representation of nodes.
+        Currently, this is a single, fixed dimensionality, but it may be
+        extended to allow for different hidden sizes for each node type.
+    out_size : int
+        The dimensionality of nodes' output representations.
+    rel_names : list of str
+        List of all edge type names in the graph. These should be the same as
+        the edge types described in `in_size_dict` (consider removing to lessen
+        redundancy).
     """
-    def __init__(self, in_size, hidden_size, out_size, rel_names):
-        super(HeteroRGCNEPModel, self).__init__()
-        
+    def __init__(self, in_size_dict, hidden_size, out_size, rel_names):
+        super(EPModel, self).__init__()
+
         # NOTE: May need to modify to take _one_ rel name
-        self.sage = HeteroRGCNLayer(in_size, out_size, rel_names)
+        self.sage = HeteroRGCNLayer(in_size_dict, out_size, rel_names)
 
         self.pred = HeteroDotProductPredictor()
 
