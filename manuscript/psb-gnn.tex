@@ -32,25 +32,33 @@ ComptoxAI includes a large graph database containing many entity and relationshi
 We extracted the subgraph from ComptoxAI's graph database defined as all nodes representing chemicals, genes, and toxicological assays, as well as the complete set of edges linking nodes of those types.
 A metagraph describing the node and edge types in the subgraph is shown in [FIGURE XXX].
 
+Every prediction task in this study involves QSAR modeling between chemicals of toxicological interest and toxicology-related activity assays derived from the US EPA's Tox21 dataset.
+Each chemical and assay is represented as a node within the larger graph database, and all chemical--assay pairs are either linked by an edge (\textit{chemicalHasActiveAssay} or \textit{chemicalHasInactiveAssay}) or not linked by an edge (i.e., no data has been collected on the chemical with respect to the assay in question). 
+
 \subsection{Heterogeneous graph neural network}
 We constructed a heterogeneous graph neural network (GNN) architecture for the graph ML experiments.
 Since our approach uses multiple entity types (e.g., chemicals, genes, assays) in the same graph---each with possibly different sets of node features, and linked by multiple semantically distinct edge types---the architecture extends the common GCN model to learn separate message passing functions for each edge type.
 We use a message passing strategy similar to GraphSAGE~\cite{hamilton2017inductive}, where signals propagated from adjacent nodes are aggregated using their arithmetic mean:
 \begin{equation}
-\mathbf{h}_v^k \gets \sigma\left(\mathbf{W} \cdot \textsc{MEAN}\left(\{\mathbf{h}_v^{k-1}\}\cup \{ \mathbf{h}_u^{k-1},\forall u \in \mathcal{N}(v) \}\right)\right)
+\mathbf{h}_v^k \gets \sigma\left(\mathbf{W} \cdot \textsc{Mean}(\{\mathbf{h}_v^{k-1}\}\cup \{ \mathbf{h}_u^{k-1},\forall u \in \mathcal{N}(v) \})\right)
 \end{equation}
 where $\mathbf{h}_v^{k}$ is an encoded representation of the input vector $\mathbf{x}$ of node $v$ at layer $k$ of the network, $\mathbf{W}$ is a weight matrix, and $\mathcal{N}(v)$ is the neighborhood of all nodes adjacent to $v$.
 Each layer in the network `pulls' information from an increasingly wider radius around each node $v$.
-$\sigma$ is an activation applied to the output of each layer; we use the leaky ReLU function:
+$\sigma$ is an activation applied to the output of each layer, which we define as the leaky ReLU function:
 \begin{equation}
 \sigma(x) =
 \begin{cases}
-   x & \quad \text{if } x > 0\\
+   x & \quad \text{if } x > 0,\\
    0.01x & \quad \text{otherwise}
 \end{cases}
 \end{equation}
 
-\subsubsection{Node prediction model}
+\subsubsection{Node classification model}
+Our node classification task consists of labeling chemicals according to whether they are (1) or are not (0) active in a specific Tox21 assay.
+To do this, we generate labels for each chemical based on its activity with regards to the assay of interest, and then remove the node from the graph corresponding to that assay.
+We then train the graph neural network in a standard supervised manner (train/test/split of 80\%/10\%/10\%) to minimize the cross-entropy loss between the true labeling and the predicted labeling.
+
+To assess the contribution of the MACCS structural features when added to the GNN, we trained the node classification model both in the presence and in the absence of MACCS bitstrings applied as node features to each chemical. Intuitively, the model trained without MACCS node features performs inference using only the graph's topological structure---including gene interactions and activity annotations to the other Tox21 assays---while the one with MACCS node features additionally has access to the same chemical structure information used in the non-graph (baseline) QSAR models.
 
 \subsubsection{Edge prediction model}
 
