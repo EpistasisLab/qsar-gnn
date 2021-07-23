@@ -97,7 +97,7 @@ def compute_ep_loss(pos_score, neg_score):
     """
     # Margin loss:
     n_edges = pos_score.shape[0]
-    return (1 - pos_score.unsqueeze(1) + neg_score.view(n_edges, -1)).clamp(min=0).mean()
+    return (1 - pos_score.to("cpu:0").unsqueeze(1) + neg_score.to("cpu:0").view(n_edges, -1)).clamp(min=0).mean()
 
 class HeteroDotProductPredictor(nn.Module):
     def forward(self, G, h, etype):

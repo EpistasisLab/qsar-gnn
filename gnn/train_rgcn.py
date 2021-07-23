@@ -70,10 +70,10 @@ def edge_prediction(args):
     
     # HERE!!!
     chem = pd.read_csv("./data/chemicals.csv")
-    maccs = torch.tensor([[int(x) for x in xx] for xx in chem.maccs]).float()
+    maccs = torch.tensor([[int(x) for x in xx] for xx in chem.maccs]).float().to('cuda:0')
     node_features = {
-        #'chemical': maccs,
-        'chemical': torch.ones((G.number_of_nodes(ntype='chemical'))).unsqueeze(1).to('cuda:0'),
+        'chemical': maccs,
+        #'chemical': torch.ones((G.number_of_nodes(ntype='chemical'))).unsqueeze(1).to('cuda:0'),
         'assay': torch.ones((G.number_of_nodes(ntype='assay'))).unsqueeze(1).to('cuda:0'),
         'gene': torch.ones((G.number_of_nodes(ntype='gene'))).unsqueeze(1).to('cuda:0')
     }
@@ -94,9 +94,11 @@ def edge_prediction(args):
         loss.backward()
         opt.step()
         
-        print(loss.item())
+        print("epoch: %3d; margin loss: %.5f" % (epoch, loss.item()))
 
         # Now, we need to figure out something to do wwith the trained model!
+
+    ipdb.set_trace()
     
 
 def node_classification(args):
