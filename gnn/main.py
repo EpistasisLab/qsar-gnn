@@ -10,7 +10,8 @@ import torch.nn.functional as F
 
 import ipdb
 
-from model import NCModel, EPModel, compute_ep_loss
+from .link_prediction import LinkPredictor, compute_lp_loss
+from .node_classification import NodeClassifier
 
 
 def construct_negative_graph(graph, k, etype):
@@ -41,7 +42,7 @@ def construct_negative_graph(graph, k, etype):
     )
 
 
-def edge_prediction(args):
+def link_prediction(args):
     """Predict edges in a heterogeneous graph given a particular edge type.
 
     For this implementation, the edge type we are predicting is:
@@ -177,7 +178,7 @@ def node_classification(args):
     
 def main(args):
     if args.task == "ep":
-        edge_prediction(args)
+        link_prediction(args)
     elif args.task == "nc":
         node_classification(args)
 
