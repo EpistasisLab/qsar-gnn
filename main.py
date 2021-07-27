@@ -10,10 +10,89 @@ import torch.nn.functional as F
 
 import ipdb
 
-from .link_prediction import LinkPredictor, compute_lp_loss
-from .node_classification import NodeClassifier
+from gnn.link_prediction import LinkPredictor, compute_lp_loss
+from gnn.node_classification import NodeClassifier
+
+if torch.cuda.is_available():
+    DEVICE = 'cuda:0'
+else:
+    DEVICE = 'cpu'
 
 
+def preprocess_edges(graph):
+    chem = pd.read_csv("./data/chemicals.csv")
+    maccs = torch.tensor([[int(x) for x in xx] for xx in chem.maccs]).float().to(DEVICE)
+    node_features = {
+        'chemical': maccs,
+        #'chemical': torch.ones((graph.number_of_nodes(ntype='chemical'))).unsqueeze(1).to(DEVICE),
+        'assay': torch.ones((graph.number_of_nodes(ntype='assay'))).unsqueeze(1).to(DEVICE),
+        'gene': torch.ones((graph.number_of_nodes(ntype='gene'))).unsqueeze(1).to(DEVICE)
+    }
+    input_type_map = dict([(x[1], x[0]) for x in graph.canonical_etypes])
+    node_sizes = { k: v.shape[1] for k, v in node_features.items() }
+    edge_input_sizes = { k: node_features[v].shape[1] for k, v in input_type_map.items() }
+
+    return node_features, node_sizes, edge_input_sizes
+
+def drop_node_return_binary_labels(graph, ntype, node_index, pos_etype, neg_etype):
+    """Drop a node from the graph and save its original connectivity as labels
+    for supervised learning (especially node classification).
+
+    Parameters
+    ----------
+    graph : dgl.DGLGraph
+        Graph on which to run the operation.
+    ntype : str
+        Node type of the node to drop from the graph.
+    node_index : int
+        Integer index of the (typed) node to drop.
+    pos_etype : str
+        Name of an incoming edge, the source of which will be labeled 1.
+    neg_etype : str
+        Name of an incoming edge, the source of which will be labeled 0.
+
+    Notes
+    -----
+    This is not an 'in place' operation. If you want to overwrite the original
+    graph, you should reassign to it when calling the function.
+    """
+    # Get node connectivity and build label indices
+    # FIX: Need to get the source node ids only!
+    
+    pos_nodes = graph.in_edges(node_index, form='eid', etype=pos_etype)
+    neg_nodes = graph.in_edges(node_index, form='eid', etype=neg_etype)
+
+    # Remove node
+    new_graph = dgl.remove_nodes(graph, node_index, ntype=ntype)
+
+    # Return both the transformed graph and the labels
+    return new_graph, pos_nodes, neg_nodes
+
+def collate_labels(graph, ntype, pos_idxs, neg_idxs, ratio=(0.8, 0.1, 0.1)):
+    """Make training/validation/testing sets along with labels.
+    """
+    assert sum(ratio) == 1.0
+    
+    all_node_idxs = graph.nodes(ntype)
+
+    pos_tensor = torch.cat((pos_idxs.unsqueeze(0), torch.ones_like(pos_idxs).unsqueeze(0)))
+    neg_tensor = torch.cat((neg_idxs.unsqueeze(0), torch.zeros_like(neg_idxs).unsqueeze(0)))
+    labeled_nodes = torch.cat((pos_tensor, neg_tensor), dim=1)
+    
+    idxs = torch.randperm(labeled_nodes.shape[1])
+    shuffled = labeled_nodes[:,idxs]
+
+    split_points = (
+        round(shuffled.shape[1] * ratio[0]),
+        round(shuffled.shape[1] * (ratio[0]+ratio[1]))
+    )
+
+    train = shuffled[:, :split_points[0]]
+    val = shuffled[:, split_points[0]:split_points[1]]
+    test = shuffled[:, split_points[1]:]
+
+    return train, val, test
+    
 def construct_negative_graph(graph, k, etype):
     """Construct a negative graph for negative sampling in edge prediction.
     
@@ -62,31 +141,16 @@ def link_prediction(args):
     """
     G = dgl.load_graphs(args.graph_file)[0][0]
 
-    #ipdb.set_trace()
-
-    # Do some more processing on the graph here
-    # TODO
-
     k = 5
     
-    # HERE!!!
-    chem = pd.read_csv("./data/chemicals.csv")
-    maccs = torch.tensor([[int(x) for x in xx] for xx in chem.maccs]).float().to('cuda:0')
-    node_features = {
-        'chemical': maccs,
-        #'chemical': torch.ones((G.number_of_nodes(ntype='chemical'))).unsqueeze(1).to('cuda:0'),
-        'assay': torch.ones((G.number_of_nodes(ntype='assay'))).unsqueeze(1).to('cuda:0'),
-        'gene': torch.ones((G.number_of_nodes(ntype='gene'))).unsqueeze(1).to('cuda:0')
-    }
-    input_type_map = dict([(x[1], x[0]) for x in G.canonical_etypes])
-    edge_input_sizes = { k: node_features[v].shape[1] for k, v in input_type_map.items() }
-    #ipdb.set_trace()
+    node_features, node_sizes, edge_input_sizes = preprocess_edges(G)
+    
     ep_model = EPModel(edge_input_sizes, 20, 5, G.etypes)
     opt = torch.optim.Adam(ep_model.parameters())
 
     for epoch in range(100):
         neg_G = construct_negative_graph(G, k, ('chemical', 'chemicalhasactiveassay', 'assay'))
-        pos_score, neg_score = ep_model(G.to('cuda:0'), neg_G.to('cuda:0'), node_features, ('chemical', 'chemicalhasactiveassay', 'assay'))
+        pos_score, neg_score = ep_model(G.to(DEVICE), neg_G.to(DEVICE), node_features, ('chemical', 'chemicalhasactiveassay', 'assay'))
         
         # margin loss
         loss = compute_ep_loss(pos_score, neg_score)
@@ -97,12 +161,11 @@ def link_prediction(args):
         
         print("epoch: %3d; margin loss: %.5f" % (epoch, loss.item()))
 
-        # Now, we need to figure out something to do wwith the trained model!
+        # Now, we need to figure out something to do with the trained model!
 
     ipdb.set_trace()
-    
 
-def node_classification(args):
+def node_classification(args, label_assay_idx):
     """Predict node labels in a heterogeneous graph given a particular node type
     and a dataset of known node labels.
 
@@ -115,9 +178,13 @@ def node_classification(args):
     Parameters
     ----------
     args : (namespace output of argparse.parse_args() - see below for details)
+    label_assay_idx : int
+        Index of 
     """
     G = dgl.load_graphs(args.graph_file)[0][0]
 
+
+    _ = """
     # Get labels for a single prediction task:
     active_assays = pkl.load(open("./data/active_assays.pkl", 'rb')).numpy()
     active_labels = np.ones(len(active_assays), dtype=int)
@@ -136,14 +203,30 @@ def node_classification(args):
     val_labels = torch.tensor(idx_labels_merged[1,5000:6000].squeeze()).long()
     test_idx = torch.tensor(idx_labels_merged[0,6000:].squeeze()).long()
     test_labels = torch.tensor(idx_labels_merged[1,6000:].squeeze()).long()
+    """
 
-    model = NCModel(G, 2, 2, 3)  # (graph, input_size, output_size, num_edge_types)
+    # Remove the prediction task node and get labels before doing anything else
+    G, pos_nodes, neg_nodes = drop_node_return_binary_labels(G, 'assay', label_assay_idx, 'chemicalhasactiveassay', 'chemicalhasinactiveassay')
+
+    train, val, test = collate_labels(G, 'chemical', pos_nodes, neg_nodes)
+
+    train_idx = train[0,:]
+    train_labels = train[1,:]
+    val_idx = val[0,:]
+    val_labels = val[1,:]
+    test_idx = test[0,:]
+    test_labels = test[1,:]
+
+    # Note: We don't do anything with the node features (yet)
+    node_features, node_sizes, edge_input_sizes = preprocess_edges(G)
+
+    model = NodeClassifier(G, node_sizes, edge_input_sizes, 2, 3)  # (graph, input_size, output_size, num_edge_types)
     opt = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
 
     best_val_acc = 0
     best_test_acc = 0
 
-    for epoch in range(1000):
+    for epoch in range(500):
         logits = model(G)
 
         try:
@@ -168,24 +251,28 @@ def node_classification(args):
         opt.step()
 
         if epoch % 5 == 0:
-            print('Epoch %4d: Loss %.4f, Train Acc %.4f, Val Acc %.4f (Best %.4f), Test Acc %.4f (Best %.4f)' % (
-                epoch,
-                loss.item(),
-                train_acc.item(),
-                val_acc.item(),
-                best_val_acc.item(),
-                test_acc.item(),
-                best_test_acc.item(),
-            ))
+            try:
+                print('Epoch %4d: Loss %.4f, Train Acc %.4f, Val Acc %.4f (Best %.4f), Test Acc %.4f (Best %.4f)' % (
+                    epoch,
+                    loss.item(),
+                    train_acc.item(),
+                    val_acc.item(),
+                    best_val_acc.item(),
+                    test_acc.item(),
+                    best_test_acc.item(),
+                ))
+            except AttributeError:
+                ipdb.set_trace()
+                print()
     
 def main(args):
-    if args.task == "ep":
+    if args.task == "lp":
         link_prediction(args)
     elif args.task == "nc":
-        node_classification(args)
+        node_classification(args, 1)
 
 if __name__=="__main__":
-    tasks = ['nc', 'ep']
+    tasks = ['nc', 'lp']
     parser = argparse.ArgumentParser(description="Train a heterogeneous RGCN on a prediction task.")
     parser.add_argument("--task", type=str, default="nc",
                         help="Type of prediction task to perform.",

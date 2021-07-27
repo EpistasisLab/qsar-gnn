@@ -1,3 +1,5 @@
+import torch.nn as nn
+
 from .model import HeteroRGCNLayer, HeteroDotProductPredictor
 
 class LinkPredictor(nn.Module):
@@ -48,4 +50,3 @@ def compute_lp_loss(pos_score, neg_score):
     # Margin loss:
     n_edges = pos_score.shape[0]
     return (1 - pos_score.unsqueeze(1) + neg_score.view(n_edges, -1)).clamp(min=0).mean()
-

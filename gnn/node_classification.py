@@ -1,7 +1,10 @@
 import torch
 from torch import nn
+import torch.nn.functional as F
 
 from .model import HeteroRGCNLayer
+
+import ipdb
 
 class NodeClassifier(nn.Module):
     """Relational Convolutional Graph NN for heterogeneous graphs.
@@ -23,11 +26,11 @@ class NodeClassifier(nn.Module):
         Number of output node features. If you don't have a reason to do otherwise, this
         should probably be the same as `in_size`.
     """
-    def __init__(self, G, in_size, hidden_size, out_size):
+    def __init__(self, G, node_sizes, edge_input_sizes, hidden_size, out_size):
         super(NodeClassifier, self).__init__()
 
         embed_dict = {
-            ntype: nn.Parameter(torch.Tensor(G.number_of_nodes(ntype), in_size)) for ntype in G.ntypes
+            ntype: nn.Parameter(torch.Tensor(G.number_of_nodes(ntype), node_sizes[ntype])) for ntype in G.ntypes
         }
 
         for key, embed in embed_dict.items():
@@ -35,7 +38,7 @@ class NodeClassifier(nn.Module):
 
         self.embed = nn.ParameterDict(embed_dict)
 
-        self.layer1 = HeteroRGCNLayer(in_size, hidden_size, G.etypes)
+        self.layer1 = HeteroRGCNLayer(edge_input_sizes, hidden_size, G.etypes)
         self.layer2 = HeteroRGCNLayer(hidden_size, out_size, G.etypes)
 
     def forward(self, G):
