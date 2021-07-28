@@ -8,10 +8,11 @@ import torch.nn.functional as F
 
 import ipdb
 
-if torch.cuda.is_available():
-    DEVICE = 'cuda:0'
-else:
-    DEVICE = 'cpu'
+# if torch.cuda.is_available():
+#     DEVICE = 'cuda:0'
+# else:
+#     DEVICE = 'cpu'
+DEVICE = 'cpu'
 
 class HeteroRGCNLayer(nn.Module):
     """Graph convolutional layer for relational data that supports

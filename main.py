@@ -13,18 +13,19 @@ import ipdb
 from gnn.link_prediction import LinkPredictor, compute_lp_loss
 from gnn.node_classification import NodeClassifier
 
-if torch.cuda.is_available():
-    DEVICE = 'cuda:0'
-else:
-    DEVICE = 'cpu'
+# if torch.cuda.is_available():
+#     DEVICE = 'cuda:0'
+# else:
+#     DEVICE = 'cpu'
+DEVICE='cpu'
 
 
 def preprocess_edges(graph):
     chem = pd.read_csv("./data/chemicals.csv")
     maccs = torch.tensor([[int(x) for x in xx] for xx in chem.maccs]).float().to(DEVICE)
     node_features = {
-        'chemical': maccs,
-        #'chemical': torch.ones((graph.number_of_nodes(ntype='chemical'))).unsqueeze(1).to(DEVICE),
+        #'chemical': maccs,
+        'chemical': torch.ones((graph.number_of_nodes(ntype='chemical'))).unsqueeze(1).to(DEVICE),
         'assay': torch.ones((graph.number_of_nodes(ntype='assay'))).unsqueeze(1).to(DEVICE),
         'gene': torch.ones((graph.number_of_nodes(ntype='gene'))).unsqueeze(1).to(DEVICE)
     }
@@ -59,8 +60,8 @@ def drop_node_return_binary_labels(graph, ntype, node_index, pos_etype, neg_etyp
     # Get node connectivity and build label indices
     # FIX: Need to get the source node ids only!
     
-    pos_nodes = graph.in_edges(node_index, form='eid', etype=pos_etype)
-    neg_nodes = graph.in_edges(node_index, form='eid', etype=neg_etype)
+    pos_nodes = graph.in_edges(node_index, form='uv', etype=pos_etype)[0]
+    neg_nodes = graph.in_edges(node_index, form='uv', etype=neg_etype)[0]
 
     # Remove node
     new_graph = dgl.remove_nodes(graph, node_index, ntype=ntype)
@@ -220,7 +221,7 @@ def node_classification(args, label_assay_idx):
     # Note: We don't do anything with the node features (yet)
     node_features, node_sizes, edge_input_sizes = preprocess_edges(G)
 
-    model = NodeClassifier(G, node_sizes, edge_input_sizes, 2, 3)  # (graph, input_size, output_size, num_edge_types)
+    model = NodeClassifier(G, node_sizes, edge_input_sizes, 2, 2)  # (self, G, node_sizes, edge_input_sizes, hidden_size, out_size)
     opt = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
 
     best_val_acc = 0
@@ -229,17 +230,21 @@ def node_classification(args, label_assay_idx):
     for epoch in range(500):
         logits = model(G)
 
-        try:
-            loss = F.cross_entropy(logits[train_idx], train_labels)
-        except TypeError:
-            ipdb.set_trace()
-            print()
+        #loss = F.cross_entropy(logits[train_idx], train_labels)
+        p = F.softmax(logits, dim=1)
+        loss = F.nll_loss(torch.log(p[train_idx]), train_labels)
 
         pred = logits.argmax(1)
 
         train_acc = (pred[train_idx] == train_labels).float().mean()
         val_acc = (pred[val_idx] == val_labels).float().mean()
         test_acc = (pred[test_idx] == test_labels).float().mean()
+
+        tp = sum(torch.logical_and(pred[test_idx], test_labels)).item()
+        fp = sum(torch.logical_and(pred[test_idx], torch.logical_not(test_labels))).item()
+        fn = sum(torch.logical_and(torch.logical_not(pred[test_idx]), test_labels)).item()
+
+        f1 = (tp)/(tp + (0.5*(fp+fn)))
 
         if best_val_acc < val_acc:
             best_val_acc = val_acc
@@ -252,7 +257,7 @@ def node_classification(args, label_assay_idx):
 
         if epoch % 5 == 0:
             try:
-                print('Epoch %4d: Loss %.4f, Train Acc %.4f, Val Acc %.4f (Best %.4f), Test Acc %.4f (Best %.4f)' % (
+                print('Epoch %4d: Loss %.4f, Train Acc %.4f, Val Acc %.4f (Best %.4f), Test Acc %.4f (Best %.4f), Test F1 %.4f' % (
                     epoch,
                     loss.item(),
                     train_acc.item(),
@@ -260,10 +265,13 @@ def node_classification(args, label_assay_idx):
                     best_val_acc.item(),
                     test_acc.item(),
                     best_test_acc.item(),
+                    f1
                 ))
             except AttributeError:
                 ipdb.set_trace()
                 print()
+
+    ipdb.set_trace()
     
 def main(args):
     if args.task == "lp":

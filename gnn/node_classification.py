@@ -6,6 +6,8 @@ from .model import HeteroRGCNLayer
 
 import ipdb
 
+DEVICE = 'cpu'
+
 class NodeClassifier(nn.Module):
     """Relational Convolutional Graph NN for heterogeneous graphs.
 
@@ -29,10 +31,12 @@ class NodeClassifier(nn.Module):
     def __init__(self, G, node_sizes, edge_input_sizes, hidden_size, out_size):
         super(NodeClassifier, self).__init__()
 
+        # Node embeddings. Note that there is a different embedding dict for each node type.
         embed_dict = {
             ntype: nn.Parameter(torch.Tensor(G.number_of_nodes(ntype), node_sizes[ntype])) for ntype in G.ntypes
         }
 
+        # Initialize the embedding matrices as xavier uniform
         for key, embed in embed_dict.items():
             nn.init.xavier_uniform_(embed)
 
