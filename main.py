@@ -24,8 +24,8 @@ def preprocess_edges(graph):
     chem = pd.read_csv("./data/chemicals.csv")
     maccs = torch.tensor([[int(x) for x in xx] for xx in chem.maccs]).float().to(DEVICE)
     node_features = {
-        #'chemical': maccs,
-        'chemical': torch.ones((graph.number_of_nodes(ntype='chemical'))).unsqueeze(1).to(DEVICE),
+        'chemical': maccs,
+        #'chemical': torch.ones((graph.number_of_nodes(ntype='chemical'))).unsqueeze(1).to(DEVICE),
         'assay': torch.ones((graph.number_of_nodes(ntype='assay'))).unsqueeze(1).to(DEVICE),
         'gene': torch.ones((graph.number_of_nodes(ntype='gene'))).unsqueeze(1).to(DEVICE)
     }
@@ -69,8 +69,8 @@ def drop_node_return_binary_labels(graph, ntype, node_index, pos_etype, neg_etyp
     # Return both the transformed graph and the labels
     return new_graph, pos_nodes, neg_nodes
 
-def collate_labels(graph, ntype, pos_idxs, neg_idxs, ratio=(0.8, 0.1, 0.1)):
-    """Make training/validation/testing sets along with labels.
+def collate_labels(graph, ntype, pos_idxs, neg_idxs, ratio=(0.8, 0.2)):
+    """Make training/testing sets along with labels.
     """
     assert sum(ratio) == 1.0
     
@@ -85,14 +85,12 @@ def collate_labels(graph, ntype, pos_idxs, neg_idxs, ratio=(0.8, 0.1, 0.1)):
 
     split_points = (
         round(shuffled.shape[1] * ratio[0]),
-        round(shuffled.shape[1] * (ratio[0]+ratio[1]))
     )
 
     train = shuffled[:, :split_points[0]]
-    val = shuffled[:, split_points[0]:split_points[1]]
-    test = shuffled[:, split_points[1]:]
+    test = shuffled[:, split_points[0]:]
 
-    return train, val, test
+    return train, test
     
 def construct_negative_graph(graph, k, etype):
     """Construct a negative graph for negative sampling in edge prediction.
@@ -184,37 +182,13 @@ def node_classification(args, label_assay_idx):
     """
     G = dgl.load_graphs(args.graph_file)[0][0]
 
-
-    _ = """
-    # Get labels for a single prediction task:
-    active_assays = pkl.load(open("./data/active_assays.pkl", 'rb')).numpy()
-    active_labels = np.ones(len(active_assays), dtype=int)
-    active = np.vstack([active_assays, active_labels])  # First row - indices; second row - labels
-    inactive_assays = pkl.load(open("./data/inactive_assays.pkl", 'rb')).numpy()
-    inactive_labels = np.zeros(len(inactive_assays), dtype=int)
-    inactive = np.vstack([inactive_assays, inactive_labels])
-
-    idx_labels_merged = np.hstack([active, inactive])  # First row - indices; second row - labels
-    # Now, we shuffle them
-    idx_labels_merged = idx_labels_merged[:, np.random.permutation(idx_labels_merged.shape[1])]
-
-    train_idx = torch.tensor(idx_labels_merged[0,:5000].squeeze()).long()
-    train_labels = torch.tensor(idx_labels_merged[1,:5000].squeeze()).long()
-    val_idx = torch.tensor(idx_labels_merged[0,5000:6000].squeeze()).long()
-    val_labels = torch.tensor(idx_labels_merged[1,5000:6000].squeeze()).long()
-    test_idx = torch.tensor(idx_labels_merged[0,6000:].squeeze()).long()
-    test_labels = torch.tensor(idx_labels_merged[1,6000:].squeeze()).long()
-    """
-
     # Remove the prediction task node and get labels before doing anything else
     G, pos_nodes, neg_nodes = drop_node_return_binary_labels(G, 'assay', label_assay_idx, 'chemicalhasactiveassay', 'chemicalhasinactiveassay')
 
-    train, val, test = collate_labels(G, 'chemical', pos_nodes, neg_nodes)
+    train, test = collate_labels(G, 'chemical', pos_nodes, neg_nodes)
 
     train_idx = train[0,:]
     train_labels = train[1,:]
-    val_idx = val[0,:]
-    val_labels = val[1,:]
     test_idx = test[0,:]
     test_labels = test[1,:]
 
@@ -222,22 +196,26 @@ def node_classification(args, label_assay_idx):
     node_features, node_sizes, edge_input_sizes = preprocess_edges(G)
 
     model = NodeClassifier(G, node_sizes, edge_input_sizes, 2, 2)  # (self, G, node_sizes, edge_input_sizes, hidden_size, out_size)
-    opt = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
+    opt = torch.optim.Adam(model.parameters(), lr=0.02, weight_decay=5e-4)
 
-    best_val_acc = 0
+    # compute class weights
+    # pos_weight = 1/(len(pos_nodes) / (len(pos_nodes)+len(neg_nodes)))
+    # neg_weight = 1/(len(neg_nodes) / (len(pos_nodes)+len(neg_nodes)))
+    pos_weight = 1 - (len(pos_nodes) / (len(pos_nodes)+len(neg_nodes)))
+    neg_weight = len(pos_nodes) / (len(pos_nodes)+len(neg_nodes))
+    weights = torch.tensor([neg_weight, pos_weight])
+
     best_test_acc = 0
 
-    for epoch in range(500):
+    for epoch in range(1000):
         logits = model(G)
 
-        #loss = F.cross_entropy(logits[train_idx], train_labels)
         p = F.softmax(logits, dim=1)
-        loss = F.nll_loss(torch.log(p[train_idx]), train_labels)
+        loss = F.cross_entropy(torch.log(p[train_idx]), train_labels)
 
         pred = logits.argmax(1)
 
         train_acc = (pred[train_idx] == train_labels).float().mean()
-        val_acc = (pred[val_idx] == val_labels).float().mean()
         test_acc = (pred[test_idx] == test_labels).float().mean()
 
         tp = sum(torch.logical_and(pred[test_idx], test_labels)).item()
@@ -246,10 +224,9 @@ def node_classification(args, label_assay_idx):
 
         f1 = (tp)/(tp + (0.5*(fp+fn)))
 
-        if best_val_acc < val_acc:
-            best_val_acc = val_acc
         if best_test_acc < test_acc:
             best_test_acc = test_acc
+            best_f1 = f1
 
         opt.zero_grad()
         loss.backward()
@@ -257,15 +234,14 @@ def node_classification(args, label_assay_idx):
 
         if epoch % 5 == 0:
             try:
-                print('Epoch %4d: Loss %.4f, Train Acc %.4f, Val Acc %.4f (Best %.4f), Test Acc %.4f (Best %.4f), Test F1 %.4f' % (
+                print('Epoch %4d: Loss %.4f, Train Acc %.4f, Test Acc %.4f (Best %.4f), Test F1 %.4f (Best %.4f)' % (
                     epoch,
                     loss.item(),
                     train_acc.item(),
-                    val_acc.item(),
-                    best_val_acc.item(),
                     test_acc.item(),
                     best_test_acc.item(),
-                    f1
+                    f1,
+                    best_f1
                 ))
             except AttributeError:
                 ipdb.set_trace()
