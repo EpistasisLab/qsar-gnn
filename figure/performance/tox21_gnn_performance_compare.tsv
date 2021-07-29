@@ -1,0 +1,5 @@
+metric	method1	method2	wilcox_signed_rank_pv
+f1	gnn	rf	2.3e-4	
+f1	gnn	gb	2.6e-3
+auc	gnn	rf	0.93
+auc	gnn	gb	0.98
