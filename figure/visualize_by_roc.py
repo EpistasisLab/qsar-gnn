@@ -25,9 +25,18 @@ gnn_perf_df = pd.read_csv(gnn_perf_file, sep = '\t', header = 0)
 gnn_map_df = pd.read_csv(gnn_map_file, sep = '\t', header = 0)
 
 ## 2. Make ROC curves to compare three methods 
+plot_color = [plt.cm.Set1(0), plt.cm.Set1(1), plt.cm.Set1(2)]
 for gdv in gnn_perf_df.dataset_name.values:
 	print(gdv)
 	roc_list = []  
+	# compute TPR, FPR for graph neural network predictions
+	gnn_query_row = gnn_perf_df[gnn_perf_df.dataset_name == gdv]
+	gnn_map_row = gnn_map_df[gnn_map_df.assay_name == gdv]
+	gnn_pred_file = prediction_folder + str(gnn_map_row.assay_index.values[0]) + '.tsv'
+	gnn_pred_df = pd.read_csv(gnn_pred_file, sep = '\t', header = 0)
+	gnn_roc_fpr, gnn_roc_tpr, _ = roc_curve(gnn_pred_df.true_label.values, gnn_pred_df.proba.values)
+	gnn_label = 'GNN - full\n(AUC=' + str(round(gnn_query_row.testing_auc.values[0], 2)) + '±' + str(round(gnn_query_row.testing_auc_ci.values[0], 2)) + ')'
+	roc_list.append((gnn_roc_fpr, gnn_roc_tpr, gnn_label))
 	# compute TPR, FPR for random forest predictions  
 	rf_query_row = rf_perf_df[rf_perf_df.dataset_name == gdv]
 	rf_pred_file = prediction_folder + 'compound_structure_fingerprint_maccs_' + gdv + '_rf_pred.tsv'
@@ -42,14 +51,6 @@ for gdv in gnn_perf_df.dataset_name.values:
 	gb_roc_fpr, gb_roc_tpr, _ = roc_curve(gb_pred_df.true_label.values, gb_pred_df.proba.values)
 	gb_label = 'Gradient Boosting\n(AUC=' + str(round(gb_query_row.testing_auc.values[0], 2)) + '±' + str(round(gb_query_row.testing_auc_ci.values[0], 2)) + ')'
 	roc_list.append((gb_roc_fpr, gb_roc_tpr, gb_label))
-	# compute TPR, FPR for graph neural network predictions  
-	gnn_query_row = gnn_perf_df[gnn_perf_df.dataset_name == gdv]
-	gnn_map_row = gnn_map_df[gnn_map_df.assay_name == gdv]	
-	gnn_pred_file = prediction_folder + str(gnn_map_row.assay_index.values[0]) + '.tsv'
-	gnn_pred_df = pd.read_csv(gnn_pred_file, sep = '\t', header = 0)
-	gnn_roc_fpr, gnn_roc_tpr, _ = roc_curve(gnn_pred_df.true_label.values, gnn_pred_df.proba.values)
-	gnn_label = 'GNN\n(AUC=' + str(round(gnn_query_row.testing_auc.values[0], 2)) + '±' + str(round(gnn_query_row.testing_auc_ci.values[0], 2)) + ')'
-	roc_list.append((gnn_roc_fpr, gnn_roc_tpr, gnn_label))
 	# specify figure and font size
 	plt.figure(figsize = (6, 6))
 	plt.rc('font', size = 20)
@@ -59,9 +60,10 @@ for gdv in gnn_perf_df.dataset_name.values:
 	plt.rc('ytick', labelsize = 15)
 	plt.rc('legend', fontsize = 15)
 	# plot ROC curves of multiple classifiers 
-	for rl in roc_list:
+	for nrl in range(0, len(roc_list)):
+		rl = roc_list[nrl]
 		rl_fpr, rl_tpr, rl_label = rl
-		plt.plot(rl_fpr, rl_tpr, lw = 2, label = rl_label)
+		plt.plot(rl_fpr, rl_tpr, lw = 2, label = rl_label, color = plot_color[nrl])
 	# plot baseline line of a random classifier (diagonal line)
 	plt.plot([0, 1], [0, 1], color = 'grey', lw = 1, linestyle='--')
 	# save plot
