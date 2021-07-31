@@ -11,7 +11,7 @@ import torch.nn.functional as F
 import ipdb
 
 from gnn.link_prediction import LinkPredictor, compute_lp_loss
-from gnn.node_classification import NodeClassifier
+from gnn.node_classification import NodeClassifier, NodeClassifierConv
 
 # if torch.cuda.is_available():
 #     DEVICE = 'cuda:0'
@@ -164,6 +164,7 @@ def link_prediction(args):
 
     ipdb.set_trace()
 
+
 def node_classification(args, label_assay_idx):
     """Predict node labels in a heterogeneous graph given a particular node type
     and a dataset of known node labels.
@@ -185,6 +186,11 @@ def node_classification(args, label_assay_idx):
     # Remove the prediction task node and get labels before doing anything else
     G, pos_nodes, neg_nodes = drop_node_return_binary_labels(G, 'assay', label_assay_idx, 'chemicalhasactiveassay', 'chemicalhasinactiveassay')
 
+    try:
+        ratio_pos = len(pos_nodes) / (len(pos_nodes) + len(neg_nodes))
+    except ZeroDivisionError:
+        ratio_pos = 0
+    
     train, test = collate_labels(G, 'chemical', pos_nodes, neg_nodes)
 
     train_idx = train[0,:]
@@ -192,23 +198,42 @@ def node_classification(args, label_assay_idx):
     test_idx = test[0,:]
     test_labels = test[1,:]
 
+    # Remove nodes for ablation analysis
+    G = dgl.edge_type_subgraph(G,
+      [
+        ('chemical', 'chemicalhasinactiveassay', 'assay'),
+        ('assay', 'assayinactiveforchemical', 'chemical'),
+        ('chemical', 'chemicalhasactiveassay', 'assay'),
+        ('assay', 'assayactiveforchemical', 'chemical'),
+        ('chemical', 'chemicalbindsgene', 'gene'),
+        ('gene', 'genebindedbychemical', 'chemical'),
+        ('chemical', 'chemicaldecreasesexpression', 'gene'),
+        ('gene', 'expressiondecreasedbychemical', 'chemical'),
+        ('chemical', 'chemicalincreasesexpression', 'gene'),
+        ('gene', 'expressionincreasedbychemical', 'chemical'),
+        ('gene', 'geneinteractswithgene', 'gene'),
+        ('gene', 'geneinverseinteractswithgene', 'gene')
+      ]
+    )
+
     # Note: We don't do anything with the node features (yet)
     node_features, node_sizes, edge_input_sizes = preprocess_edges(G)
 
     model = NodeClassifier(G, node_sizes, edge_input_sizes, 2, 2)  # (self, G, node_sizes, edge_input_sizes, hidden_size, out_size)
+    # model = NodeClassifierConv(G, node_sizes, edge_input_sizes, 2, 2)  # (self, G, node_sizes, edge_input_sizes, hidden_size, out_size)
     opt = torch.optim.Adam(model.parameters(), lr=0.02, weight_decay=5e-4)
 
     # compute class weights
-    # pos_weight = 1/(len(pos_nodes) / (len(pos_nodes)+len(neg_nodes)))
-    # neg_weight = 1/(len(neg_nodes) / (len(pos_nodes)+len(neg_nodes)))
     pos_weight = 1 - (len(pos_nodes) / (len(pos_nodes)+len(neg_nodes)))
     neg_weight = len(pos_nodes) / (len(pos_nodes)+len(neg_nodes))
     weights = torch.tensor([neg_weight, pos_weight])
 
     best_test_acc = 0
+    best_f1 = 0
 
     for epoch in range(1000):
         logits = model(G)
+        # logits = model(G, node_features)
 
         p = F.softmax(logits, dim=1)
         loss = F.cross_entropy(torch.log(p[train_idx]), train_labels)
@@ -226,7 +251,11 @@ def node_classification(args, label_assay_idx):
 
         if best_test_acc < test_acc:
             best_test_acc = test_acc
+            # best_f1 = f1
+            # best_probs = p
+        if best_f1 < f1:
             best_f1 = f1
+            best_probs = p
 
         opt.zero_grad()
         loss.backward()
@@ -247,13 +276,79 @@ def node_classification(args, label_assay_idx):
                 ipdb.set_trace()
                 print()
 
+    preds = pd.DataFrame({'proba': p[test_idx][:,1].detach().numpy(), 'true_label': test_labels.detach().numpy()})
     ipdb.set_trace()
+    return (best_test_acc.item(), best_f1, preds, ratio_pos)
     
 def main(args):
     if args.task == "lp":
         link_prediction(args)
     elif args.task == "nc":
-        node_classification(args, 1)
+        assay_index = []
+        assay_node_ids = []
+        assays = pd.read_csv("./data/assays.csv")
+        for ind, a in assays.iterrows():
+            assay_index.append(ind)
+            assay_node_ids.append(a)
+
+        if args.assay == "all":
+            assay_index = []
+            assay_node_ids = []
+            assays = pd.read_csv("./data/assays.csv")
+            for ind, a in assays.iterrows():
+                assay_index.append(ind)
+                assay_node_ids.append(a)
+            
+            test_accs = []
+            f1s = []
+            ratio_positive_nodes = []
+
+            with open("./gnn_nc_results/nc_results.tsv", 'w') as fp:
+                fp.write("assay_index\tassay_node_id\tacc\tf1\tpos_ratio\n")
+
+            for i in assay_index:
+
+                if i == 47:
+                    continue  # need to debug this one...
+
+                print("================================")
+                print(" ASSAY {0} OF {1}".format(i, len(assay_index)))
+                print("================================")
+                try:
+                    test_acc, f1, preds, rp = node_classification(args, i)
+                except:
+                    with open("./gnn_nc_results/nc_results_pd.tsv", 'a') as fp:
+                        fp.write("ERROR ON ASSAY WITH INDEX: {0}\n".format(i))
+                    print("UH OH SOMETHING WENT WRONG")
+                    continue
+                print()
+                test_accs.append(test_acc)
+                f1s.append(f1)
+                ratio_positive_nodes.append(rp)
+
+                preds.to_csv('gnn_nc_results/{0}.tsv'.format(i), sep='\t', index=False)
+
+                with open("./gnn_nc_results/nc_results.tsv", 'a') as fp:
+                    fp.write(f"{i}\t{int(assay_node_ids[i])}\t{test_acc:.4f}\t{f1:.4f}\t{rp:.3f}\n")
+
+            all_assay_results = pd.DataFrame({'assay_index': assay_index, 'assay_node_id': assay_node_ids, 'acc': test_accs, 'f1': f1s})
+            all_assay_results.to_csv('gnn_nc_results/nc_results_pd.tsv', sep='\t', index=False)
+            
+            ipdb.set_trace()
+            print()
+        elif args.assay.isdigit():
+            assay_idx = int(args.assay)
+            
+            test_acc, f1, preds, rp = node_classification(args, assay_idx)
+
+            #preds.to_csv('gnn_nc_results/ablation/{0}.tsv'.format(assay_idx), sep='\t', index=False)
+
+            print(f"{assay_idx}\t{int(assay_node_ids[assay_idx])}\t{test_acc:.4f}\t{f1:.4f}\t{rp:.3f}\n")
+
+            ipdb.set_trace()
+
+        else:
+            raise argparse.ArgumentError("Error - `--assay` must be an integer or 'all'.")
 
 if __name__=="__main__":
     tasks = ['nc', 'lp']
@@ -265,6 +360,7 @@ if __name__=="__main__":
                         help="File location where the DGL heterograph is stored.")
     parser.add_argument("--lr", type=float, default=0.01,
                         help="Learning rate for the NN optimizer.")
+    parser.add_argument("--assay", )
 
     parser.set_defaults(validation=True)
 
