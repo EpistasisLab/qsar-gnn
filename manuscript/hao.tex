@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{ee477}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+
+\begin{document}
+ 
+\title{PSB-GNN}
+\maketitle
+
+\section{Introduction} 
+Evaluating the toxicity of chemicals is essential to pharmaceutical research.
+The task has traditionally been conducted through in vivo models \cite{fischer2020toxicity}.
+However, in vivo testing bears major limitations as the number of chemicals in need of assessment explodes.
+Meanwhile, it remains challenging to extrapolate findings from model organisms to humans.
+In the last decade, in silico testing has become an alternative approach to analyze toxicity profiles of chemicals \cite{raies2016silico}.
+The development of toxicity prediction models is facilitated by high-throughput screening resources such as Tox21 \cite{huang2016quantitative}, which provides thousands of data points for model traninig.
+A common in silico approach is quantitative structure-activity relationship (QSAR) modeling \cite{cherkasov2014qsar}.
+QSAR models first quantify chemical structure into into molecular descriptors or fingerprints, then relate them to the endpoints by classification algorithms.
+The accuracy of QSAR models in toxicity prediction largely depend on endpoint of interest \cite{valerio2009silico}.
+Despite of achieving decent performance for some endpoints, QSAR models often failed to explain the cellular mechanisms underlying structure-toxicity associations \cite{polishchuk2017interpretation}.
+The lack of interpretability arises from difficulties in linking structure properties of high relevance to toxicity genes and pathways \cite{cruz2017systemic}. 
+
+\section{Method}
+
+\subsection{Tox21 datasets}
+We obtained active and inactive compounds of 52 toxicity assays from Tox21 data portal (\url{https://tripod.nih.gov/tox21/assays/}) \cite{huang2016quantitative}. 
+Compounds were uniquely identified by their PubChem IDs. 
+We removed compounds with inconvlusive or ambiguous screening results.  
+
+\subsection{Baseline QSAR models}
+We built QSAR models to predict the response of compounds to each toxicity assay.
+To quantify structure properties of compounds, we adpoted 166 MACCS fingerprints that cover most interesting chemical features for drug discovery. 
+We used "rcdk" package \cite{guha2007chemical} to compute MACCS fingerprints of chemicals from their SMILES strings.  
+Two classification methods were implemented for the task: random forest and gradient boosting. 
+Each model was trained with 80 percent of all available instances, then evaluted with the remaining 20 percent.
+We tuned six hyperparameters for each random forest model, and five hyperparameters for each gradient boosting model (\textbf{Table S1}). 
+We used grid search to find the optimal hyperparamter setting that minimizes binary cross entropy loss on training data.  
+The optimal performance for all datasets can be found in \textbf{Table S2}. 
+
+
+\bibliographystyle{unsrt}
+\bibliography{psb-gnn}
+ 
+\end{document}

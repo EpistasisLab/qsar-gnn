@@ -5,7 +5,7 @@
 
 \begin{document}
 
-\title{Machine Learning on Publicly Available Semantic Graph Data for Interpretable QSAR Modeling}
+\title{Improving QSAR Modeling for Predictive Toxicology using Publicly Aggregated Semantic Graph Data and Graph Neural Networks}
 
 \author{Joseph~D.~Romano$^*$, Yun~Hao$^*$, and Jason~H.~Moore$^\dag$}
 
@@ -15,25 +15,29 @@ $^\dag$E-mail: jhmoore@upenn.edu\\
 $^*$These authors contributed equally.}
 
 \begin{abstract}
-This is a placeholder for the real abstract.
-Please write each sentence on its own line in the \LaTeX{} source file for easier tracking in Git.
+Quantitative Structure-Activity Relationship (QSAR) modeling is the most common computational technique for predicting toxicity for specific chemicals, but a lack of methodological innovations have led to underwhelming performance of QSAR in modern applications.
+We show that contemporary QSAR modeling for predictive toxicology can be substantially improved by incorporating semantic graph data aggregated from open-access public databases, and analyzing those data in the context of graph neural networks (GNNs).
+Furthermore, we introspect the GNNs to demonstrate how they can lead to more interpretable applications of QSAR, and use ablation analysis to explore the contribution of different data elements to the final models' performance.
 \end{abstract}
 
-\keywords{Toxicology; Graph machine learning; QSAR; Artificial Intelligence.}
+\keywords{Toxicology; Graph neural networks; Data aggregation; QSAR; Artificial intelligence.}
 
 \section{Introduction}\label{aba:sec1}
 Testing.
 
 \section{Methods}
 
-\subsection{Data sources}
-The data used in this study come from a new data resource for computational toxicology, named ComptoxAI.
+\subsection{Aggregating publicly accessible multimodal graph data}
+The graph data used in this study come from a new data resource for computational toxicology, named ComptoxAI.
 ComptoxAI includes a large graph database containing many entity and relationship types that pertain to translational mechanisms of toxicity, all of which are sourced from third-party public databases (including PubChem, Drugbank, the US EPA's Computational Toxicology Dashboard, NCBI Gene, and many others).
 We extracted the subgraph from ComptoxAI's graph database defined as all nodes representing chemicals, genes, and toxicological assays, as well as the complete set of edges linking nodes of those types.
 A metagraph describing the node and edge types in the subgraph is shown in [FIGURE XXX].
 
 Every prediction task in this study involves QSAR modeling between chemicals of toxicological interest and toxicology-related activity assays derived from the US EPA's Tox21 dataset.
 Each chemical and assay is represented as a node within the larger graph database, and all chemical--assay pairs are either linked by an edge (\textit{chemicalHasActiveAssay} or \textit{chemicalHasInactiveAssay}) or not linked by an edge (i.e., no data has been collected on the chemical with respect to the assay in question). 
+
+\subsection{Obtaining toxicology assay data}
+We used the Tox21 dataset---which is a freely available resource produced collaboratively by the US National Institutes of Health, the US Food and Drug Administration, and the US Environmental Protection Agency---to obtain a set of candidate assays for classification and establish `ground truth' relationships between specific chemicals and those assays.
 
 \subsection{Heterogeneous graph neural network}
 We constructed a heterogeneous graph neural network (GNN) architecture for the graph ML experiments.
@@ -54,15 +58,13 @@ $\sigma$ is an activation applied to the output of each layer, which we define a
 \end{equation}
 
 \subsubsection{Node classification model}
-Our node classification task consists of labeling chemicals according to whether they are (1) or are not (0) active in a specific Tox21 assay.
+Our node classification task consists of labeling chemicals according to whether they do (1) or do not (0) activate a specific Tox21 assay.
 To do this, we generate labels for each chemical based on its activity with regards to the assay of interest, and then remove the node from the graph corresponding to that assay.
 We then train the graph neural network in a standard supervised manner (train/test/split of 80\%/10\%/10\%) to minimize the cross-entropy loss between the true labeling and the predicted labeling.
 
 To assess the contribution of the MACCS structural features when added to the GNN, we trained the node classification model both in the presence and in the absence of MACCS bitstrings applied as node features to each chemical. Intuitively, the model trained without MACCS node features performs inference using only the graph's topological structure---including gene interactions and activity annotations to the other Tox21 assays---while the one with MACCS node features additionally has access to the same chemical structure information used in the non-graph (baseline) QSAR models.
 
-\subsubsection{Edge prediction model}
-
-\subsection{Baseline QSAR models}
+\subsection{Baseline QSAR classifiers}
 
 \section{Results}
 
@@ -73,8 +75,17 @@ To assess the contribution of the MACCS structural features when added to the GN
 \section{Code availability}
 All source code pertaining to this study is available on GitHub at \url{https://github.com/JDRomano2/psb-gnn}, and in a `frozen' version on FigShare at [XXX].
 
+\section*{Acknowledgements}
+This work was made possible with support from US National Institutes of Health grants \texttt{R01-LM010098}, \texttt{R01-LM012601}, \texttt{R01-AI116794}, \texttt{UL1-TR001878}, \texttt{UC4-DK112217} (PI: Jason~Moore), \texttt{T32-ES019851}, and \texttt{P30-ES013508} (PI: Trevor~Penning).
+
 \bibliographystyle{ws-procs11x85}
 \bibliography{psb-gnn}
+
+\appendix{Graph convolutional network architecture}
+Some stuff here.
+
+\appendix{Node classification model}
+Some more stuff.
 
 \end{document} 
 
