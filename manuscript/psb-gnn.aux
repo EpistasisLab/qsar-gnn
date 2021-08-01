@@ -5,27 +5,31 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2}Methods}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Obtaining toxicology assay data}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Aggregating publicly available multimodal graph data}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Metagraph describing the node types, node counts, and edge types in the heterogeneous graph. During implementation of the GNN, we also define corresponding inverse edges (e.g., assayTargetsGene $\to $ geneTargetedByAssay) to facilitate the message-passing paradigm of the GNN.}}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Metagraph describing the node types, node counts, and edge types in the heterogeneous graph. During implementation of the GNN, we also define corresponding inverse edges (e.g., assayTargetsGene $\leftrightarrow $ geneTargetedByAssay) to facilitate the message-passing paradigm of the GNN.}}{}\protected@file@percent }
 \newlabel{fig:2}{{2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Heterogeneous graph neural network}{}\protected@file@percent }
 \citation{schlichtkrull2018modeling}
 \citation{kingma2014adam}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Node classification model}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Node classification}{}\protected@file@percent }
 \newlabel{methods-nc}{{2.3.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Labeled heterogeneous graph construction for toxicity assay QSAR model.}}{}\protected@file@percent }
+\newlabel{alg:1}{{1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Baseline QSAR classifiers}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Results}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}GNN node classification performance vs.\ baseline QSAR models}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overall performance metrics of the 3 QSAR model types on each of the Tox21 assays---a.)\nobreakspace  {}Area Under the Receiver Operator Characteristic curve (AUROC) and b.)\nobreakspace  {}F1 score. The mean AUROC is significantly higher for the GNN model than for either of the two baseline QSAR approaches. The differences in F1 scores are not statistically significant. The GNN achieves poor F1 scores on assays with relatively few (e.g., $< 100$) ``active'' annotations in Tox21, which is consistent with known performance of neural networks on data with sparse labels.}}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overall performance metrics of the 3 QSAR model types on each of the Tox21 assays---a.)\nobreakspace  {}area under the receiver operating characteristic curve (AUROC) and b.)\nobreakspace  {}F1 score. The mean AUROC is significantly higher for the GNN model than for either of the two baseline QSAR approaches. The differences in F1 scores are not statistically significant. The GNN achieves poor F1 scores on assays with relatively few (e.g., $< 100$) ``active'' annotations in Tox21, which is consistent with known performance of neural networks on data with sparse labels.}}{}\protected@file@percent }
 \newlabel{fig:3}{{3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays: a.)\nobreakspace  {}PXR agonism (\texttt  {tox21-pxr-p1}) and b.)\nobreakspace  {}HepG2 cell viability (\texttt  {tox21-rt-viability-hepg2-p1}). In both cases, the area under the curve (AUC) is significantly higher for the GNN model than either the Random Forest or Gradient Boosting models.}}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Receiver operating characteristic (ROC) curves for two selected Tox21 assays: a.)\nobreakspace  {}PXR agonism (\texttt  {tox21-pxr-p1}) and b.)\nobreakspace  {}HepG2 cell viability (\texttt  {tox21-rt-viability-hepg2-p1}). In both cases, the area under the curve (AUC) is significantly higher for the GNN model than either the Random Forest or Gradient Boosting models.}}{}\protected@file@percent }
 \newlabel{fig:4}{{4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Ablation analysis of graph components' influence on the trained predictive model}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays using different configurations of the GNN model. `GNN - full' is the complete model as described in \S  \G@refundefinedtrue \text  {\normalfont  \bfseries  ??}\GenericWarning  {               }{LaTeX Warning: Reference `methods-nc' on page  undefined}. `GNN - no structure' omits the MACCS chemical descriptors and replaces them with node embeddings of the same dimensionality. `GNN - no gene' removes gene nodes and their incident edges from the network. `GNN - no assay' removes all assay nodes and incident edges, so predictions are made solely using chemicals, genes, the remaining edges, and the MACCS chemical descriptors as chemical node features.}}{}\protected@file@percent }
-\newlabel{fig:5}{{5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}GNNs versus traditional ML for QSAR modeling}{}\protected@file@percent }
 \bibstyle{ws-procs11x85}
 \bibdata{psb-gnn}
+\bibcite{schlichtkrull2018modeling}{1}
+\bibcite{kingma2014adam}{2}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays using different configurations of the GNN model. `GNN - full' is the complete model as described in \S  2.3.1\hbox {}. `GNN - no structure' omits the MACCS chemical descriptors and replaces them with node embeddings of the same dimensionality. `GNN - no gene' removes gene nodes and their incident edges from the network. `GNN - no assay' removes all assay nodes and incident edges, so predictions are made solely using chemicals, genes, the remaining edges, and the MACCS chemical descriptors as chemical node features.}}{}\protected@file@percent }
+\newlabel{fig:5}{{5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Interpretability of GNNs in QSAR}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Future opportunities}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{}\protected@file@percent }
