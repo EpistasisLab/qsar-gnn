@@ -88,13 +88,13 @@ class QSARDataset(DGLDataset):
   def read_source_files(self):
     print("  ...reading source files.")
     # Load node source files
-    self.chemicals = pd.read_csv("./data/chemicals.csv")
-    self.genes = pd.read_csv("./data/genes.csv")
-    self.assays = pd.read_csv("./data/assays.csv")
+    self.chemicals = pd.read_csv("../data/chemicals.csv")
+    self.genes = pd.read_csv("../data/genes.csv")
+    self.assays = pd.read_csv("../data/assays.csv")
     # Load edge source files
-    self.chemical_assay = pd.read_csv("./data/chemical-assay.csv")
-    self.chemical_gene = pd.read_csv("./data/chemical-gene.csv")
-    self.gene_gene = pd.read_csv("./data/gene-gene.csv")
+    self.chemical_assay = pd.read_csv("../data/chemical-assay.csv")
+    self.chemical_gene = pd.read_csv("../data/chemical-gene.csv")
+    self.gene_gene = pd.read_csv("../data/gene-gene.csv")
 
   def parse_node_features(self):
     print("  ...parsing node features.")
@@ -116,11 +116,13 @@ class QSARDataset(DGLDataset):
     
     active_assay_nodes = active_assays[0][active_assay_mask]
     inactive_assay_nodes = inactive_assays[0][inactive_assay_mask]
-    pkl.dump(active_assay_nodes, open("./data/active_assays.pkl", 'wb'))
-    pkl.dump(inactive_assay_nodes, open("./data/inactive_assays.pkl", 'wb'))
+    pkl.dump(active_assay_nodes, open("../data/active_assays.pkl", 'wb'))
+    pkl.dump(inactive_assay_nodes, open("../data/inactive_assays.pkl", 'wb'))
     
   def make_adjacency(self, s_node, rel, o_node):
     """
+    Make an adjacency list for a specific metaedge.
+
     Parameters
     ----------
     s_node : str
@@ -131,9 +133,9 @@ class QSARDataset(DGLDataset):
     rel_df = eval("self."+s_node+"_"+o_node)
     o_df = eval("self."+o_node+"s")
 
-    if o_node == 'assay':
-      # REMOVE WHEN node2 == 2783
-      rel_df = rel_df.loc[rel_df.node2 != 2783,:]
+    # if o_node == 'assay':
+    #   # REMOVE WHEN node2 == 2783
+    #   rel_df = rel_df.loc[rel_df.node2 != 2783,:]
     
     filtered_rels = rel_df.loc[rel_df.edge == rel,:]
 
@@ -204,7 +206,7 @@ class QSARDataset(DGLDataset):
 
   def load(self):
     print("Loading data from disk...")
-    return load_graphs("./data/graph.bin")[0][0]
+    return load_graphs("../data/graph.bin")[0][0]
 
   def make_rel_t(self, s_node, rel, o_node):
     """Make a tensor representing links between a subject and an object node
