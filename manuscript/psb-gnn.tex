@@ -2,6 +2,7 @@
 
 \documentclass{ws-procs11x85}
 \usepackage{ws-procs-thm}           % comment this line when `amsthm / theorem / ntheorem` package is used
+\usepackage{algorithmic}
 
 \begin{document}
 
@@ -11,7 +12,7 @@
 
 \address{Institute for Biomedical Informatics, University of Pennsylvania,\\
 Philadelphia, Pennsylvania 19104, United States\\
-$^\dag$E-mail: jhmoore@upenn.edu\\
+$^\dag$Corresponding author e-mail: jhmoore@upenn.edu\\
 $^*$These authors contributed equally.}
 
 \begin{abstract}
@@ -40,26 +41,36 @@ Our results show that the GNN strategy significantly outperforms traditional QSA
 We further refine our results by using an ablation analysis to explain the relative contributions of different data sources to the GNNs' increased performance.
 Finally, we discuss how GNNs improve the interpretability of QSAR, and suggest future directions.
 
-
-\section{Methods}
-
 \begin{figure}
    \centering
    \includegraphics[width=\textwidth]{figures/figure1.pdf}
-   \caption{Schematic overview of the graph machine learning approach used in this study. We build a toxicology-focused graph database (named ComptoxAI) using data aggregated from many public databases, and extract a subgraph to be used for QSAR analysis (containing chemicals, assays, and genes). We then train and evaluate a graph convolutional neural network on the heterogeneous graph for predicting whether or not a chemical activates specific toxicology-focused assays from the Tox21 database.}
+   \caption{Schematic overview of the graph machine learning approach used in this study. We build a toxicology-focused graph database (named ComptoxAI) using data aggregated from many public databases, and extract a subgraph for QSAR analysis containing chemicals, assays, and genes. We then train and evaluate a graph neural network that predicts whether or not a chemical activates specific toxicology-focused assays from the Tox21 database.}
 \end{figure}
 
-\subsection{Aggregating publicly accessible multimodal graph data}
-The graph data used in this study come from a new data resource for computational toxicology, named ComptoxAI.
-ComptoxAI includes a large graph database containing many entity and relationship types that pertain to translational mechanisms of toxicity, all of which are sourced from third-party public databases (including PubChem, Drugbank, the US EPA's Computational Toxicology Dashboard, NCBI Gene, and many others).
-We extracted the subgraph from ComptoxAI's graph database defined as all nodes representing chemicals, genes, and toxicological assays, as well as the complete set of edges linking nodes of those types.
-A metagraph describing the node and edge types in the subgraph is shown in [FIGURE XXX].
-
-Every prediction task in this study involves QSAR modeling between chemicals of toxicological interest and toxicology-related activity assays derived from the US EPA's Tox21 dataset.
-Each chemical and assay is represented as a node within the larger graph database, and all chemical--assay pairs are either linked by an edge (\textit{chemicalHasActiveAssay} or \textit{chemicalHasInactiveAssay}) or not linked by an edge (i.e., no data has been collected on the chemical with respect to the assay in question). 
+\section{Methods}
 
 \subsection{Obtaining toxicology assay data}
 We used the Tox21 dataset---which is a freely available resource produced collaboratively by the US National Institutes of Health, the US Food and Drug Administration, and the US Environmental Protection Agency---to obtain a set of candidate assays for classification and establish `ground truth' relationships between specific chemicals and those assays.
+Each assay is presented along with experimental screening results describing the response of the assay to exposure to specific chemicals of toxicological interest, which includes pharmaceutical drugs, small molecule metabolites, environmental toxicants and others.
+We removed all screening experiments with inconclusive or ambiguous results, as well as assays with very few (e.g., $<100$) active chemicals.
+
+\subsection{Aggregating publicly available multimodal graph data}
+The graph data used in this study come from a new data resource for computational toxicology, named ComptoxAI.
+ComptoxAI includes a large graph database containing many entity and relationship types that pertain to translational mechanisms of toxicity, all of which are sourced from third-party public databases (including PubChem, Drugbank, the US EPA's Computational Toxicology Dashboard, NCBI Gene, and many others).
+We extracted the subgraph from ComptoxAI's graph database defined as all nodes representing chemicals, genes, and toxicological assays, as well as the complete set of edges linking nodes of those types.
+The full graph database for ComptoxAI can be found at \url{https://comptox.ai}, and will be described in a separate, upcoming publication.
+
+\begin{figure}
+   \centering
+   \includegraphics[width=0.7\textwidth]{figures/figure1-1.pdf}
+   \caption{Metagraph describing the node types, node counts, and edge types in the heterogeneous graph. During implementation of the GNN, we also define corresponding inverse edges (e.g., assayTargetsGene $\to$ geneTargetedByAssay) to facilitate the message-passing paradigm of the GNN.}\label{fig:2}
+\end{figure}
+
+The 3 entity types that comprise the nodes of the extracted subgraph are \textit{chemicals}, \textit{assays}, and \textit{genes}.
+We sourced the chemicals from the US EPA's DSSTox database, and further filtered them so that each one is equivalent to a distinct compound in PubChem.
+We obtained genes from the NCBI Gene database, and assays from the Tox21 screening repository as described above.
+All edges in the graph were sourced from either the Hetionet database or from assay--chemical annotations in Tox21.
+A metagraph describing the node and edge types in the subgraph is shown in \textbf{Figure~\ref{fig:2}}.
 
 \subsection{Heterogeneous graph neural network}
 We constructed a heterogeneous graph convolutional neural network (GCNN) architecture for the graph ML experiments.
@@ -104,6 +115,10 @@ The procedure we use for generating these labels is as follows:
    \end{enumerate}
    \item Delete $a$ (and all edges incident to $a$) from the graph.
 \end{enumerate}
+
+\begin{algorithmic}
+   
+\end{algorithmic}
 The resulting graph $\mathcal{G}_a^\star$ is then used in a standard supervised learning task where the goal is to predict the labels on nodes corresponding to chemicals, which represent whether the assay is or is not activated in response to perturbation by that chemical.
 We use an 80\%/20\% train/test split on the labeled chemicals, optimize the GCNN's parameters using the Adam algorithm (a computationally efficient variant of stochastic gradient descent suitable for sparse gradients)~\cite{kingma2014adam}, and compute the error between predicted and true labels via cross entropy loss.
 
@@ -122,18 +137,18 @@ These were tuned using grid search, where the optimal hyperparameter set is defi
 \subsection{GNN node classification performance vs.\ baseline QSAR models}
 Of the 68 total assays in the Tox21 database, we retained 52 for analysis in the QSAR experiments.
 The remaining 16 assays were not used due to either a low number of active chemicals or underrepresentation of screened chemicals in the ComptoxAI graph database.
-Furthermore, we discarded compounds with inconclusive or ambiguous screening results.
+As mentioned above, we discarded compounds with inconclusive or ambiguous screening results.
 
 \begin{figure}
    \centering
    \includegraphics[width=\textwidth]{figures/figure2.pdf}
-   \caption{Overall performance metrics of the 3 QSAR model types on each of the Tox21 assays---a.)~Area Under the Receiver Operator Characteristic curve (AUROC) and b.)~F1 score. The mean AUROC is significantly higher for the GNN model than for either of the two baseline QSAR approaches. The differences in F1 scores are not statistically significant. It is worth noting that the GNN achieves poor F1 scores on assays with relatively few (e.g., $< 100$) ``active'' annotations in Tox21, which is consistent with known performance of neural networks on data with sparse labels.}
+   \caption{Overall performance metrics of the 3 QSAR model types on each of the Tox21 assays---a.)~Area Under the Receiver Operator Characteristic curve (AUROC) and b.)~F1 score. The mean AUROC is significantly higher for the GNN model than for either of the two baseline QSAR approaches. The differences in F1 scores are not statistically significant. The GNN achieves poor F1 scores on assays with relatively few (e.g., $< 100$) ``active'' annotations in Tox21, which is consistent with known performance of neural networks on data with sparse labels.}\label{fig:3}
 \end{figure}
 
 \begin{figure}
    \centering
    \includegraphics[width=\textwidth]{figures/figure3.pdf}
-   \caption{Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays: a.)~PXR agonism (\texttt{tox21-pxr-p1}) and b.)~HepG2 cell viability (\texttt{tox21-rt-viability-hepg2-p1}). In both cases, the area under the curve (AUC) is significantly higher for the GNN model than either the Random Forest or Gradient Boosting models. Cell viability assays---in particular---are notoriously challenging to predict computationally.}
+   \caption{Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays: a.)~PXR agonism (\texttt{tox21-pxr-p1}) and b.)~HepG2 cell viability (\texttt{tox21-rt-viability-hepg2-p1}). In both cases, the area under the curve (AUC) is significantly higher for the GNN model than either the Random Forest or Gradient Boosting models.}\label{fig:4}
 \end{figure}
 
 \subsection{Ablation analysis of graph components' influence on the trained predictive model}
@@ -141,12 +156,20 @@ Furthermore, we discarded compounds with inconclusive or ambiguous screening res
 \begin{figure}
    \centering
    \includegraphics[width=\textwidth]{figures/figure3.pdf}
-   \caption{Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays using different configurations of the GNN model. `GNN - full' is the complete model as described in \S\ref{methods-nc}. `GNN - no structure' omits the MACCS chemical descriptors and replaces them with node embeddings of the same dimensionality. `GNN - no gene' removes gene nodes and their incident edges from the network. `GNN - no assay' removes all assay nodes and incident edges, so predictions are made solely using chemicals, genes, the remaining edges, and the MACCS chemical descriptors as chemical node features. For both assays, the full model performs the best, while the model without assay nodes performs only marginally better than guessing labels at random.}
+   \caption{Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays using different configurations of the GNN model. `GNN - full' is the complete model as described in \S\ref{methods-nc}. `GNN - no structure' omits the MACCS chemical descriptors and replaces them with node embeddings of the same dimensionality. `GNN - no gene' removes gene nodes and their incident edges from the network. `GNN - no assay' removes all assay nodes and incident edges, so predictions are made solely using chemicals, genes, the remaining edges, and the MACCS chemical descriptors as chemical node features.}\label{fig:5}
 \end{figure}
 
-\subsection{Interpretability of trained GCNNs via assay embeddings}
-
 \section{Discussion}
+
+\subsection{GNNs versus traditional ML for QSAR modeling}
+The toxicology community largely agrees that QSAR underperforms on many tasks, and that new methodological advances are desperately needed.
+In this study, we demonstrate that GNNs significantly outperform the current gold-standard techniques in the field.
+Aside from the fact that neural networks can more easily adapt to nonlinear objectives than non-neural network models, this is likely a natural consequence of incorporating biomedical knowledge that goes beyond chemical structure characteristics.
+Gene interactions provide clues about how chemicals influence metabolic and signaling pathways \textit{in vivo}, and non-target assays (i.e., other assays in the graph aside from the one currently being predicted) may correlate with activity of the target assay.
+
+\subsection{Interpretability of GNNs in QSAR}
+
+\subsection{Future opportunities}
 
 \section{Conclusions}
 
@@ -160,14 +183,14 @@ Supplemental tables and figures are available on FigShare at [XXX].
 \section*{Acknowledgements}
 This work was made possible with support from US National Institutes of Health grants \texttt{R01-LM010098}, \texttt{R01-LM012601}, \texttt{R01-AI116794}, \texttt{UL1-TR001878}, \texttt{UC4-DK112217} (PI: Jason~Moore), \texttt{T32-ES019851}, and \texttt{P30-ES013508} (PI: Trevor~Penning).
 
-\bibliographystyle{ws-procs11x85}
-\bibliography{psb-gnn}
-
 \appendix{Graph convolutional network architecture}\label{GCNN}
 Some stuff here.
 
 \appendix{Node classification model}\label{NC}
 Some more stuff.
+
+\bibliographystyle{ws-procs11x85}
+\bibliography{psb-gnn}
 
 \end{document} 
 

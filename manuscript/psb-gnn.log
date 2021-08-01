@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  1 AUG 2021 01:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  1 AUG 2021 14:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -158,39 +158,47 @@ Package: ws-procs-thm 2014/01/20 WSPC Theorem Style
 \c@proposition=\count278
 \c@question=\count279
 \c@remark=\count280
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/algorithms/algorithmic.sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+\c@ALC@unique=\count281
+\c@ALC@line=\count282
+\c@ALC@rem=\count283
+\c@ALC@depth=\count284
+\ALC@tlm=\skip52
+\algorithmicindent=\skip53
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count281
+\l__kernel_color_stack_int=\count285
 \l__pdf_internal_box=\box50
 ) (/Users/jdr2160/projects/psb-gnn/manuscript/psb-gnn.aux)
 \openout1 = `psb-gnn.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
  (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count282
+\scratchcounter=\count286
 \scratchdimen=\dimen155
 \scratchbox=\box51
-\nofMPsegments=\count283
-\nofMParguments=\count284
+\nofMPsegments=\count287
+\nofMParguments=\count288
 \everyMPshowfont=\toks22
-\MPscratchCnt=\count285
+\MPscratchCnt=\count289
 \MPscratchDim=\dimen156
-\MPnumerator=\count286
-\makeMPintoPDFobject=\count287
+\MPnumerator=\count290
+\makeMPintoPDFobject=\count291
 \everyMPtoPDFconversion=\toks23
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -198,11 +206,11 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 8.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 9.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 8.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -211,37 +219,87 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <figures/figure1.pdf, id=12, 763.85374pt x 318.18875pt>
 File: figures/figure1.pdf Graphic file (type pdf)
 <use figures/figure1.pdf>
-Package pdftex.def Info: figures/figure1.pdf  used on input line 48.
+Package pdftex.def Info: figures/figure1.pdf  used on input line 46.
 (pdftex.def)             Requested size: 476.98244pt x 198.68782pt.
- [2 </Users/jdr2160/projects/psb-gnn/manuscript/figures/figure1.pdf>] [3] [4]
-<figures/figure2.pdf, id=137, 1156.32pt x 433.62pt>
+ [2 </Users/jdr2160/projects/psb-gnn/manuscript/figures/figure1.pdf>]
+<figures/figure1-1.pdf, id=127, 626.34pt x 288.07625pt>
+File: figures/figure1-1.pdf Graphic file (type pdf)
+<use figures/figure1-1.pdf>
+Package pdftex.def Info: figures/figure1-1.pdf  used on input line 65.
+(pdftex.def)             Requested size: 333.88625pt x 153.57199pt.
+
+
+LaTeX Warning: Reference `fig:2' on page  undefined on input line 73.
+
+[3 </Users/jdr2160/projects/psb-gnn/manuscript/figures/figure1-1.pdf>]
+
+LaTeX Warning: Citation `schlichtkrull2018modeling' on page  undefined on input line 85.
+
+
+LaTeX Warning: Reference `GCNN' on page  undefined on input line 89.
+
+
+/Users/jdr2160/projects/psb-gnn/manuscript/psb-gnn.tex:121: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.121 \end{algorithmic}
+                       
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Citation `kingma2014adam' on page  undefined on input line 123.
+
+[4]
+
+LaTeX Warning: Reference `NC' on page  undefined on input line 128.
+
+<figures/figure2.pdf, id=153, 1156.32pt x 433.62pt>
 File: figures/figure2.pdf Graphic file (type pdf)
 <use figures/figure2.pdf>
-Package pdftex.def Info: figures/figure2.pdf  used on input line 129.
+Package pdftex.def Info: figures/figure2.pdf  used on input line 144.
 (pdftex.def)             Requested size: 476.98244pt x 178.86383pt.
-<figures/figure3.pdf, id=138, 1734.48pt x 433.62pt>
+<figures/figure3.pdf, id=154, 1734.48pt x 433.62pt>
 File: figures/figure3.pdf Graphic file (type pdf)
 <use figures/figure3.pdf>
-Package pdftex.def Info: figures/figure3.pdf  used on input line 135.
+Package pdftex.def Info: figures/figure3.pdf  used on input line 150.
 (pdftex.def)             Requested size: 476.98244pt x 119.24255pt.
 File: figures/figure3.pdf Graphic file (type pdf)
 <use figures/figure3.pdf>
-Package pdftex.def Info: figures/figure3.pdf  used on input line 143.
+Package pdftex.def Info: figures/figure3.pdf  used on input line 158.
 (pdftex.def)             Requested size: 476.98244pt x 119.24255pt.
- [5 </Users/jdr2160/projects/psb-gnn/manuscript/figures/figure2.pdf> </Users/jdr2160/projects/psb-gnn/manuscript/figures/figure3.pdf>] (/Users/jdr2160/projects/psb-gnn/manuscript/psb-gnn.bbl [6]) [7] (/Users/jdr2160/projects/psb-gnn/manuscript/psb-gnn.aux) ) 
+
+LaTeX Warning: Reference `methods-nc' on page  undefined on input line 159.
+
+
+LaTeX Warning: Reference `methods-nc' on page  undefined on input line 159.
+
+[5 </Users/jdr2160/projects/psb-gnn/manuscript/figures/figure2.pdf>] [6 </Users/jdr2160/projects/psb-gnn/manuscript/figures/figure3.pdf>]
+No file psb-gnn.bbl.
+[7] (/Users/jdr2160/projects/psb-gnn/manuscript/psb-gnn.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2975 strings out of 480608
- 38093 string characters out of 5903631
- 278319 words of memory out of 5000000
- 18833 multiletter control sequences out of 15000+600000
+ 3120 strings out of 480608
+ 39780 string characters out of 5903631
+ 281467 words of memory out of 5000000
+ 18975 multiletter control sequences out of 15000+600000
  543359 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 46i,6n,34p,925b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on /Users/jdr2160/projects/psb-gnn/manuscript/psb-gnn.pdf (7 pages, 996512 bytes).
+ 46i,5n,34p,908b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on /Users/jdr2160/projects/psb-gnn/manuscript/psb-gnn.pdf (7 pages, 1051401 bytes).
 PDF statistics:
- 221 PDF objects out of 1000 (max. 8388607)
- 148 compressed objects within 2 object streams
+ 241 PDF objects out of 1000 (max. 8388607)
+ 160 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
