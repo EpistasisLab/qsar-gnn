@@ -1,21 +1,26 @@
 \relax 
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{}\protected@file@percent }
-\newlabel{aba:sec1}{{1}{}}
+\newlabel{introduction}{{1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Methods}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Schematic overview of the graph machine learning approach used in this study. We build a toxicology-focused graph database (named ComptoxAI) using data aggregated from many public databases, and extract a subgraph to be used for QSAR analysis (containing chemicals, assays, and genes). We then train and evaluate a graph convolutional neural network on the heterogeneous graph for predicting whether or not a chemical activates specific toxicology-focused assays from the Tox21 database.}}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Aggregating publicly accessible multimodal graph data}{}\protected@file@percent }
 \citation{schlichtkrull2018modeling}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Obtaining toxicology assay data}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Heterogeneous graph neural network}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Node classification model}{}\protected@file@percent }
 \citation{kingma2014adam}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Node classification model}{}\protected@file@percent }
+\newlabel{methods-nc}{{2.3.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Baseline QSAR classifiers}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Results}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}GCNN performance on node classification and comparison to baseline QSAR models}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}GNN node classification performance vs.\ baseline QSAR models}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Overall performance metrics of the 3 QSAR model types on each of the Tox21 assays---a.)\nobreakspace  {}Area Under the Receiver Operator Characteristic curve (AUROC) and b.)\nobreakspace  {}F1 score. The mean AUROC is significantly higher for the GNN model than for either of the two baseline QSAR approaches. The differences in F1 scores are not statistically significant. It is worth noting that the GNN achieves poor F1 scores on assays with relatively few (e.g., $< 100$) ``active'' annotations in Tox21, which is consistent with known performance of neural networks on data with sparse labels.}}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays: a.)\nobreakspace  {}PXR agonism (\texttt  {tox21-pxr-p1}) and b.)\nobreakspace  {}HepG2 cell viability (\texttt  {tox21-rt-viability-hepg2-p1}). In both cases, the area under the curve (AUC) is significantly higher for the GNN model than either the Random Forest or Gradient Boosting models. Cell viability assays---in particular---are notoriously challenging to predict computationally.}}{}\protected@file@percent }
 \bibstyle{ws-procs11x85}
 \bibdata{psb-gnn}
 \bibcite{schlichtkrull2018modeling}{1}
 \bibcite{kingma2014adam}{2}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Ablation analysis of graph components' influence on the trained predictive model}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays using different configurations of the GNN model. `GNN - full' is the complete model as described in \S  2.3.1\hbox {}. `GNN - no structure' omits the MACCS chemical descriptors and replaces them with node embeddings of the same dimensionality. `GNN - no gene' removes gene nodes and their incident edges from the network. `GNN - no assay' removes all assay nodes and incident edges, so predictions are made solely using chemicals, genes, the remaining edges, and the MACCS chemical descriptors as chemical node features. For both assays, the full model performs the best, while the model without assay nodes performs only marginally better than guessing labels at random.}}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Interpretability of trained GCNNs via assay embeddings}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{}\protected@file@percent }
