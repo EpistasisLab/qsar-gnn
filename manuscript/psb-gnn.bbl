@@ -1,7 +1,12 @@
 \begin{thebibliography}{1}
 
-\bibitem{hamilton2017inductive}
-W.~L. Hamilton, R.~Ying and J.~Leskovec, Inductive representation learning on
-  large graphs, 1025  (2017).
+\bibitem{schlichtkrull2018modeling}
+M.~Schlichtkrull, T.~N. Kipf, P.~Bloem, R.~Van Den~Berg, I.~Titov and
+  M.~Welling, Modeling relational data with graph convolutional networks, 593
+  (2018).
+
+\bibitem{kingma2014adam}
+D.~P. Kingma and J.~Ba, Adam: A method for stochastic optimization, {\em arXiv
+  preprint arXiv:1412.6980}   (2014).
 
 \end{thebibliography}
