@@ -57,3 +57,5 @@ assay_index	node_id	acc	f1	pos_ratio	assay_name
 56	3504	0.9612	0.2059	0.044	tox21-tshr-agonist-p1
 57	3549	0.9755	0.7241	0.053	tox21-er-bla-antagonist-p1
 58	3586	0.9118	0.615	0.129	tox21-car-agonist-p1
+
+

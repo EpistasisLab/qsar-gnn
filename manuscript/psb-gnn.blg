@@ -1,51 +1,52 @@
-This is BibTeX, Version 0.99d (TeX Live 2020)
+This is BibTeX, Version 0.99d (TeX Live 2020/W32TeX)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: psb-gnn.aux
 The style file: ws-procs11x85.bst
 Database file #1: psb-gnn.bib
 <ws-procs11x85.bst>
 World Scientific's Bibliography Style File for Proceedings
-Warning--empty title in hamilton2017inductive
-Warning--empty volume in hamilton2017inductive
-You've used 1 entry,
+Warning--empty title in schlichtkrull2018modeling
+Warning--empty volume in schlichtkrull2018modeling
+Warning--empty volume in kingma2014adam
+You've used 2 entries,
             2825 wiz_defined-function locations,
-            653 strings with 5082 characters,
-and the built_in function-call counts, 327 in all, are:
-= -- 35
-> -- 11
+            659 strings with 5230 characters,
+and the built_in function-call counts, 476 in all, are:
+= -- 40
+> -- 28
 < -- 0
-+ -- 4
-- -- 3
-* -- 23
-:= -- 49
-add.period$ -- 1
-call.type$ -- 1
-change.case$ -- 1
++ -- 10
+- -- 8
+* -- 41
+:= -- 79
+add.period$ -- 2
+call.type$ -- 2
+change.case$ -- 2
 chr.to.int$ -- 0
-cite$ -- 3
-duplicate$ -- 16
-empty$ -- 20
-format.name$ -- 3
-if$ -- 77
+cite$ -- 5
+duplicate$ -- 21
+empty$ -- 33
+format.name$ -- 8
+if$ -- 105
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 6
-num.names$ -- 1
-pop$ -- 2
+int.to.str$ -- 2
+missing$ -- 2
+newline$ -- 9
+num.names$ -- 2
+pop$ -- 4
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 17
+skip$ -- 16
 stack$ -- 0
-substring$ -- 22
-swap$ -- 10
+substring$ -- 17
+swap$ -- 9
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 2
 type$ -- 0
-warning$ -- 2
-while$ -- 3
-width$ -- 2
-write$ -- 10
-(There were 2 warnings)
+warning$ -- 3
+while$ -- 4
+width$ -- 3
+write$ -- 18
+(There were 3 warnings)
