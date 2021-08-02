@@ -51,11 +51,28 @@ G.~R. Brown, V.~Hem, K.~S. Katz, M.~Ovetsky, C.~Wallin, O.~Ermolaeva,
   gene-centered information resource at ncbi, {\em Nucleic acids research} {\bf
   43}, D36  (2015).
 
+\bibitem{durant2002reoptimization}
+J.~L. Durant, B.~A. Leland, D.~R. Henry and J.~G. Nourse, Reoptimization of mdl
+  keys for use in drug discovery, {\em Journal of chemical information and
+  computer sciences} {\bf 42}, 1273  (2002).
+
 \bibitem{himmelstein2017systematic}
 D.~S. Himmelstein, A.~Lizee, C.~Hessler, L.~Brueggeman, S.~L. Chen, D.~Hadley,
   A.~Green, P.~Khankhanian and S.~E. Baranzini, Systematic integration of
   biomedical knowledge prioritizes drugs for repurposing, {\em Elife} {\bf 6},
   p. e26726  (2017).
+
+\bibitem{kipf2016semi}
+T.~N. Kipf and M.~Welling, Semi-supervised classification with graph
+  convolutional networks, {\em arXiv preprint arXiv:1609.02907}   (2016).
+
+\bibitem{chen2019multi}
+Z.-M. Chen, X.-S. Wei, P.~Wang and Y.~Guo, Multi-label image recognition with
+  graph convolutional networks, 5177  (2019).
+
+\bibitem{zhang2019heterogeneous}
+C.~Zhang, D.~Song, C.~Huang, A.~Swami and N.~V. Chawla, Heterogeneous graph
+  neural network, 793  (2019).
 
 \bibitem{schlichtkrull2018modeling}
 M.~Schlichtkrull, T.~N. Kipf, P.~Bloem, R.~Van Den~Berg, I.~Titov and
@@ -66,11 +83,40 @@ M.~Schlichtkrull, T.~N. Kipf, P.~Bloem, R.~Van Den~Berg, I.~Titov and
 D.~P. Kingma and J.~Ba, Adam: A method for stochastic optimization, {\em arXiv
   preprint arXiv:1412.6980}   (2014).
 
+\bibitem{svetnik2003random}
+V.~Svetnik, A.~Liaw, C.~Tong, J.~C. Culberson, R.~P. Sheridan and B.~P.
+  Feuston, Random forest: a classification and regression tool for compound
+  classification and qsar modeling, {\em Journal of chemical information and
+  computer sciences} {\bf 43}, 1947  (2003).
+
+\bibitem{sheridan2016extreme}
+R.~P. Sheridan, W.~M. Wang, A.~Liaw, J.~Ma and E.~M. Gifford, Extreme gradient
+  boosting as a method for quantitative structure--activity relationships, {\em
+  Journal of chemical information and modeling} {\bf 56}, 2353  (2016).
+
+\bibitem{hornik1989multilayer}
+K.~Hornik, M.~Stinchcombe and H.~White, Multilayer feedforward networks are
+  universal approximators, {\em Neural networks} {\bf 2}, 359  (1989).
+
+\bibitem{matveieva2021benchmarks}
+M.~Matveieva and P.~Polishchuk, Benchmarks for interpretation of qsar models,
+  {\em Journal of cheminformatics} {\bf 13}, 1  (2021).
+
+\bibitem{wu2017smoothened}
+C.~Wu, S.~Hu, J.~Cheng, G.~Wang and K.~Tao, Smoothened antagonist gdc-0449
+  (vismodegib) inhibits proliferation and triggers apoptosis in colon cancer
+  cell lines, {\em Experimental and therapeutic medicine} {\bf 13}, 2529
+  (2017).
+
 \bibitem{cronin2019identification}
 M.~T. Cronin, A.-N. Richarz and T.~W. Schultz, Identification and description
   of the uncertainty, variability, bias and influence in quantitative
   structure-activity relationships (qsars) for toxicity prediction, {\em
   Regulatory Toxicology and Pharmacology} {\bf 106}, 90  (2019).
+
+\bibitem{shoichet2004virtual}
+B.~K. Shoichet, Virtual screening of chemical libraries, {\em Nature} {\bf
+  432}, 862  (2004).
 
 \bibitem{xie2020heterogeneous}
 Y.~Xie, H.~Xu, J.~Li, C.~Yang and K.~Gao, Heterogeneous graph neural networks
@@ -80,5 +126,9 @@ Y.~Xie, H.~Xu, J.~Li, C.~Yang and K.~Gao, Heterogeneous graph neural networks
 \bibitem{nt2019revisiting}
 H.~Nt and T.~Maehara, Revisiting graph neural networks: All we have is low-pass
   filters, {\em arXiv preprint arXiv:1905.09550}   (2019).
+
+\bibitem{hamilton2017inductive}
+W.~L. Hamilton, R.~Ying and J.~Leskovec, Inductive representation learning on
+  large graphs, 1025  (2017).
 
 \end{thebibliography}

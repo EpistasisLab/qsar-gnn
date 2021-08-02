@@ -5,49 +5,56 @@ The style file: ws-procs11x85.bst
 Database file #1: psb-gnn.bib
 <ws-procs11x85.bst>
 World Scientific's Bibliography Style File for Proceedings
+Warning--empty volume in kipf2016semi
+Warning--empty title in chen2019multi
+Warning--empty volume in chen2019multi
+Warning--empty title in zhang2019heterogeneous
+Warning--empty volume in zhang2019heterogeneous
 Warning--empty title in schlichtkrull2018modeling
 Warning--empty volume in schlichtkrull2018modeling
 Warning--empty volume in kingma2014adam
 Warning--empty volume in nt2019revisiting
-You've used 16 entries,
+Warning--empty title in hamilton2017inductive
+Warning--empty volume in hamilton2017inductive
+You've used 27 entries,
             2825 wiz_defined-function locations,
-            757 strings with 8654 characters,
-and the built_in function-call counts, 4500 in all, are:
-= -- 420
-> -- 261
+            820 strings with 10900 characters,
+and the built_in function-call counts, 7647 in all, are:
+= -- 756
+> -- 402
 < -- 2
-+ -- 93
-- -- 77
-* -- 375
-:= -- 648
-add.period$ -- 16
-call.type$ -- 16
-change.case$ -- 16
++ -- 144
+- -- 117
+* -- 620
+:= -- 1070
+add.period$ -- 27
+call.type$ -- 27
+change.case$ -- 27
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 232
-empty$ -- 308
-format.name$ -- 77
-if$ -- 1064
+cite$ -- 38
+duplicate$ -- 401
+empty$ -- 520
+format.name$ -- 117
+if$ -- 1831
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 15
-newline$ -- 51
-num.names$ -- 16
-pop$ -- 27
+int.to.str$ -- 27
+missing$ -- 26
+newline$ -- 84
+num.names$ -- 27
+pop$ -- 42
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 198
+skip$ -- 353
 stack$ -- 0
-substring$ -- 206
-swap$ -- 138
+substring$ -- 396
+swap$ -- 241
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 2
 type$ -- 0
-warning$ -- 4
-while$ -- 40
-width$ -- 18
-write$ -- 141
-(There were 4 warnings)
+warning$ -- 11
+while$ -- 71
+width$ -- 29
+write$ -- 236
+(There were 11 warnings)
