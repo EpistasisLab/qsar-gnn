@@ -1,9 +1,18 @@
 \relax 
+\citation{raies2016silico}
+\citation{tice2013improving,roncaglioni2013silico}
+\citation{dudek2006computational}
+\citation{tropsha2010best,hansch1964p}
+\citation{cherkasov2014qsar,maggiora2006outliers}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{}\protected@file@percent }
 \newlabel{introduction}{{1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Schematic overview of the graph machine learning approach used in this study. We build a toxicology-focused graph database (named ComptoxAI) using data aggregated from many public databases, and extract a subgraph for QSAR analysis containing chemicals, assays, and genes. We then train and evaluate a graph neural network that predicts whether or not a chemical activates specific toxicology-focused assays from the Tox21 database.}}{}\protected@file@percent }
+\citation{tice2013improving}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the graph machine learning approach used in this study. We build a toxicology-focused graph database (named ComptoxAI) using data aggregated from diverse public databases, and extract a subgraph for QSAR analysis containing chemicals, assays, and genes. We then train and evaluate a graph neural network that predicts whether or not a chemical activates specific toxicology-focused assays from the Tox21 database.}}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2}Methods}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Obtaining toxicology assay data}{}\protected@file@percent }
+\citation{williams2017comptox}
+\citation{brown2015gene}
+\citation{himmelstein2017systematic}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Aggregating publicly available multimodal graph data}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Metagraph describing the node types, node counts, and edge types in the heterogeneous graph. During implementation of the GNN, we also define corresponding inverse edges (e.g., assayTargetsGene $\leftrightarrow $ geneTargetedByAssay) to facilitate the message-passing paradigm of the GNN.}}{}\protected@file@percent }
 \newlabel{fig:2}{{2}{}}
@@ -26,22 +35,33 @@
 \newlabel{fig:5}{{5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}GNNs versus traditional ML for QSAR modeling}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Interpretability of GNNs in QSAR}{}\protected@file@percent }
 \citation{cronin2019identification}
 \citation{xie2020heterogeneous,nt2019revisiting}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Interpretability of GNNs in QSAR}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Sources of bias and their effects on QSAR for toxicity prediction}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {6}Code availability}{}\protected@file@percent }
-\bibstyle{ws-procs11x85}
-\bibdata{psb-gnn}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Supplemental Materials}{}\protected@file@percent }
 \newlabel{GCNN}{{A}{}}
 \newlabel{eq:a1}{{A.1}{}}
+\bibstyle{ws-procs11x85}
+\bibdata{psb-gnn}
+\bibcite{raies2016silico}{1}
+\bibcite{tice2013improving}{2}
+\bibcite{roncaglioni2013silico}{3}
+\bibcite{dudek2006computational}{4}
+\bibcite{tropsha2010best}{5}
+\bibcite{hansch1964p}{6}
+\bibcite{cherkasov2014qsar}{7}
+\bibcite{maggiora2006outliers}{8}
+\bibcite{williams2017comptox}{9}
+\bibcite{brown2015gene}{10}
+\bibcite{himmelstein2017systematic}{11}
 \newlabel{NC}{{B}{}}
 \newlabel{eq:b1}{{B.1}{}}
-\bibcite{schlichtkrull2018modeling}{1}
-\bibcite{kingma2014adam}{2}
-\bibcite{cronin2019identification}{3}
-\bibcite{xie2020heterogeneous}{4}
-\bibcite{nt2019revisiting}{5}
+\bibcite{schlichtkrull2018modeling}{12}
+\bibcite{kingma2014adam}{13}
+\bibcite{cronin2019identification}{14}
+\bibcite{xie2020heterogeneous}{15}
+\bibcite{nt2019revisiting}{16}
 \newlabel{eof}{{B}{}}

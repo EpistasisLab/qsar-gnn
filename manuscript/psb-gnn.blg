@@ -9,45 +9,45 @@ Warning--empty title in schlichtkrull2018modeling
 Warning--empty volume in schlichtkrull2018modeling
 Warning--empty volume in kingma2014adam
 Warning--empty volume in nt2019revisiting
-You've used 5 entries,
+You've used 16 entries,
             2825 wiz_defined-function locations,
-            678 strings with 5887 characters,
-and the built_in function-call counts, 1190 in all, are:
-= -- 105
-> -- 64
-< -- 1
-+ -- 23
-- -- 18
-* -- 100
-:= -- 178
-add.period$ -- 5
-call.type$ -- 5
-change.case$ -- 5
+            757 strings with 8654 characters,
+and the built_in function-call counts, 4500 in all, are:
+= -- 420
+> -- 261
+< -- 2
++ -- 93
+- -- 77
+* -- 375
+:= -- 648
+add.period$ -- 16
+call.type$ -- 16
+change.case$ -- 16
 chr.to.int$ -- 0
-cite$ -- 9
-duplicate$ -- 63
-empty$ -- 88
-format.name$ -- 18
-if$ -- 276
+cite$ -- 20
+duplicate$ -- 232
+empty$ -- 308
+format.name$ -- 77
+if$ -- 1064
 int.to.chr$ -- 0
-int.to.str$ -- 5
-missing$ -- 5
-newline$ -- 18
-num.names$ -- 5
-pop$ -- 9
+int.to.str$ -- 16
+missing$ -- 15
+newline$ -- 51
+num.names$ -- 16
+pop$ -- 27
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 48
+skip$ -- 198
 stack$ -- 0
-substring$ -- 41
-swap$ -- 33
-text.length$ -- 1
+substring$ -- 206
+swap$ -- 138
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 2
 type$ -- 0
 warning$ -- 4
-while$ -- 10
-width$ -- 6
-write$ -- 44
+while$ -- 40
+width$ -- 18
+write$ -- 141
 (There were 4 warnings)
