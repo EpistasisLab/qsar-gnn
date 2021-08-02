@@ -1,7 +1,7 @@
 %\documentclass[wsdraft]{ws-procs11x85}
 
 \documentclass{ws-procs11x85}
-\usepackage{ws-procs-thm}           % comment this line when `amsthm / theorem / ntheorem` package is used
+\usepackage{ws-procs-thm}
 \usepackage{algorithm,algpseudocode}
 
 \begin{document}
@@ -98,14 +98,14 @@ The procedure we use for labeling the graph is shown in \textbf{Algorithm~\ref{a
 \begin{algorithm}
 \caption{Labeled heterogeneous graph construction for toxicity assay QSAR model.}\label{alg:1}
 \begin{algorithmic}
-\State{Let $\mathcal{G}$ be a heterogeneous graph for QSAR, $a \in \mathcal{A}$ be an assay of interest, and $l(c)$ denote an activity label for chemical $c\in\mathcal{C}$ w.r.t.~assay $a$.}
+\State{Let $\mathcal{G}$ be a heterogeneous graph for QSAR, $a \in \mathcal{A}$ be an assay of interest, and $\ell(c)$ denote an activity label for chemical $c\in\mathcal{C}$ w.r.t.~assay $a$.}
 \For{each chemical $c \in \mathcal{C}$}
    \If{$\exists$ an edge $(c,r,a)$ s.t.~the edge type of $r$ is $\langle \mathtt{chemicalHasActiveAssay} \rangle$}
-      \State{$l(c) \gets 1$}
+      \State{$\ell(c) \gets 1$}
    \ElsIf{$\exists$ an edge $(c,r,a)$ s.t.~the edge type of $r$ is $\langle \mathtt{chemicalHasInactiveAssay} \rangle$}
-      \State{$l(c) \gets 0$}
+      \State{$\ell(c) \gets 0$}
    \Else
-      \State{$l(c) \gets$ is undefined}\Comment{No label available for node $c$}
+      \State{$\ell(c) \gets$ is undefined}\Comment{No label available for node $c$}
    \EndIf
 \EndFor
 \State{$\mathcal{G}_a^\star \gets \mathcal{G} \setminus a$}\Comment{Delete node $a$ from the graph to prevent information leakage}
@@ -222,22 +222,34 @@ Supplemental tables and figures are available on FigShare at [XXX].
 This work was made possible with support from US National Institutes of Health grants \texttt{R01-LM010098}, \texttt{R01-LM012601}, \texttt{R01-AI116794}, \texttt{UL1-TR001878}, \texttt{UC4-DK112217} (PI: Jason~Moore), \texttt{T32-ES019851}, and \texttt{P30-ES013508} (PI: Trevor~Penning).
 
 \appendix{Graph convolutional network architecture}\label{GCNN}
-Our GCNN implementation uses a message-passing strategy that combines aspects of the GraphSAGE and R-GCN architectures.
+Our GCNN implementation uses a message-passing paradigm that combines aspects of the GraphSAGE and R-GCN architectures.
+Let $G = (\mathcal{V}, \mathcal{E}, \mathcal{R})$ be a heterogeneous graph consisting of nodes $v_i \in \mathcal{V}$, edges $(v_i, r, v_j)\in\mathcal{E}$, and a set of \textit{edge types} $r\in\mathcal{R}$.
+Each edge is labeled with exactly one edge type.
+All chemical nodes (represented below as $h^0$) are represented by a bit string of length 166 corresponding to the chemical's MACCS fingerprint, while all other nodes (assays and genes) are represented by a single decimal-valued `embedding feature' that is learned during optimization.
+The magnitude of an assay or gene's embedding is roughly equivalent that node's importance in the network, and can be introspected for model interpretation.
 
+Each layer of the network is defined as an edge-wise aggregation of adjacent nodes:
+\begin{equation}
+   h_i^{(l)} = \sigma \left(\sum_{r\in\mathcal{R}}\rho_{j\in\mathcal{N}_i^r}\left(W_r^{(l-1)} h_j^{(l-1)} + W_0^{(l-1)} h_i^{(l-1)}\right) \right).\label{eq:a1}
+\end{equation}
+where $h_i^l$ is the hidden representation of node $i$ in layer $l$, $\mathcal{N}(i)$ is the set of immediate neighbors of node $i$, and $\sigma$ is a nonlinear activation function (either softmax or leaky ReLU, as explained in \textbf{Appendix~\ref{NC}}).
+$\rho$ can be any differential `reducer' function that combines messages passed from incident edges of a single type; in the case of this study we use summation.
+Since our graph contains relatively few edge types, regularization of the weight matrices $W$ is not needed.
 
 \appendix{Node classification model}\label{NC}
-For classifying chemicals as active or inactive with regards to an assay of interest, we stack 2 GCN layers in the form given by [XXX], with a leaky ReLU activation between the two layers and softmax applied to the second layer's output.
+For classifying chemicals as active or inactive with regards to an assay of interest, we stack 2 GCN layers in the form given by (\ref{eq:a1}), with a leaky ReLU activation between the two layers and softmax applied to the second layer's output.
 Since we only classify chemical nodes, we ignore outputs for all other node types (and for chemicals with undefined labels); labels are generated via \textbf{Algorithm~\ref{alg:1}}
 We train the network by minimizing binary cross-entropy between the network's softmax outputs and true activity values:
 \begin{equation}
-   \mathcal{L} = -\sum_{i\in\mathcal{Y}}\sum_{k=1}^K t_{ik} \ln h_{ik}^L
+   \mathcal{L} = -\sum_{i\in\mathcal{Y}}
+   \ell(h_i^{(0)}) \cdot\ln h_{i}^{(2)} +
+   (1 - \ell(h_i^{(0)})) \cdot\ln (1 - h_{i}^{(2)}).\label{eq:b1}
 \end{equation}
+where $\mathcal{Y}$ is the set of all labeled nodes, $\ell(h_i^{(0)})$ is the true label of node $i$, and $h_i^{(2)}$ is the final layer output of node $i$.
 
-The relatively shallow architecture of the network allows us to optimize the model using the Adam algorithm applied to the entire training data set, but the model can be easily adapted to mini-batch training when appropriate or necessary.
+The relatively shallow architecture of the network allows us to optimize the model using the Adam algorithm applied to the entire training data set, but the model can be adapted to mini-batch training when appropriate or necessary.
 
 \bibliographystyle{ws-procs11x85}
 \bibliography{psb-gnn}
 
 \end{document} 
-
-%%% \renewcommand\bibname{References\\ {\normalfont\it References can be typed in your preferred bibliography style.}}
