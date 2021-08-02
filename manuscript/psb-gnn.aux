@@ -22,18 +22,23 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Receiver operating characteristic (ROC) curves for two selected Tox21 assays: a.)\nobreakspace  {}PXR agonism (\texttt  {tox21-pxr-p1}) and b.)\nobreakspace  {}HepG2 cell viability (\texttt  {tox21-rt-viability-hepg2-p1}). In both cases, the area under the curve (AUC) is significantly higher for the GNN model than either the Random Forest or Gradient Boosting models.}}{}\protected@file@percent }
 \newlabel{fig:4}{{4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Ablation analysis of graph components' influence on the trained predictive model}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays using different configurations of the GNN model. `GNN - full' is the complete model as described in \S  2.3.1\hbox {}. `GNN - no structure' omits the MACCS chemical descriptors and replaces them with node embeddings of the same dimensionality. `GNN - no gene' removes gene nodes and their incident edges from the network. `GNN - no assay' removes all assay nodes and incident edges, so predictions are made solely using chemicals, genes, the remaining edges, and the MACCS chemical descriptors as chemical node features.}}{}\protected@file@percent }
+\newlabel{fig:5}{{5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}GNNs versus traditional ML for QSAR modeling}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Interpretability of GNNs in QSAR}{}\protected@file@percent }
+\citation{cronin2019identification}
+\citation{xie2020heterogeneous,nt2019revisiting}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Sources of bias and their effects on QSAR for toxicity prediction}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Code availability}{}\protected@file@percent }
 \bibstyle{ws-procs11x85}
 \bibdata{psb-gnn}
 \bibcite{schlichtkrull2018modeling}{1}
 \bibcite{kingma2014adam}{2}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays using different configurations of the GNN model. `GNN - full' is the complete model as described in \S  2.3.1\hbox {}. `GNN - no structure' omits the MACCS chemical descriptors and replaces them with node embeddings of the same dimensionality. `GNN - no gene' removes gene nodes and their incident edges from the network. `GNN - no assay' removes all assay nodes and incident edges, so predictions are made solely using chemicals, genes, the remaining edges, and the MACCS chemical descriptors as chemical node features.}}{}\protected@file@percent }
-\newlabel{fig:5}{{5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Interpretability of GNNs in QSAR}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Future opportunities}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Code availability}{}\protected@file@percent }
+\bibcite{cronin2019identification}{3}
+\bibcite{xie2020heterogeneous}{4}
+\bibcite{nt2019revisiting}{5}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Supplemental Materials}{}\protected@file@percent }
 \newlabel{GCNN}{{A}{}}
 \newlabel{NC}{{B}{}}

@@ -9,4 +9,19 @@ M.~Schlichtkrull, T.~N. Kipf, P.~Bloem, R.~Van Den~Berg, I.~Titov and
 D.~P. Kingma and J.~Ba, Adam: A method for stochastic optimization, {\em arXiv
   preprint arXiv:1412.6980}   (2014).
 
+\bibitem{cronin2019identification}
+M.~T. Cronin, A.-N. Richarz and T.~W. Schultz, Identification and description
+  of the uncertainty, variability, bias and influence in quantitative
+  structure-activity relationships (qsars) for toxicity prediction, {\em
+  Regulatory Toxicology and Pharmacology} {\bf 106}, 90  (2019).
+
+\bibitem{xie2020heterogeneous}
+Y.~Xie, H.~Xu, J.~Li, C.~Yang and K.~Gao, Heterogeneous graph neural networks
+  for noisy few-shot relation classification, {\em Knowledge-Based Systems}
+  {\bf 194}, p. 105548  (2020).
+
+\bibitem{nt2019revisiting}
+H.~Nt and T.~Maehara, Revisiting graph neural networks: All we have is low-pass
+  filters, {\em arXiv preprint arXiv:1905.09550}   (2019).
+
 \end{thebibliography}

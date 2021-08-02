@@ -90,7 +90,7 @@ A formal description of the GNN is given in \textbf{Appendix~\ref{GCNN}}.
 
 \subsubsection{Node classification}\label{methods-nc}
 Given the GCNN architecture described above, we construct a heterogeneous graph where chemicals are labeled according to whether they do (1) or do not (2) activate an assay of interet.
-Although we remove the node representing the assay of interest\footnote{To prevent information leakage}, all other Tox21 assays are included in the graph, and edges between chemicals and the other assays can therefore be used to improve the inferential capacity of the model beyond those of the baseline QSAR models, which only have access to chemical structure.
+Although we remove the node representing the assay of interest\footnote{To prevent information leakage, since conectivity to the assay would perfectly predict the node labels.}, all other Tox21 assays are included in the graph, and edges between chemicals and the other assays can therefore be used to improve the inferential capacity of the model beyond those of the baseline QSAR models, which only have access to chemical structure.
 Similarly, interactions involving genes further increase the information available to the model.
 Finally, the same MACCS chemical descriptors used to train the baseline QSAR models (see below) are included as node features.
 The procedure we use for labeling the graph is shown in \textbf{Algorithm~\ref{alg:1}}.
@@ -169,6 +169,11 @@ For both of the assays, we re-trained the model after removing specific componen
    \item MACCS fingerprints for chemical nodes (replacing them with dummy variables so the structure of the network would remain the same).
 \end{itemize}
 The results of these experiments are shown in \textbf{Figure~\ref{fig:4}}.
+In both assays, the full GNN model performed best, although only modestly better (in terms of AUROC) than the versions without MACCS fingerprints or gene nodes.
+However, the performance of the GNN drops substantially---barely better than guessing labels at random (which would correspond to an AUROC of 0.50)---when assay nodes are removed from the graph.
+In other words, much of the inferential capacity of the GNN models are conferred by chemicals' connections to assays other than the one for which activity is being predicted.
+Similarly, MACCS fingerprints are not---on their own---enough for the GNN to attain equal performance to the baseline QSAR models, which only use MACCS fingerprints as predictive features.
+Therefore, although the GNN achieves significantly better performance than the two baseline models, it is only able to do so with the added context of network relationships between chemicals, assays, and (to a lesser degree) genes.
 
 \begin{figure}
    \centering
@@ -185,11 +190,27 @@ Aside from the fact that neural networks can more easily adapt to nonlinear obje
 Gene interactions provide clues about how chemicals influence metabolic and signaling pathways \textit{in vivo}, and non-target assays (i.e., other assays in the graph aside from the one currently being predicted) may correlate with activity of the target assay.
 
 \subsection{Interpretability of GNNs in QSAR}
+Chemical fingerprints---such as MACCS fingerprints, which we use in this study---provide a valuable method for representing chemicals that is suitable for machine learning.
+However, models based on fingerprints are challenging to interpret.
+Although each field of a MACCS fingerprint corresponds to meaningful chemical properties (such as whether the chemical contains multiple aromatic rings, or at least one nitrogen atom), the fingerprint is largely inscrutable in QSAR applications, since biological activity is the result of many higher-order interactions between the chemical of interest and biomolecules.
 
-\subsection{Future opportunities}
+When we use a GNN model, the graph data represents easily interpretable relationships between entity types that mediate toxic responses to chemicals.
+Although not implemented in this particular study, a GNN architecture known as a \textit{graph attention network} explicitly highlights portions of a graph that are influential in predictions, providing a logical next step for continuing this body of work on GNNs in QSAR modeling.
+Other, simpler approaches also provide avenues for exploring interpretability, such as visualizing the edge weights for edges starting at assay nodes in the trained GNN.
+Often, the sheer size of graphs make this approach intractable, but since our graph only contains 52 assays it is relatively straightforward to inspect their weights. We provide all assay weights for the two above-mentioned assays in \textbf{Supplemental Materials}.
 
+\subsection{Sources of bias and their effects on QSAR for toxicity prediction}
+Like any meta-analysis technique, QSAR is subject to multiple sources of bias that can be introduced at several levels, not the least of which is in the original experiments used to generate toxic activity annotations for training data samples.
+This was a greater issue historically, when known activities for chemicals were compiled either from published scientific journal article results or from reporting guidelines for \textit{in vivo} experiments~\cite{cronin2019identification}.
+Publication bias caused negative activity annotations to be extremely incomplete, and techniques for imputing negative annotations were inconsistent.
+Older QSAR studies often did not state the original sources of their data, so verification and reproducibility of results are immensely challenging (if not impossible).
+
+Fortunately, modern large-scale screening efforts (including Tox21) were created to directly address these and other issues.
+While our training data are still subject to batch effects, bias in selecting assays and chemicals for screening, and other systematic and experimental errors that are propagated along to the final QSAR model, we are relatively confident that publication bias, reporting bias, and other issues that plagued early QSAR studies have been substantially decreased. Furthermore, our GNN approach to QSAR modeling may be more robust to these sources of bias than non-GNN approaches, because (a.)~the graph incorporates multiple levels of biological knowledge that can `fill in gaps' left by incomplete data at other levels and (b.)~GNNs---and heterogeneous GNNs in particular---contain properties that make them inherently robust to noise~\cite{xie2020heterogeneous,nt2019revisiting}.
 \section{Conclusions}
-
+In this study, we introduce a novel GNN-based approach to QSAR modeling for toxicity prediction, and evaluate it on data from 52 assays to show that it significantly outperforms existing methods.
+GNNs comprise an incredibly active emerging topic within artificial intelligence research, and as one of the first GNN applications in computational toxicology we hope that our results serve as a `jumping off point' for a vast body of similar work.
+We plan to evaluate graph attention networks, new data modalities, and network regulization techniques in the near future, and encourage contributions from the toxicology and informatics communities at-large to improve predictive toxicology's overall data ecosystem.
 \section{Code availability}
 All source code pertaining to this study is available on GitHub at \url{https://github.com/EpistasisLab/qsar-gnn}.
 A frozen copy of the code at the time of writing is available at [XXX; Zenodo].
@@ -201,10 +222,18 @@ Supplemental tables and figures are available on FigShare at [XXX].
 This work was made possible with support from US National Institutes of Health grants \texttt{R01-LM010098}, \texttt{R01-LM012601}, \texttt{R01-AI116794}, \texttt{UL1-TR001878}, \texttt{UC4-DK112217} (PI: Jason~Moore), \texttt{T32-ES019851}, and \texttt{P30-ES013508} (PI: Trevor~Penning).
 
 \appendix{Graph convolutional network architecture}\label{GCNN}
-Some stuff here.
+Our GCNN implementation uses a message-passing strategy that combines aspects of the GraphSAGE and R-GCN architectures.
+
 
 \appendix{Node classification model}\label{NC}
-Some more stuff.
+For classifying chemicals as active or inactive with regards to an assay of interest, we stack 2 GCN layers in the form given by [XXX], with a leaky ReLU activation between the two layers and softmax applied to the second layer's output.
+Since we only classify chemical nodes, we ignore outputs for all other node types (and for chemicals with undefined labels); labels are generated via \textbf{Algorithm~\ref{alg:1}}
+We train the network by minimizing binary cross-entropy between the network's softmax outputs and true activity values:
+\begin{equation}
+   \mathcal{L} = -\sum_{i\in\mathcal{Y}}\sum_{k=1}^K t_{ik} \ln h_{ik}^L
+\end{equation}
+
+The relatively shallow architecture of the network allows us to optimize the model using the Adam algorithm applied to the entire training data set, but the model can be easily adapted to mini-batch training when appropriate or necessary.
 
 \bibliographystyle{ws-procs11x85}
 \bibliography{psb-gnn}
