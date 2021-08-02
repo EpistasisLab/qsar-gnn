@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.20)  2 AUG 2021 16:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.20)  2 AUG 2021 19:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -246,12 +246,12 @@ Package pdftex.def Info: figures/figure1.pdf  used on input line 46.
 <figures/figure1-1.pdf, id=127, 626.34pt x 288.07625pt>
 File: figures/figure1-1.pdf Graphic file (type pdf)
 <use figures/figure1-1.pdf>
-Package pdftex.def Info: figures/figure1-1.pdf  used on input line 64.
+Package pdftex.def Info: figures/figure1-1.pdf  used on input line 73.
 (pdftex.def)             Requested size: 333.88625pt x 153.57199pt.
  [3 <./figures/figure1-1.pdf>] [4] [5]
 
 pdfTeX warning: pdflatex.exe (file ./figures/figure3.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<figures/figure3.pdf, id=156, 845.0471pt x 323.87099pt>
+<figures/figure3.pdf, id=157, 845.0471pt x 323.87099pt>
 File: figures/figure3.pdf Graphic file (type pdf)
 <use figures/figure3.pdf>
 Package pdftex.def Info: figures/figure3.pdf  used on input line 145.
@@ -259,7 +259,7 @@ Package pdftex.def Info: figures/figure3.pdf  used on input line 145.
 [6 <./figures/figure3.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./figures/figure4.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<figures/figure4.pdf, id=184, 845.0471pt x 418.21243pt>
+<figures/figure4.pdf, id=185, 845.0471pt x 418.21243pt>
 File: figures/figure4.pdf Graphic file (type pdf)
 <use figures/figure4.pdf>
 Package pdftex.def Info: figures/figure4.pdf  used on input line 158.
@@ -267,25 +267,25 @@ Package pdftex.def Info: figures/figure4.pdf  used on input line 158.
 [7 <./figures/figure4.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./figures/figure5.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<figures/figure5.pdf, id=207, 845.0471pt x 418.21243pt>
+<figures/figure5.pdf, id=208, 845.0471pt x 418.21243pt>
 File: figures/figure5.pdf Graphic file (type pdf)
 <use figures/figure5.pdf>
 Package pdftex.def Info: figures/figure5.pdf  used on input line 179.
 (pdftex.def)             Requested size: 381.5874pt x 188.84474pt.
 [8 <./figures/figure5.pdf>] [9] [10] (./psb-gnn.bbl [11]) [12] (./psb-gnn.aux) ) 
 Here is how much of TeX's memory you used:
- 3596 strings out of 480608
- 46208 string characters out of 5907535
- 289751 words of memory out of 5000000
- 19437 multiletter control sequences out of 15000+600000
- 543863 words of font info for 68 fonts, out of 8000000 for 9000
+ 3602 strings out of 480608
+ 46298 string characters out of 5907535
+ 288772 words of memory out of 5000000
+ 19442 multiletter control sequences out of 15000+600000
+ 544200 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  46i,8n,34p,856b,270s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on psb-gnn.pdf (12 pages, 1931309 bytes).
+{c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on psb-gnn.pdf (12 pages, 1933656 bytes).
 PDF statistics:
- 298 PDF objects out of 1000 (max. 8388607)
- 192 compressed objects within 2 object streams
+ 302 PDF objects out of 1000 (max. 8388607)
+ 195 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

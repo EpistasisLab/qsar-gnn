@@ -13,48 +13,52 @@ Warning--empty volume in zhang2019heterogeneous
 Warning--empty title in schlichtkrull2018modeling
 Warning--empty volume in schlichtkrull2018modeling
 Warning--empty volume in kingma2014adam
+Warning--empty title in liu2020finding
+Warning--empty volume in liu2020finding
+Warning--empty title in wang2019heterogeneous
+Warning--empty volume in wang2019heterogeneous
 Warning--empty volume in nt2019revisiting
 Warning--empty title in hamilton2017inductive
 Warning--empty volume in hamilton2017inductive
-You've used 27 entries,
+You've used 30 entries,
             2825 wiz_defined-function locations,
-            820 strings with 10900 characters,
-and the built_in function-call counts, 7647 in all, are:
-= -- 756
-> -- 402
+            835 strings with 11407 characters,
+and the built_in function-call counts, 8455 in all, are:
+= -- 837
+> -- 444
 < -- 2
-+ -- 144
-- -- 117
-* -- 620
-:= -- 1070
-add.period$ -- 27
-call.type$ -- 27
-change.case$ -- 27
++ -- 159
+- -- 129
+* -- 680
+:= -- 1180
+add.period$ -- 30
+call.type$ -- 30
+change.case$ -- 29
 chr.to.int$ -- 0
-cite$ -- 38
-duplicate$ -- 401
-empty$ -- 520
-format.name$ -- 117
-if$ -- 1831
+cite$ -- 45
+duplicate$ -- 441
+empty$ -- 578
+format.name$ -- 129
+if$ -- 2027
 int.to.chr$ -- 0
-int.to.str$ -- 27
-missing$ -- 26
-newline$ -- 84
-num.names$ -- 27
-pop$ -- 42
+int.to.str$ -- 30
+missing$ -- 30
+newline$ -- 93
+num.names$ -- 30
+pop$ -- 52
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 353
+skip$ -- 389
 stack$ -- 0
-substring$ -- 396
-swap$ -- 241
+substring$ -- 440
+swap$ -- 262
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 2
 type$ -- 0
-warning$ -- 11
-while$ -- 71
-width$ -- 29
-write$ -- 236
-(There were 11 warnings)
+warning$ -- 15
+while$ -- 78
+width$ -- 32
+write$ -- 259
+(There were 15 warnings)

@@ -39,6 +39,10 @@ A.~Cherkasov, E.~N. Muratov, D.~Fourches, A.~Varnek, I.~I. Baskin, M.~Cronin,
 G.~M. Maggiora, On outliers and activity cliffs why qsar often disappoints
   (2006).
 
+\bibitem{robinson2015graph}
+I.~Robinson, J.~Webber and E.~Eifrem, {\em Graph databases: new opportunities
+  for connected data} (" O'Reilly Media, Inc.", 2015).
+
 \bibitem{williams2017comptox}
 A.~J. Williams, C.~M. Grulke, J.~Edwards, A.~D. McEachran, K.~Mansouri, N.~C.
   Baker, G.~Patlewicz, I.~Shah, J.~F. Wambaugh, R.~S. Judson {\em et~al.}, The
@@ -94,6 +98,10 @@ R.~P. Sheridan, W.~M. Wang, A.~Liaw, J.~Ma and E.~M. Gifford, Extreme gradient
   boosting as a method for quantitative structure--activity relationships, {\em
   Journal of chemical information and modeling} {\bf 56}, 2353  (2016).
 
+\bibitem{liu2020finding}
+T.~Liu and F.~Zenke, Finding trainable sparse networks through neural tangent
+  transfer, 6336  (2020).
+
 \bibitem{hornik1989multilayer}
 K.~Hornik, M.~Stinchcombe and H.~White, Multilayer feedforward networks are
   universal approximators, {\em Neural networks} {\bf 2}, 359  (1989).
@@ -101,6 +109,10 @@ K.~Hornik, M.~Stinchcombe and H.~White, Multilayer feedforward networks are
 \bibitem{matveieva2021benchmarks}
 M.~Matveieva and P.~Polishchuk, Benchmarks for interpretation of qsar models,
   {\em Journal of cheminformatics} {\bf 13}, 1  (2021).
+
+\bibitem{wang2019heterogeneous}
+X.~Wang, H.~Ji, C.~Shi, B.~Wang, Y.~Ye, P.~Cui and P.~S. Yu, Heterogeneous
+  graph attention network, 2022  (2019).
 
 \bibitem{wu2017smoothened}
 C.~Wu, S.~Hu, J.~Cheng, G.~Wang and K.~Tao, Smoothened antagonist gdc-0449
