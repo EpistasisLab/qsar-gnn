@@ -1,0 +1,134 @@
+\begin{thebibliography}{10}
+
+\bibitem{raies2016silico}
+A.~B. Raies and V.~B. Bajic, In silico toxicology: computational methods for
+  the prediction of chemical toxicity, {\em Wiley Interdisciplinary Reviews:
+  Computational Molecular Science} {\bf 6}, 147  (2016).
+
+\bibitem{tice2013improving}
+R.~R. Tice, C.~P. Austin, R.~J. Kavlock and J.~R. Bucher, Improving the human
+  hazard characterization of chemicals: a tox21 update, {\em Environmental
+  health perspectives} {\bf 121}, 756  (2013).
+
+\bibitem{roncaglioni2013silico}
+A.~Roncaglioni, A.~A. Toropov, A.~P. Toropova and E.~Benfenati, In silico
+  methods to predict drug toxicity, {\em Current opinion in pharmacology} {\bf
+  13}, 802  (2013).
+
+\bibitem{dudek2006computational}
+A.~Z. Dudek, T.~Arodz and J.~G{\'a}lvez, Computational methods in developing
+  quantitative structure-activity relationships (qsar): a review, {\em
+  Combinatorial chemistry \& high throughput screening} {\bf 9}, 213  (2006).
+
+\bibitem{tropsha2010best}
+A.~Tropsha, Best practices for qsar model development, validation, and
+  exploitation, {\em Molecular informatics} {\bf 29}, 476  (2010).
+
+\bibitem{hansch1964p}
+C.~Hansch and T.~Fujita, p-$\sigma$-$\pi$ analysis. a method for the
+  correlation of biological activity and chemical structure, {\em Journal of
+  the American Chemical Society} {\bf 86}, 1616  (1964).
+
+\bibitem{cherkasov2014qsar}
+A.~Cherkasov, E.~N. Muratov, D.~Fourches, A.~Varnek, I.~I. Baskin, M.~Cronin,
+  J.~Dearden, P.~Gramatica, Y.~C. Martin, R.~Todeschini {\em et~al.}, Qsar
+  modeling: where have you been? where are you going to?, {\em Journal of
+  medicinal chemistry} {\bf 57}, 4977  (2014).
+
+\bibitem{maggiora2006outliers}
+G.~M. Maggiora, On outliers and activity cliffs why qsar often disappoints
+  (2006).
+
+\bibitem{williams2017comptox}
+A.~J. Williams, C.~M. Grulke, J.~Edwards, A.~D. McEachran, K.~Mansouri, N.~C.
+  Baker, G.~Patlewicz, I.~Shah, J.~F. Wambaugh, R.~S. Judson {\em et~al.}, The
+  comptox chemistry dashboard: a community data resource for environmental
+  chemistry, {\em Journal of cheminformatics} {\bf 9}, 1  (2017).
+
+\bibitem{brown2015gene}
+G.~R. Brown, V.~Hem, K.~S. Katz, M.~Ovetsky, C.~Wallin, O.~Ermolaeva,
+  I.~Tolstoy, T.~Tatusova, K.~D. Pruitt, D.~R. Maglott {\em et~al.}, Gene: a
+  gene-centered information resource at ncbi, {\em Nucleic acids research} {\bf
+  43}, D36  (2015).
+
+\bibitem{durant2002reoptimization}
+J.~L. Durant, B.~A. Leland, D.~R. Henry and J.~G. Nourse, Reoptimization of mdl
+  keys for use in drug discovery, {\em Journal of chemical information and
+  computer sciences} {\bf 42}, 1273  (2002).
+
+\bibitem{himmelstein2017systematic}
+D.~S. Himmelstein, A.~Lizee, C.~Hessler, L.~Brueggeman, S.~L. Chen, D.~Hadley,
+  A.~Green, P.~Khankhanian and S.~E. Baranzini, Systematic integration of
+  biomedical knowledge prioritizes drugs for repurposing, {\em Elife} {\bf 6},
+  p. e26726  (2017).
+
+\bibitem{kipf2016semi}
+T.~N. Kipf and M.~Welling, Semi-supervised classification with graph
+  convolutional networks, {\em arXiv preprint arXiv:1609.02907}   (2016).
+
+\bibitem{chen2019multi}
+Z.-M. Chen, X.-S. Wei, P.~Wang and Y.~Guo, Multi-label image recognition with
+  graph convolutional networks, 5177  (2019).
+
+\bibitem{zhang2019heterogeneous}
+C.~Zhang, D.~Song, C.~Huang, A.~Swami and N.~V. Chawla, Heterogeneous graph
+  neural network, 793  (2019).
+
+\bibitem{schlichtkrull2018modeling}
+M.~Schlichtkrull, T.~N. Kipf, P.~Bloem, R.~Van Den~Berg, I.~Titov and
+  M.~Welling, Modeling relational data with graph convolutional networks, 593
+  (2018).
+
+\bibitem{kingma2014adam}
+D.~P. Kingma and J.~Ba, Adam: A method for stochastic optimization, {\em arXiv
+  preprint arXiv:1412.6980}   (2014).
+
+\bibitem{svetnik2003random}
+V.~Svetnik, A.~Liaw, C.~Tong, J.~C. Culberson, R.~P. Sheridan and B.~P.
+  Feuston, Random forest: a classification and regression tool for compound
+  classification and qsar modeling, {\em Journal of chemical information and
+  computer sciences} {\bf 43}, 1947  (2003).
+
+\bibitem{sheridan2016extreme}
+R.~P. Sheridan, W.~M. Wang, A.~Liaw, J.~Ma and E.~M. Gifford, Extreme gradient
+  boosting as a method for quantitative structure--activity relationships, {\em
+  Journal of chemical information and modeling} {\bf 56}, 2353  (2016).
+
+\bibitem{hornik1989multilayer}
+K.~Hornik, M.~Stinchcombe and H.~White, Multilayer feedforward networks are
+  universal approximators, {\em Neural networks} {\bf 2}, 359  (1989).
+
+\bibitem{matveieva2021benchmarks}
+M.~Matveieva and P.~Polishchuk, Benchmarks for interpretation of qsar models,
+  {\em Journal of cheminformatics} {\bf 13}, 1  (2021).
+
+\bibitem{wu2017smoothened}
+C.~Wu, S.~Hu, J.~Cheng, G.~Wang and K.~Tao, Smoothened antagonist gdc-0449
+  (vismodegib) inhibits proliferation and triggers apoptosis in colon cancer
+  cell lines, {\em Experimental and therapeutic medicine} {\bf 13}, 2529
+  (2017).
+
+\bibitem{cronin2019identification}
+M.~T. Cronin, A.-N. Richarz and T.~W. Schultz, Identification and description
+  of the uncertainty, variability, bias and influence in quantitative
+  structure-activity relationships (qsars) for toxicity prediction, {\em
+  Regulatory Toxicology and Pharmacology} {\bf 106}, 90  (2019).
+
+\bibitem{shoichet2004virtual}
+B.~K. Shoichet, Virtual screening of chemical libraries, {\em Nature} {\bf
+  432}, 862  (2004).
+
+\bibitem{xie2020heterogeneous}
+Y.~Xie, H.~Xu, J.~Li, C.~Yang and K.~Gao, Heterogeneous graph neural networks
+  for noisy few-shot relation classification, {\em Knowledge-Based Systems}
+  {\bf 194}, p. 105548  (2020).
+
+\bibitem{nt2019revisiting}
+H.~Nt and T.~Maehara, Revisiting graph neural networks: All we have is low-pass
+  filters, {\em arXiv preprint arXiv:1905.09550}   (2019).
+
+\bibitem{hamilton2017inductive}
+W.~L. Hamilton, R.~Ying and J.~Leskovec, Inductive representation learning on
+  large graphs, 1025  (2017).
+
+\end{thebibliography}
