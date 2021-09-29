@@ -1,0 +1,91 @@
+\relax 
+\citation{raies2016silico}
+\citation{tice2013improving,roncaglioni2013silico}
+\citation{dudek2006computational}
+\citation{tropsha2010best,hansch1964p}
+\citation{cherkasov2014qsar,maggiora2006outliers}
+\citation{yue2020graph}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{}\protected@file@percent }
+\newlabel{introduction}{{1}{}}
+\citation{tice2013improving}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of the graph machine learning approach used in this study. We build a toxicology-focused graph database (named ComptoxAI) using data aggregated from diverse public databases, and extract a subgraph for QSAR analysis containing chemicals, assays, and genes. We then train and evaluate a graph neural network that predicts whether or not a chemical activates specific toxicology-focused assays from the Tox21 database.}}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Methods}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Obtaining toxicology assay data}{}\protected@file@percent }
+\citation{williams2017comptox}
+\citation{brown2015gene}
+\citation{durant2002reoptimization}
+\citation{himmelstein2017systematic}
+\citation{kipf2016semi}
+\citation{chen2019multi}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Aggregating publicly available multimodal graph data}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Metagraph of the node types, node counts, and edge types in the heterogeneous graph. During implementation of the GNN, we also define corresponding inverse edges (e.g., assayTargetsGene $\leftrightarrow $ geneTargetedByAssay) to facilitate the message-passing paradigm of the GNN.}}{}\protected@file@percent }
+\newlabel{fig:2}{{2}{}}
+\citation{zhang2019heterogeneous}
+\citation{schlichtkrull2018modeling}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Heterogeneous graph neural network}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Node classification}{}\protected@file@percent }
+\newlabel{methods-nc}{{2.3.1}{}}
+\citation{kingma2014adam}
+\citation{svetnik2003random}
+\citation{sheridan2016extreme}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Labeled heterogeneous graph construction for toxicity assay QSAR model.}}{}\protected@file@percent }
+\newlabel{alg:1}{{1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Baseline QSAR classifiers}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}GNN node classification performance vs.\ baseline QSAR models}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overall performance metrics of the 3 QSAR model types on each of the Tox21 assays---a.)\nobreakspace  {}AUROC and b.)\nobreakspace  {}F1 score. The mean AUROC is significantly higher for the GNN model than for either of the two baseline models. Differences in F1 scores are not statistically significant. The GNN achieves poor F1 scores on assays with relatively few (e.g., $< 100$) ``active'' annotations in Tox21, which is consistent with known performance of neural networks on data with sparse labels. $p$-values correspond to Wilcoxon signed-rank tests on means, with a significance level of 0.05.}}{}\protected@file@percent }
+\newlabel{fig:3}{{3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Receiver operating characteristic (ROC) curves for two selected Tox21 assays: a.)\nobreakspace  {}PXR agonism (\texttt  {tox21-pxr-p1}) and b.)\nobreakspace  {}HepG2 cell viability (\texttt  {tox21-rt-viability-hepg2-p1}). In both cases, the area under the curve (AUC) is significantly higher for the GNN model than either the Random Forest or Gradient Boosting models. AUC values are given with 95\% confidence intervals.}}{}\protected@file@percent }
+\newlabel{fig:4}{{4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Ablation analysis of graph components' influence on the trained model}{}\protected@file@percent }
+\citation{hornik1989multilayer}
+\citation{cherkasov2014qsar,matveieva2021benchmarks}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Receiver Operator Characteristic (ROC) curves for two selected Tox21 assays using different configurations of the GNN model. `GNN - full' is the complete model as described in \S  2.3.1\hbox {}. `GNN - no structure' omits the MACCS chemical descriptors and replaces them with node embeddings. `GNN - no gene' omits gene nodes and their incident edges. `GNN - no assay' removes all assay nodes and incident edges, so predictions are made solely using chemicals, genes, the remaining edges, and the MACCS fingerprints as chemical node features. AUC values include 95\% confidence intervals.}}{}\protected@file@percent }
+\newlabel{fig:5}{{5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}GNNs versus traditional ML for QSAR modeling}{}\protected@file@percent }
+\citation{wu2017smoothened}
+\citation{cronin2019identification}
+\citation{shoichet2004virtual}
+\citation{xie2020heterogeneous,nt2019revisiting}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Interpretability of GNNs in QSAR}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Sources of bias and their effects on QSAR for toxicity prediction}{}\protected@file@percent }
+\citation{hamilton2017inductive}
+\citation{schlichtkrull2018modeling}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusions}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Supplemental Materials}{}\protected@file@percent }
+\newlabel{GCN}{{A}{}}
+\bibstyle{ws-procs11x85}
+\bibdata{psb-gnn}
+\bibcite{raies2016silico}{1}
+\bibcite{tice2013improving}{2}
+\bibcite{roncaglioni2013silico}{3}
+\bibcite{dudek2006computational}{4}
+\bibcite{tropsha2010best}{5}
+\bibcite{hansch1964p}{6}
+\bibcite{cherkasov2014qsar}{7}
+\bibcite{maggiora2006outliers}{8}
+\bibcite{yue2020graph}{9}
+\newlabel{eq:a1}{{A.1}{}}
+\newlabel{NC}{{B}{}}
+\newlabel{eq:b1}{{B.1}{}}
+\bibcite{williams2017comptox}{10}
+\bibcite{brown2015gene}{11}
+\bibcite{durant2002reoptimization}{12}
+\bibcite{himmelstein2017systematic}{13}
+\bibcite{kipf2016semi}{14}
+\bibcite{chen2019multi}{15}
+\bibcite{zhang2019heterogeneous}{16}
+\bibcite{schlichtkrull2018modeling}{17}
+\bibcite{kingma2014adam}{18}
+\bibcite{svetnik2003random}{19}
+\bibcite{sheridan2016extreme}{20}
+\bibcite{hornik1989multilayer}{21}
+\bibcite{matveieva2021benchmarks}{22}
+\bibcite{wu2017smoothened}{23}
+\bibcite{cronin2019identification}{24}
+\bibcite{shoichet2004virtual}{25}
+\bibcite{xie2020heterogeneous}{26}
+\bibcite{nt2019revisiting}{27}
+\bibcite{hamilton2017inductive}{28}
+\newlabel{eof}{{B}{}}

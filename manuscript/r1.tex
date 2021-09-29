@@ -122,6 +122,10 @@ can be improved more, but it is very minor. Algorithm can be more
 detailed, but I understand due to the limited pages.
 \end{displayquote}
 
+We have thoroughly reread the manuscript and addressed a number of
+stylistic issues (including the first sentence of the Abstract) where
+they occurred.
+
 \begin{displayquote}
 In the experiment, GNN showed higher variance than the others,
 and it was justified that it is because that neural networks tend to
@@ -135,9 +139,25 @@ I am wondering the performance with conventional neural networks
 because it compared only non-deep learning methods.
 \end{displayquote}
 
+We agree---it is important to provide a baseline using conventional
+neural networks for comparison to demonstrate that improved
+performance is not solely the result of using neural network
+models. To this end, we provide additional results for the cell
+viability assay when using a 2-hidden-layer multilayer perceptron
+model to construct a conventional QSAR analysis. Indeed, we see the
+MLP performs similarly to the other baseline QSAR models. Due to
+limited space, we have included these results in Supplementary
+Materials, but mention the outcome in the main manuscript under the
+Results section.
+
 \begin{displayquote}
 I am wondering how to choose threshold to compute F-1 scores.
 \end{displayquote}
+
+We used \texttt{scikit-learn}'s implementation of the F1 metric, which
+first determines precision and recall based on the final decision
+threshold for the model, and then computes the F1 based on these two
+values.
 
 \vspace{2ex} Sincerely,
 

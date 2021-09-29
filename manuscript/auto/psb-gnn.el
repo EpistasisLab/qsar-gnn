@@ -1,0 +1,37 @@
+(TeX-add-style-hook
+ "psb-gnn"
+ (lambda ()
+   (LaTeX-add-bibitems
+    "cherkasov2014qsar"
+    "hamilton2017inductive"
+    "schlichtkrull2018modeling"
+    "kingma2014adam"
+    "cronin2019identification"
+    "xie2020heterogeneous"
+    "nt2019revisiting"
+    "tropsha2010best"
+    "maggiora2006outliers"
+    "hansch1964p"
+    "dudek2006computational"
+    "raies2016silico"
+    "tice2013improving"
+    "roncaglioni2013silico"
+    "williams2017comptox"
+    "brown2015gene"
+    "himmelstein2017systematic"
+    "kipf2016semi"
+    "chen2019multi"
+    "zhang2019heterogeneous"
+    "durant2002reoptimization"
+    "svetnik2003random"
+    "sheridan2016extreme"
+    "hornik1989multilayer"
+    "shoichet2004virtual"
+    "matveieva2021benchmarks"
+    "wu2017smoothened"
+    "robinson2015graph"
+    "liu2020finding"
+    "wang2019heterogeneous"
+    "yue2020graph"))
+ :bibtex)
+
